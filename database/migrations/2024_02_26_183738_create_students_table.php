@@ -19,6 +19,7 @@ return new class extends Migration
             $table->teacher_id();
             $table->email();
             $table->address();
+            $table->image();
         });
     }
 
