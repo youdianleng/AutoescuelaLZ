@@ -1,7 +1,6 @@
 <template>
     <div class="layout-wrapper" :class="containerClass">
         <app-topbar></app-topbar>
-        
         <div class="layout-main-container ">
             <Breadcrumb :home="home" :model="crumbs" class="mb-2">
                     <template #item="{ item, props }">
