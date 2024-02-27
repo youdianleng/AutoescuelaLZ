@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string("option");
             $table->boolean("isCorrect");
-            $table->id("questionId");
+            $table->integer("questionId");
         });
     }
 
