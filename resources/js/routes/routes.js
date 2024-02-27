@@ -264,4 +264,25 @@ export default [
         name: 'NotFound',
         component: () => import("../views/errors/404.vue"),
     },
+
+    {
+        path: '/student',
+        component: AuthenticatedLayout,
+        // redirect: {
+        //     name: 'admin.index'
+        // },
+        beforeEnter: requireLogin,
+        //meta: { breadCrumb: 'Dashboard' },
+        children: [
+            {
+                name: 'student.index',
+                path: '',
+                component: () => import('../views/student/index.vue'),
+                //meta: { breadCrumb: 'Student' }
+            },
+        ]
+    } 
+
+
 ];
+
