@@ -1,7 +1,7 @@
 <template>
     <div class="layout-topbar">
-        <router-link to="/" class="layout-topbar-logo">
-            <img src="/images/logo.svg" alt="logo" />
+        <router-link to="/" >
+            <img src="/images/logo.svg" alt="logo AutoEscuelaLZ" height="100px" width="200px" />
             <span></span>
         </router-link>
         <!--
