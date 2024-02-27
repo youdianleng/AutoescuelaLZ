@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('licenses', function (Blueprint $table) {
             $table->id();
-            $table->type();
-            $table->description();
+            $table->string("type");
+            $table->string("description");
         });
     }
 
