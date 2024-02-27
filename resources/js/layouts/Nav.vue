@@ -75,4 +75,14 @@ import LocaleSwitcher from "../components/LocaleSwitcher.vue";
     width: 100%;
     position: fixed;
 }
+
+.nav-link{
+    padding-top: 0px;
+}
+
+.container{
+    margin: 0px;
+    padding-left: 28px;
+    width: 100%;
+}
 </style>
