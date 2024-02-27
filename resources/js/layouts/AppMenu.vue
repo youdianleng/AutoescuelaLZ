@@ -1,13 +1,16 @@
 
 <template>
+    <!--
     <ul class="layout-menu">
         <template v-for="(item, i) in model" :key="item">
             <app-menu-item v-if="!item.separator" :item="item" :index="i"></app-menu-item>
             <li v-if="item.separator" class="menu-separator"></li>
         </template>
     </ul>
+    -->
 </template>
 
+<!--
 <script setup>
 import { ref } from 'vue';
 import AppMenuItem from './AppMenuItem.vue';
@@ -23,18 +26,18 @@ const model = ref([
         items: [{ label: 'Dashboard', icon: 'pi pi-fw pi-home', to: '/admin', permision: 'all'}]
     },
     {
-        label: 'Usuarios',
+        label: 'Estudiantes',
         items: [
-            { label: 'Users', icon: 'pi pi-fw pi-id-card', to: '/admin/users', permision: 'user-list' },
-            { label: 'Roles', icon: 'pi pi-fw pi-check-square', to: '/admin/roles', permision:'role-list' },
+            { label: 'Perfil', icon: 'pi pi-fw pi-id-card', to: '/admin/users', permision: 'user-list' },
+            { label: 'Realizar test', icon: 'pi pi-fw pi-check-square', to: '/admin/roles', permision:'role-list' },
             { label: 'Permisos', icon: 'pi pi-fw pi-bookmark', to: '/admin/permissions', permision:'permission-list' }
         ]
     },
     {
-        label: 'Ejercicios',
+        label: 'Tests',
         items: [
-            { label: 'Ejercicios', icon: 'pi pi-fw pi-id-card', to: '/admin/exercises', permision: 'exercise-list' },
-            { label: 'Categorias', icon: 'pi pi-fw pi-id-card', to: '/admin/categories', permision: 'category-list' }
+            { label: 'Preguntas i respuestas', icon: 'pi pi-fw pi-id-card', to: '/admin/exercises', permision: 'exercise-list' },
+            { label: 'Crear pregunta i respuesta', icon: 'pi pi-fw pi-id-card', to: '/admin/categories', permision: 'category-list' }
         ]
     },
     {
@@ -48,3 +51,5 @@ const model = ref([
 
 
 <style lang="scss" scoped></style>
+
+-->
