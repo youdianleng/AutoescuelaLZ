@@ -1,7 +1,17 @@
 <template>
     <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        
         <div class="container">
-            <router-link to="/" class="navbar-brand">DAW 2</router-link>
+            <router-link to="/" >
+                <img src="/images/logo.svg" alt="logo AutoEscuelaLZ" height="100px" width="200px" />
+                <span></span>
+            </router-link>
+            <button class="p-link layout-topbar-button layout-topbar-button-c">
+                Información autoescuela
+            </button>
+            <button class="p-link layout-topbar-button layout-topbar-button-c">
+                Carnets
+            </button>
             <a class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </a>
@@ -21,9 +31,6 @@
                             <router-link class="nav-link" to="/login"
                             >{{ $t('login') }}</router-link
                             >
-                        </li>
-                        <li class="nav-item">
-                            <router-link class="nav-link" to="/register">{{ $t('register') }}</router-link>
                         </li>
                     </template>
                     <li v-if="user?.name" class="nav-item dropdown">
@@ -53,3 +60,29 @@ import LocaleSwitcher from "../components/LocaleSwitcher.vue";
     const user = computed(() => store.getters["auth/user"])
     const { processing, logout } = useAuth();
 </script>
+<style lang="scss" scoped>
+.layout-topbar-button-c,
+.layout-topbar-button-c:hover {
+    width: auto;
+    background-color: rgb(255, 255, 255, 0);
+    border: 0;
+    border-radius: 0%;
+    padding: 1em;
+}
+
+.navbar{
+    height: 70px;
+    width: 100%;
+    position: fixed;
+}
+
+.nav-link{
+    padding-top: 0px;
+}
+
+.container{
+    margin: 0px;
+    padding-left: 28px;
+    width: 100%;
+}
+</style>

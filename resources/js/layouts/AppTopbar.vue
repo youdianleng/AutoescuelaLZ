@@ -112,4 +112,8 @@ const topbarMenuClasses = computed(() => {
     border-radius: 0%;
     padding: 1em;
 }
+
+a{
+    padding-top: 0px;
+}
 </style>
