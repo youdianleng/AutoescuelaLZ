@@ -16,4 +16,10 @@ class Student extends Model
         "teacher_id",
         "email",
     ];
+
+    public function teachers()
+    {
+        return $this->belongsToMany(Teacher::class, 'students_teachers');
+    }
+
 }
