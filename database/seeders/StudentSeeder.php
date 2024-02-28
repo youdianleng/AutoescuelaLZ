@@ -4,7 +4,8 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use ./
+use App\Models\Student;
+
 class StudentSeeder extends Seeder
 {
     /**
@@ -26,6 +27,10 @@ class StudentSeeder extends Seeder
 
         foreach ($students as $student) {
             Student::create(['name' => $student]);
+        }
+
+        foreach ($studentsApellidos as $studentApellido) {
+            Student::create(['surname' => $studentApellido]);
         }
     }
     
