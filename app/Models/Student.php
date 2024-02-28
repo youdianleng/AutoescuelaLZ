@@ -22,4 +22,10 @@ class Student extends Model
         return $this->belongsToMany(Teacher::class, 'students_teachers');
     }
 
+    public function licenses()
+    {
+        return $this->belongsToMany(License::class, 'students_licenses');
+    }
+
+
 }

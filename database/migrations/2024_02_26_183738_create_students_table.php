@@ -20,7 +20,9 @@ return new class extends Migration
             $table->string("email");
             $table->string("address");
             $table->string("image");
+            $table->unsignedBigInteger("license_id");
             $table->foreign('teacher_id')->references('id')->on('teachers')->onDelete('cascade');
+            $table->foreign('license_id')->references('id')->on('licenses')->onDelete('cascade');
         });
     }
 

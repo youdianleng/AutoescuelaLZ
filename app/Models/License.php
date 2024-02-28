@@ -13,4 +13,8 @@ class License extends Model
         "type",
         "description",
     ];
+
+    public function students(){
+        return $this->belongsToMany(Student::class, 'license_student');
+    }
 }
