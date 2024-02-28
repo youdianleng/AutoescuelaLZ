@@ -16,10 +16,11 @@ return new class extends Migration
             $table->string("name");
             $table->string("surname");
             $table->string("password");
-            $table->string("teacher_id");
+            $table->unsignedBigInteger('teacher_id');
             $table->string("email");
             $table->string("address");
             $table->string("image");
+            $table->foreign('teacher_id')->references('id')->on('teachers')->onDelete('cascade');
         });
     }
 
