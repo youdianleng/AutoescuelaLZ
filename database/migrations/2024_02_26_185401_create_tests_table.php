@@ -13,10 +13,7 @@ return new class extends Migration
     {
         Schema::create('tests', function (Blueprint $table) {
             $table->id();
-            $table->integer("studentId");
-            $table->integer("licenseId");
-            $table->integer("errors");
-            $table->timestamp("date");
+            $table->integer("question_id");
         });
     }
 
