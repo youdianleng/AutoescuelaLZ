@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('students_licenses', function (Blueprint $table) {
             $table->unsignedBigInteger('student_id');
             $table->unsignedBigInteger('license_id');
+            $table->timestamp("start_date");
+            $table->timestamp("end_date");
             $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');
             $table->foreign('license_id')->references('id')->on('licenses')->onDelete('cascade');
         });

@@ -16,6 +16,7 @@ return new class extends Migration
             $table->integer("studentId");
             $table->integer("licenseId");
             $table->integer("errors");
+            $table->timestamp("date");
         });
     }
 
