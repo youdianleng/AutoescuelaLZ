@@ -3,56 +3,55 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
-use App\Models\Tasks;
+use App\Models\Student;
 use Illuminate\Http\Request;
 
 class TaskController extends Controller
 {
     public function index()
     {
-        $tasks = Tasks::all()->toArray();
+        $tasks = Student::with("teachers")->get();
         return $tasks;
     }
 
+
     public function store(Request $request)
     {
-
-
         $request->validate([
             'name' => 'required|max:5',
-            'description' => 'required'
+            'surname' => 'required'
         ]);
-        $task = $request->all();
-        $tarea = Tasks::create($task);
 
+        $task = $request->all();
+        $tarea = Student::create($task);
 
         return response()->json(['success' => true, 'data' => $tarea]);
     }
 
-    public function update($id, Request $request)
-    {
-        $task = Tasks::find($id);
-        $request->validate([
-            'name' => 'required|max:5',
-            'description' => 'required'
-        ]);
+    // public function update($id, Request $request)
+    // {
+    //     $task = Tasks::find($id);
+    //     $request->validate([
+    //         'name' => 'required|max:5',
+    //         'description' => 'required'
+    //     ]);
 
 
-        $dataToUpdate = $request->all();
-        $task->update($dataToUpdate);
+    //     $dataToUpdate = $request->all();
+    //     $task->update($dataToUpdate);
 
 
-        return response()->json(['success' => true, 'data' => $task]);
-    }
+    //     return response()->json(['success' => true, 'data' => $task]);
+    // }
 
-    public function destroy($id, Request $request)
-    {
-        $task = Tasks::find($id);
-        $task->delete();
+    // public function destroy($id, Request $request)
+    // {
+    //     $task = Tasks::find($id);
+    //     $task->delete();
 
 
-        return response()->json(['success' => true, 'data' => "Deleted"]);
-    }
+    //     return response()->json(['success' => true, 'data' => "Deleted"]);
+    // }
 
 
 

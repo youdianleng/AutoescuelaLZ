@@ -27,5 +27,6 @@ class Student extends Model
         return $this->belongsToMany(License::class, 'students_licenses');
     }
 
+    
 
 }

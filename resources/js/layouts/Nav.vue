@@ -73,7 +73,6 @@ import LocaleSwitcher from "../components/LocaleSwitcher.vue";
 .navbar{
     height: 70px;
     width: 100%;
-    position: fixed;
 }
 
 .nav-link{
