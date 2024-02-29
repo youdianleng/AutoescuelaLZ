@@ -25,6 +25,8 @@ class TaskController extends Controller
         $task = $request->all();
         $tarea = Student::create($task);
 
+        $tarea->teachers()->sync([1]);
+
         return response()->json(['success' => true, 'data' => $tarea]);
     }
 

@@ -12,10 +12,20 @@
             
             </div>
             <div class="carousel-item">
-                <img src="/images/imagesCarrouselHome/perfectStudyEnvironment.jpeg" class="d-block" alt="...">
+                <div class="col-12 d-flex">
+                    <img src="/images/imagesCarrouselHome/perfectStudyEnvironment.jpeg" class="d-block col-6" alt="...">
+                    <div class="col-6">
+                        <p>Great Environment of the Schools</p>
+                    </div>
+                </div>
             </div>
             <div class="carousel-item">
-                <img src="/images/imagesCarrouselHome/perfectStudyEnvironment.jpeg" class="d-block" alt="...">
+                <div class="col-12 d-flex">
+                    <img src="/images/imagesCarrouselHome/perfectStudyEnvironment.jpeg" class="d-block col-6" alt="...">
+                    <div class="col-6">
+                        <p>Great Environment of the Schools</p>
+                    </div>
+                </div>
             </div>
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
