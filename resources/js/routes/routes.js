@@ -281,7 +281,24 @@ export default [
                 //meta: { breadCrumb: 'Student' }
             },
         ]
-    } 
+    },
+    {
+        path: '/test',
+        component: AuthenticatedLayout,
+        // redirect: {
+        //     name: 'admin.index'
+        // },
+        beforeEnter: requireLogin,
+        //meta: { breadCrumb: 'Dashboard' },
+        children: [
+            {
+                name: 'test.index',
+                path: '',
+                component: () => import('../views/test/index.vue'),
+                //meta: { breadCrumb: 'Test' }
+            },
+        ]
+    }  
 
 
 ];

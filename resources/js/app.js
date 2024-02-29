@@ -21,7 +21,7 @@ import PrimeVue from "primevue/config";
 //import Badge from 'primevue/badge';
 //import BadgeDirective from 'primevue/badgedirective';
 //import BlockUI from 'primevue/blockui';
-//import Button from 'primevue/button';
+import Button from 'primevue/button';
 //import Breadcrumb from 'primevue/breadcrumb';
 //import Calendar from 'primevue/calendar';
 //import Card from 'primevue/card';

@@ -16,18 +16,27 @@
                 </div>
             </div>
             <div class="card">
-                <h1>NIVEL DE DIFICULTAD DEL TEST</h1>
+                <h2>NIVEL DE DIFICULTAD DEL TEST</h2>
                 <div class="row">
                     <div class="card col-4">
-                    Nivel básico
+                        Nivel básico
                     </div>
                     <div class="card col-4">
-                    Nivel medio
+                        Nivel medio
                     </div>
                     <div class="card col-4">
-                    Nivel alto
+                        Nivel alto
                     </div>
-                    <h2>Generar test aleatorio</h2>
+                </div>
+                <div class="row">
+                    <h2>GENERAR TEST ALEATORIO</h2>
+                    <div class="card col-6">
+                        Acceder al test
+                    </div>
+                    <h2>TEST CON LAS PREGUNTAS MÁS FALLADAS</h2>
+                    <div class="card col-6">
+                        Acceder al test
+                    </div>
                 </div>
             </div>
         </div>
