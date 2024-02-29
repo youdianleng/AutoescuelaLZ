@@ -16,17 +16,17 @@
                     <button class="btn btn-success">Siguiente</button>
                 </div>
                 <div class="row mt-5">
-            <div v-for="i in 30" :key="i" class="card mr-2" style="width: 5px; height: 5px; justify-content: center;">
-              {{ i }}
-            </div>
-          </div>
-                
+                    <div v-for="i in 30" :key="i" class="card mr-2"
+                        style="width: 5px; height: 5px; justify-content: center;">
+                        {{ i }}
+                    </div>
+                </div>
 
-                
+
+
             </div>
         </div>
-</div>
-
+    </div>
 </template>
 
 
