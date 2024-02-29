@@ -298,6 +298,23 @@ export default [
                 //meta: { breadCrumb: 'Test' }
             },
         ]
+    },
+    {
+        path: '/teacher',
+        component: AuthenticatedLayout,
+        // redirect: {
+        //     name: 'admin.index'
+        // },
+        beforeEnter: requireLogin,
+        //meta: { breadCrumb: 'Dashboard' },
+        children: [
+            {
+                name: 'teacher.index',
+                path: '',
+                component: () => import('../views/teacher/index.vue'),
+                //meta: { breadCrumb: 'Test' }
+            },
+        ]
     }  
 
 
