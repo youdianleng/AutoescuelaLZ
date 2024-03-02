@@ -6,9 +6,11 @@
                 <img src="/images/logo.svg" alt="logo AutoEscuelaLZ" height="100px" width="200px" />
                 <span></span>
             </router-link>
-            <button class="p-link layout-topbar-button layout-topbar-button-c">
-                Información autoescuela
-            </button>
+            <router-link to="infoAutoescuela">
+                <button class="p-link layout-topbar-button layout-topbar-button-c">
+                    Información autoescuela
+                </button>
+            </router-link>
             <button class="p-link layout-topbar-button layout-topbar-button-c">
                 Carnets
             </button>

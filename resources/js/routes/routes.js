@@ -46,6 +46,11 @@ export default [
                 component: () => import('../views/home/index.vue'),
             },
             {
+                path: 'infoAutoescuela',
+                name: 'Informacion Informacion',
+                component: () => import('../views/test/infoAutoescuela.vue'),
+            },
+            {
                 path: 'posts',
                 name: 'public-posts.index',
                 component: () => import('../views/posts/index.vue'),
