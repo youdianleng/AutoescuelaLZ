@@ -13,17 +13,14 @@
                         <p>b. Moderar la velocidad en zonas donde puede haber aglomeración de personas</p>
                         <p>c. Circular lo más cerca posible de la acera o de los vehículos estacionados </p>
                     </div>
-                    <button class="btn btn-success">Siguiente</button>
+                    <button class="btn btn-success bg-blue-700">Siguiente</button>
                 </div>
                 <div class="row mt-5">
-                    <div v-for="i in 30" :key="i" class="card mr-2"
-                        style="width: 5px; height: 5px; justify-content: center;">
+                    <div v-for="i in 30" :key="i" class="card mr-2 bg-teal-300"
+                        style="width: 5px; height: 5px; align-items: center; justify-content: center;">
                         {{ i }}
                     </div>
                 </div>
-
-
-
             </div>
         </div>
     </div>
