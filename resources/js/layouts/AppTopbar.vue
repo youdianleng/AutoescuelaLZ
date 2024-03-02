@@ -1,80 +1,46 @@
 <template>
-    <div class="layout-topbar">
-        <router-link to="/" >
-            <img src="/images/logo.svg" alt="logo AutoEscuelaLZ" height="100px" width="200px" />
-            <span></span>
-        </router-link>
-        <!--
-            <button class="p-link layout-menu-button layout-topbar-button" @click="onMenuToggle()">
-            <i class="pi pi-bars"></i>
-        </button>
+    <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <div class="container">
 
-        <button class="p-link layout-topbar-menu-button layout-topbar-button" @click="onTopBarMenuButton()">
-            <i class="pi pi-ellipsis-v"></i>
-        </button>
-        -->
+            <router-link to="/" >
+                <img src="/images/logo.svg" alt="logo AutoEscuelaLZ" height="100px" width="200px" />
+                <span></span>
+            </router-link>
+
+            <router-link to="info">
+                <button class="p-link layout-topbar-button layout-topbar-button-c">
+                    Información
+                </button>
+            </router-link>
+
+            <button v-if="role === 'teacher'" class="p-link layout-topbar-button layout-topbar-button-c">
+                Estudiants
+            </button>
         
-        <div>
-            <button class="p-link layout-topbar-button layout-topbar-button-c">
-                Información autoescuela
-            </button>
-            <button class="p-link layout-topbar-button layout-topbar-button-c">
-                Carnets
-            </button>
-
-            <button class="p-link layout-topbar-button layout-topbar-button-c nav-item dropdown " role="button"
-                data-bs-toggle="dropdown">
-
-                <ul class="dropdown-menu dropdown-menu-end border-0 shadow-sm">
-                    <li>
-                        <router-link :to="{ name: 'profile.index' }" class="dropdown-item">Carnet de coche</router-link>
-                    </li>
-                    <li>
-                        <router-link :to="{ name: 'profile.index' }" class="dropdown-item">Carnet de moto</router-link>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" href="#">Preferencias</a>
-                    </li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-                    <li>
-                        <a class="dropdown-item" :class="{ 'opacity-25': processing }" :disabled="processing"
-                            href="javascript:void(0)" @click="logout">Cerrar sessión</a>
-                    </li>
-                </ul>               
-            </button>
-        </div>
-
-        <div class="layout-topbar-menu" :class="topbarMenuClasses">
-
-            <button class="p-link layout-topbar-button layout-topbar-button-c nav-item dropdown " role="button"
-                data-bs-toggle="dropdown">
-
-                <i class="pi pi-user"></i>
-                <ul class="dropdown-menu dropdown-menu-end border-0 shadow-sm">
-                    <li>
-                        <router-link :to="{ name: 'profile.index' }" class="dropdown-item">Perfil</router-link>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" href="#">Preferencias</a>
-                    </li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-                    <li>
-                        <a class="dropdown-item" :class="{ 'opacity-25': processing }" :disabled="processing"
-                            href="javascript:void(0)" @click="logout">Cerrar sessión</a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mt-2 mt-lg-0 me-auto mb-2 mb-lg-0">
+                    <LocaleSwitcher />
+                </ul>
+                <ul class="navbar-nav mt-2 mt-lg-0 ms-auto">
+                    <template v-if="!user?.name">
+                        <li class="nav-item">
+                            <router-link class="nav-link" to="/login">{{ $t('login') }}</router-link>
+                        </li>
+                    </template>
+                    <li v-if="user?.name" class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Hola, {{ user.name }}
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><router-link class="dropdown-item" to="profile">Perfil</router-link></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="javascript:void(0)" @click="logout">Logout</a></li>
+                        </ul>
                     </li>
                 </ul>
-
-                <span class="nav-link dropdown-toggle ms-3 me-2" href="#" role="button" data-bs-toggle="dropdown"
-                    aria-expanded="false">
-                    Hola, {{ user.name }}
-                </span>
-            </button>
+            </div>
         </div>
-    </div>
+    </nav>
 </template>
 
 <script setup>
@@ -82,10 +48,12 @@ import { ref, computed, onMounted, onBeforeUnmount } from 'vue';
 import { useLayout } from '../composables/layout';
 import { useStore } from 'vuex';
 import useAuth from "@/composables/auth";
+import LocaleSwitcher from "../components/LocaleSwitcher.vue";
 
 const { onMenuToggle } = useLayout();
 const store = useStore();
 const user = computed(() => store.state.auth.user)
+const role = computed(() => store.state.auth.role)
 const { processing, logout } = useAuth();
 
 const topbarMenuActive = ref(false);
@@ -99,8 +67,6 @@ const topbarMenuClasses = computed(() => {
         'layout-topbar-menu-mobile-active': topbarMenuActive.value
     };
 });
-
-
 </script>
 
 <style lang="scss" scoped>
@@ -115,5 +81,20 @@ const topbarMenuClasses = computed(() => {
 
 a{
     padding-top: 0px;
+}
+
+.navbar{
+    height: 70px;
+    width: 100%;
+}
+
+.nav-link{
+    padding-top: 0px;
+}
+
+.container{
+    margin: 0px;
+    padding-left: 28px;
+    width: 100%;
 }
 </style>
