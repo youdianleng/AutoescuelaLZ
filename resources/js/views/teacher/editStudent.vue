@@ -1,16 +1,15 @@
 <template>
     <div class="grid">
-        <h1 class="ms-3">Panel de Creación</h1>
+        <h1 class="ms-3">Panel de Editación</h1>
         <div class="col-12 d-flex">
-            
             <div class="col-4">
                 <div class="menuSelect">
                     <div class="borderCreacion">
-                        <h3>Menu de Creación</h3>
+                        <h3>Menu de Editación</h3>
                         <div class="row col-12 justify-content-center mb-5">
                             <div class="d-flex botoneCreacionAlumno justify-content-center">
                                 <img src="/public/images/ImagenCrear/crearUsuario.png">
-                                <button class="btn btn-white">Alta Alumnnos</button>
+                                <button class="btn btn-white">Editar Estudiante</button>
                             </div>                            
                         </div>
                     </div>
@@ -21,105 +20,48 @@
                 <div class="card col-11 ms-5 ">
                     <div class="formularioCrearStudent">
                         <div class="contenidoStudent">
-                            <h2>Nuevas Estudiantes</h2>   
+                            <h2>Editar Estudiante</h2>   
                             <div class="d-flex">
                                 <div class="col-8 row">
-                                    <form @submit.prevent="createStudent" class="col-12 row">
-                                        <input placeholder="Nombre" v-model="student.name" name="nombre" required>
-                                        <input class="mt-4" name="surname" v-model="student.surname" placeholder="Apellido">
-                                        <input class="mt-4" name="image" v-model="student.image" placeholder="Imagen">
-                                        <input type="mail" name="email" v-model="student.email" class="mt-4" placeholder="Email" required>
-                                        <input class="mt-4" name="password" v-model="student.password" placeholder="Contraseña" required>
-                                        <select class="mt-4" name="license_id" v-model="student.license_id" required>
+                                    <form class="col-12 row">
+                                        <input placeholder="Nombre" name="nombre" required>
+                                        <input class="mt-4" name="surname" placeholder="Apellido">
+                                        <input class="mt-4" name="image" placeholder="Imagen">
+                                        <input type="mail" name="email" class="mt-4" placeholder="Email" required>
+                                        <input class="mt-4" name="password" placeholder="Contraseña" required>
+                                        <select class="mt-4" name="license_id" required>
                                             <option>1</option>
                                             <option>2</option>
                                         </select>
-                                        <select class="mt-4" name="teacher_id" v-model="student.teacher_id" required>
+                                        <select class="mt-4" name="teacher_id" required>
                                             <option>1</option>
                                             <option>2</option>
                                         </select>
                                         <div class="col-12 d-flex justify-content-end">
-                                            <button type="submit" class="col-5 mt-3 btn btn-dark">Crear</button>
+                                            <button type="submit" class="col-5 mt-3 btn btn-dark">Editar</button>
                                         </div>
                                         
-                                    </form>
-                                
+                                    </form> 
                                 </div>
                                 <div class="col-4 textoDeRecuerdo">
                                     <h4>Notificaciones</h4>
-                                    <p>Para poder crear Estudiante nueva hay que asegurar el estudiante
-                                        ha entregado todos los documento de forma correcta y que es obligatorio 
-                                        tener los identidad y el tipo de carnet que desea sacar.
-                                    </p>
                                 </div>
-                            
                             </div>
-                           
                         </div>
-                        
-
                     </div>
                 </div>
             </div>
-            
         </div>
     </div>
 </template>
 
-<script setup>
-// Import all the library 
-import { ref, onMounted, reactive } from "vue";
-import { useForm, useField } from "vee-validate";
-import { useRoute } from "vue-router";
-import * as yup from 'yup';
-import { es } from 'yup-locales';
-import { setLocale } from 'yup';
+<script>
 
-// asigment of the required validation fields
-const schema = yup.object({
-    name: yup.string().required().label('Nombre'),
-})
-
-// Define the validate using form fields
-const { validate, errors } = useForm({ validationSchema: schema })
-const route = useRoute()
-
-// Set the Success and Error message
-const strSuccess = ref();
-const strError = ref();
-
-setLocale(es);
-
-
-    // Get the value from the form Inputs
-    const { value: name } = useField('name', null, { initialValue: '' });
-    const { value: surname } = useField('surname', null, { initialValue: '' });
-    const { value: image } = useField('image', null, { initialValue: '' });
-    const { value: email } = useField('email', null, { initialValue: '' });
-    const { value: password } = useField('password', null, { initialValue: '' });
-    const { value: license_id } = useField('license_id', null, { initialValue: '' });
-    const { value: teacher_id } = useField('teacher_id', null, { initialValue: '' });
-
-    // Create an array with all the value send by form
-    const student = reactive({
-        name,
-        surname,
-        image,
-        email,
-        password,
-        license_id,
-        teacher_id
-    })
-
-    // Send to create one Student calling the function we defined in API
-    function createStudent() {
-    // if validate 
+function saveTask() {
     validate().then(form => {
         console.log('validate');
-        //If the content of the form is validate
         if (form.valid) {
-            // Call the funtion with all the content we saved (Sending as $request)
-            axios.post('/api/student/create', student)
+            axios.post('/api/tasks/update/', task)
                 .then(response => {
                     strError.value = ""
                     strSuccess.value = response.data.success
@@ -131,14 +73,12 @@ setLocale(es);
         }
     })
 
-    }
-
+}
 
 </script>
 
 <style>
-    
-    
+
     .menuSelect{
         padding: 30px;
         background-color: white;

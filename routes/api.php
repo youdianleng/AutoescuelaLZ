@@ -27,6 +27,8 @@ Route::post('reset-password', [ResetPasswordController::class, 'reset'])->name('
 Route::get('student', [StudentController::class, 'index']);
 Route::post('student/create', [StudentController::class, 'store']);
 
+Route::put('student/update', [StudentController::class, 'update']);
+
 // Funciones para Teachers
 
 Route::group(['middleware' => 'auth:sanctum'], function() {
