@@ -73,6 +73,19 @@ export default [
                 component: () => import('../views/admin/index.vue'),
                 meta: { breadCrumb: 'Profile' },
                 beforeEnter: requireLogin,
+            },
+            {
+                name: 'Profile',
+                path: 'profile',
+                component: () => import('../views/admin/index.vue'),
+                meta: { breadCrumb: 'Profile' },
+                beforeEnter: requireLogin,
+            },
+            {
+                name: 'CreateStudent',
+                path: 'createStudent',
+                component: () => import('../views/teacher/createStudent.vue'),
+                meta: { breadCrumb: 'techer'}
             }
         ]
     },
@@ -127,12 +140,7 @@ export default [
                 component: () => import('../views/teacher/index.vue'),
                 //meta: { breadCrumb: 'Test' }
             },
-            {
-                name: 'CreateStudent',
-                path: 'createStudent',
-                component: () => import('../views/teacher/createStudent.vue'),
-                meta: { breadCrumb: 'techer'}
-            }
+            
         ]
     },
 
