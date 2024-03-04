@@ -59,12 +59,12 @@
 
 
 <script setup>
-import { ref, onMounted, reactive } from "vue";
-import { useForm, useField } from "vee-validate";
-import { useRoute } from "vue-router";
-import * as yup from 'yup';
-import { es } from 'yup-locales';
-import { setLocale } from 'yup';
+    import { ref, onMounted, reactive } from "vue";
+    import { useForm, useField } from "vee-validate";
+    import { useRoute } from "vue-router";
+    import * as yup from 'yup';
+    import { es } from 'yup-locales';
+    import { setLocale } from 'yup';
 
 
 const schema = yup.object({
@@ -118,6 +118,25 @@ function saveTask() {
         console.log('validate');
         if (form.valid) {
             axios.post('/api/tasks/update/' + route.params.id, task)
+                .then(response => {
+                    strError.value = ""
+                    strSuccess.value = response.data.success
+                })
+                .catch(function (error) {
+                    strSuccess.value = ""
+                    strError.value = error.response.data.message
+                });
+        }
+    })
+
+}
+
+
+function createTask() {
+    validate().then(form => {
+        console.log('validate');
+        if (form.valid) {
+            axios.post('/api/tasks/create/' + route.params.id, task)
                 .then(response => {
                     strError.value = ""
                     strSuccess.value = response.data.success

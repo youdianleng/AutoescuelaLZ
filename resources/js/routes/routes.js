@@ -86,7 +86,13 @@ export default [
                 path: 'createStudent',
                 component: () => import('../views/teacher/createStudent.vue'),
                 meta: { breadCrumb: 'techer'}
-            }
+            },
+            {
+                name: 'crearTask',
+                path: 'createTasks',
+                component: () => import('../views/task/create.vue'),
+                meta: { breadCrumb: 'techer'}
+            },
         ]
     },
 

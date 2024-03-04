@@ -20,15 +20,20 @@ class StudentController extends Controller
         $request->validate([
             'name' => 'required|max:5',
             'surname' => 'required',
-            ''
-
+            'password' => 'required',
+            'teacher_id' => 'required',
+            'email' => 'required|email',
+            'address',
+            'image',
+            'license_id' => 'required',
         ]);
 
         $task = $request->all();
-        $tarea = Student::create($task);
 
-        $tarea->teachers()->sync([1]);
+        $tarea = Student::create($task);
 
         return response()->json(['success' => true, 'data' => $tarea]);
     }
+
+    
 }
