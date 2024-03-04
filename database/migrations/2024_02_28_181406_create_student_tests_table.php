@@ -19,7 +19,7 @@ return new class extends Migration
             $table->boolean("is_correct");
             $table->date("start_date");
             $table->date("end_date");
-            $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');
+            $table->foreign('student_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('test_id')->references('id')->on('tests')->onDelete('cascade');
             $table->foreign('question_id')->references('id')->on('questions')->onDelete('cascade');
 

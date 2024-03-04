@@ -1,38 +1,10 @@
 <template>
     <div class="layout-wrapper" :class="containerClass">
         <app-topbar></app-topbar>
-        <div class="layout-main-container ">
-            <div class="layout-main">
-                
-
-                <Suspense>
-                <router-view></router-view>
-                </Suspense>
-            </div>
-            <app-footer></app-footer>
-        </div>
-        <!--app-config></app-config-->
-        <div class="layout-mask"></div>
+        <router-view></router-view>   
+        <app-footer></app-footer>
     </div>
 </template>
-
-<!--template>
-    <AdminNavbar />
-    <div class="d-flex align-items-stretch w-100">
-        <AdminSidebar />
-        <div class="container-fluid">
-            <Breadcrumb class="row justify-content-center mt-4" :crumbs="crumbs" @selected="selected" />
-             <h2 class="fw-semibold">
-                {{ crumbs }}
-            </h2>
-                 <div class="main mx-2">
-                <Suspense>
-                <router-view></router-view>
-                </Suspense>
-            </div>
-        </div>
-    </div>
-</template-->
 
 <script setup>
 import { computed, watch, ref } from 'vue';
@@ -42,7 +14,6 @@ import Breadcrumb from 'primevue/breadcrumb';
 import AppTopbar from './AppTopbar.vue';
 import AppFooter from './AppFooter.vue';
 import AppSidebar from './AppSidebar.vue';
-//import AppConfig from './AppConfig.vue';
 import { useLayout } from '../composables/layout';
 
 const route = useRoute();

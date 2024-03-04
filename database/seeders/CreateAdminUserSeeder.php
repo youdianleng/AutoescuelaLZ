@@ -18,33 +18,36 @@ class CreateAdminUserSeeder extends Seeder
      */
     public function run()
     {
-        $user = User::create([
-            'name' => 'David',
-            'email' => 'admin@demo.com',
+        $roleTeacher = Role::create(['name' => 'teacher']);
+        $roleStudent = Role::create(['name' => 'student']);
+
+        $permissionsTeacher = [
+            'student-list',
+            'student-create',
+            'student-edit',
+            'student-delete',
+            'test-list',
+            'test-create',
+            'test-edit',
+            'test-delete'
+        ];
+        $roleTeacher->syncPermissions($permissionsTeacher);
+
+        $teacher = User::create([
+            'name' => 'Teacher',
+            'surname' => '1',
+            'email' => 'teacher@gmail.com',
             'password' => bcrypt('12345678')
         ]);
+        $teacher->assignRole([$roleTeacher->id]);
 
-        $role = Role::create(['name' => 'admin']);
-        $role2 = Role::create(['name' => 'user']);
-        $permissions = [
-            'post-list',
-            'post-create',
-            'post-edit',
-            'post-delete',
-            'post-list',
-            'exercise-create',
-            'exercise-edit',
-            'exercise-all',
-            'exercise-delete'
-        ];
-        $role2->syncPermissions($permissions);
-        Category::create(['name' => 'Vue.js']);
-        Category::create(['name' => 'Cat 2']);
-
-        $permissions = Permission::pluck('id','id')->all();
-
-        $role->syncPermissions($permissions);
-
-        $user->assignRole([$role->id]);
+        $student = User::create([
+            'name' => 'Student',
+            'surname' => '1',
+            'email' => 'student@gmail.com',
+            'password' => bcrypt('12345678'),
+            'teacher_id' => $teacher->id
+        ]);
+        $student->assignRole([$roleStudent->id]);
     }
 }
