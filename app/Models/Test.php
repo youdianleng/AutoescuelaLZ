@@ -9,7 +9,8 @@ class Test extends Model
 {
     use HasFactory;
     protected $fillable = [
-        "errors",
+        "question",
+        "difficulty",
     ];
     
 }

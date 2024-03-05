@@ -15,10 +15,15 @@
 
             <router-link to="CreateStudent">
                 <button v-if="role === 'teacher'" class="p-link layout-topbar-button layout-topbar-button-c">
-                Estudiants
+                Estudiantes
                 </button>
             </router-link>
             
+            <router-link to="CreateTest">
+                <button v-if="role === 'teacher'" class="p-link layout-topbar-button layout-topbar-button-c">
+                Tests
+                </button>
+            </router-link>
         
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mt-2 mt-lg-0 me-auto mb-2 mb-lg-0">
