@@ -22,9 +22,9 @@
                         <div class="contenidoStudent">
                             <h2>Editar Estudiante</h2>   
                             <div class="d-flex">
-                                <div class="col-8 row">
+                                <div class="col-12 row">
                                     <form class="col-12 row">
-                                        <input placeholder="Nombre" name="nombre" required>
+                                        <input v-model="student.name" name="name" required>
                                         <input class="mt-4" name="surname" placeholder="Apellido">
                                         <input class="mt-4" name="image" placeholder="Imagen">
                                         <input type="mail" name="email" class="mt-4" placeholder="Email" required>
@@ -43,9 +43,6 @@
                                         
                                     </form> 
                                 </div>
-                                <div class="col-4 textoDeRecuerdo">
-                                    <h4>Notificaciones</h4>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -55,13 +52,63 @@
     </div>
 </template>
 
-<script>
+<script setup>
+import { ref, onMounted, reactive } from "vue";
+import { useForm, useField} from "vee-validate";
+import { useRoute } from "vue-router";
+import * as yup from 'yup';
+import { es } from 'yup-locales';
+import { setLocale } from 'yup';
+
+
+const schema =  yup.object({
+    name: yup.string().required().label('Nombre'),
+})
+
+
+const { validate, errors } = useForm({ validationSchema: schema })
+const route = useRoute()
+
+
+setLocale(es);
+
+
+
+
+const { value: name } = useField('name', null, { initialValue: '' });
+const { value: description } = useField('description', null, { initialValue: '' });
+const { value: date_open } = useField('date_open', null, { initialValue: '' });
+const { value: date_close } = useField('date_close', null, { initialValue: '' });
+
+
+const student = reactive({
+    name,
+})
+
+
+const strSuccess = ref();
+const strError = ref();
+
+
+onMounted(() => {
+    axios.get('/api/student/' + route.params.id)
+    .then(response => {
+        console.log(response);
+        student.name = response.data.name;
+    })
+    .catch(function(error) {
+        console.log(error);
+    });
+})
+
+
+
 
 function saveTask() {
     validate().then(form => {
         console.log('validate');
         if (form.valid) {
-            axios.post('/api/tasks/update/', task)
+            axios.post('/api/student/update/', task)
                 .then(response => {
                     strError.value = ""
                     strSuccess.value = response.data.success

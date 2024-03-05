@@ -146,6 +146,12 @@ export default [
                 component: () => import('../views/teacher/createStudent.vue'),
                 meta: { breadCrumb: 'techer'}
             },
+            {
+                name: 'EditStudent',
+                path: 'editStudent/:id',
+                component: () => import('../views/teacher/editStudent.vue'),
+                meta: { breadCrumb: 'createStudent'}
+            },
             
         ]
     },

@@ -25,7 +25,7 @@
                             <div class="d-flex">
                                 <div class="col-8 row">
                                     <form @submit.prevent="createStudent" class="col-12 row">
-                                        <input placeholder="Nombre" v-model="student.name" name="nombre" required>
+                                        <input placeholder="Nombre" v-model="student.name" name="name" required>
                                         <input class="mt-4" name="surname" v-model="student.surname" placeholder="Apellido">
                                         <input class="mt-4" name="image" v-model="student.image" placeholder="Imagen">
                                         <input type="mail" name="email" v-model="student.email" class="mt-4" placeholder="Email" required>
@@ -87,8 +87,11 @@
                                 <td class="col-2" v-else="student.license_id === 2">Moto</td>
                                 <td class="col-2">{{ student.teacher_id }}</td>
                                 <td class="col-2 d-flex justify-content-between">
-                                    <button type="submit" class="editButton btn btn-primary">Editar</button>
-                                    <button type="submit" class="editButton btn btn-primary">Eliminar</button>
+                                    <router-link  :to="{name: 'EditStudent', params: { id: student.id }}" class="editButton btn btn-primary">Editar</router-link>
+                                    <form @submit.prevent="createStudent">
+                                        <button type="submit" class="editButton btn btn-primary">Eliminar</button>
+                                    </form>
+                                    
                                 </td>
                                 
                             </tr>
@@ -115,14 +118,7 @@ onMounted(() => {
     axios.get('/api/student')
         .then(response => {
             students.value = response.data;
-            // console.log(response);
-            // students.name = response.data.name;
-            // students.surname = response.data.surname;
-            // students.image = response.data.password;
-            // students.email = response.data.teacher_id;
-            // students.password = response.data.password;
-            // students.license_id = response.data.license_id;
-            // students.teacher_id = response.data.teacher_id;
+
         })
         .catch(function (error) {
             console.log(error);
@@ -189,10 +185,6 @@ validate().then(form => {
 })
 
 }
-
-
-// Edit user with the previous data
-
 
 
 </script>

@@ -29,16 +29,15 @@ class StudentController extends Controller
         ]);
 
         $task = $request->all();
-
+        $teacher_id = $task["teacher_id"];
         $tarea = Student::create($task);
-
+        $tarea->teachers()->sync([1]);
         return response()->json(['success' => true, 'data' => $tarea]);
     }
 
     public function update(Request $request)
     {
-        $mailStudent = $request->input('email');
-        $task = Student::find($mailStudent);
+        $task = Student::find();
         $request->validate([
             'name' => 'required|max:10',
             'surname' => 'required',
@@ -57,6 +56,29 @@ class StudentController extends Controller
 
         return response()->json(['success' => true, 'data' => $task]);
     }
+
+    //Find the student with the specific ID
+    public function findStudent($id, Request $request)
+    {
+        
+        $student = Student::find($id);
+        if (!$student) {
+            return response()->json(['success' => false, 'message' => 'Estudiante no encontrado'], 404);
+        }
+
+        return response()->json(['success' => true, 'data' => $student]);
+    }
+
+    //Destroy the specific student with the same id we sended
+    public function destroy($id, Request $request)
+    {
+        $task = Student::find($id);
+        $task->delete();
+
+
+        return response()->json(['success' => true, 'data' => "Deleted"]);
+    }
+
 
     
 }

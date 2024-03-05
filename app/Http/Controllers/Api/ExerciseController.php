@@ -71,7 +71,6 @@ class ExerciseController extends Controller
                 $exercise->media()->delete();
                 $exercise->addMediaFromRequest('thumbnail')->preservingOriginal()->toMediaCollection('images-exercises');
             }
-
             return new ExerciseResource($exercise);
         }
     }
