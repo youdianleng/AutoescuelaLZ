@@ -20,6 +20,7 @@
 
             <form @submit.prevent="saveTask">
 
+
                 <div class="form-group mb-2">
                     <label>Nombre</label><span class="text-danger"> *</span>
                     <input type="text" class="form-control" v-model="task.name" placeholder="Nombre tarea">
@@ -39,7 +40,7 @@
                     <label>Fecha inicio</label><span class="text-danger">*</span>
                     <input class="form-control" type="datetime-local" v-model="task.date_open" name="date_open" />
                 </div>
-
+       
                 <div class="form-gorup mb-2">
                     <label>Fecha fin</label><span class="text-danger">*</span>
                     <input class="form-control" type="datetime-local" v-model="task.date_close" name="date_close" />
@@ -58,15 +59,15 @@
 
 
 <script setup>
-    import { ref, onMounted, reactive } from "vue";
-    import { useForm, useField } from "vee-validate";
-    import { useRoute } from "vue-router";
-    import * as yup from 'yup';
-    import { es } from 'yup-locales';
-    import { setLocale } from 'yup';
+import { ref, onMounted, reactive } from "vue";
+import { useForm, useField} from "vee-validate";
+import { useRoute } from "vue-router";
+import * as yup from 'yup';
+import { es } from 'yup-locales';
+import { setLocale } from 'yup';
 
 
-const schema = yup.object({
+const schema =  yup.object({
     name: yup.string().required().label('Nombre'),
 })
 
@@ -100,59 +101,41 @@ const strError = ref();
 
 onMounted(() => {
     axios.get('/api/tasks/' + route.params.id)
-        .then(response => {
-            task.name = response.data.name;
-            task.description = response.data.description;
-            task.date_open = response.data.date_open;
-            task.date_close = response.data.date_close;
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
+    .then(response => {
+        task.name = response.data.name;
+        task.description = response.data.description;
+        task.date_open = response.data.date_open;
+        task.date_close = response.data.date_close;
+    })
+    .catch(function(error) {
+        console.log(error);
+    });
 })
 
 
 function saveTask() {
     validate().then(form => {
         console.log('validate');
-        if (form.valid) {
-            axios.post('/api/tasks/update/' + route.params.id, task)
-                .then(response => {
-                    strError.value = ""
-                    strSuccess.value = response.data.success
-                })
-                .catch(function (error) {
-                    strSuccess.value = ""
-                    strError.value = error.response.data.message
-                });
+        if (form.valid){
+            axios.post('/api/tasks/update/'+route.params.id, task)
+            .then(response => {
+                strError.value = ""
+                strSuccess.value = response.data.success
+            })
+            .catch(function (error) {
+                strSuccess.value = ""
+                strError.value = error.response.data.message
+            });
         }
     })
-
-}
-
-
-function createTask() {
-    validate().then(form => {
-        console.log('validate');
-        if (form.valid) {
-            axios.post('/api/tasks/create/' + route.params.id, task)
-                .then(response => {
-                    strError.value = ""
-                    strSuccess.value = response.data.success
-                })
-                .catch(function (error) {
-                    strSuccess.value = ""
-                    strError.value = error.response.data.message
-                });
-        }
-    })
-
+   
 }
 
 
 </script>
 
 
-<style></style>
+<style>
+</style>
 
 

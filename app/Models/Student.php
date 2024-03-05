@@ -14,7 +14,10 @@ class Student extends Model
         "surname",
         "password",
         "teacher_id",
+        "license_id",
         "email",
+        'address',
+        'image'
     ];
 
     public function teachers()
