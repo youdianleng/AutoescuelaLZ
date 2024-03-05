@@ -87,6 +87,14 @@ export default [
                 component: () => import('../views/task/create.vue'),
                 meta: { breadCrumb: 'techer'}
             },
+            {
+                name: 'CreateTest',
+                path: 'createTest',
+                component: () => import('../views/teacher/test/create.vue'),
+                meta: { breadCrumb: 'createTest'},
+                beforeEnter: requireLogin,
+
+            }
         ]
     },
 
@@ -107,24 +115,6 @@ export default [
             },
         ]
     },
-    {
-        path: '/test',
-        component: Layout,
-        // redirect: {
-        //     name: 'admin.index'
-        // },
-        beforeEnter: requireLogin,
-        //meta: { breadCrumb: 'Dashboard' },
-        children: [
-            {
-                name: 'test.index',
-                path: '',
-                component: () => import('../views/test/index.vue'),
-                //meta: { breadCrumb: 'Test' }
-            },
-        ]
-    },
-
     {
         path: '/teacher',
         component: Layout,

@@ -20,7 +20,6 @@
 
             <form @submit.prevent="saveTask">
 
-
                 <div class="form-group mb-2">
                     <label>Nombre</label><span class="text-danger"> *</span>
                     <input type="text" class="form-control" v-model="task.name" placeholder="Nombre tarea">
