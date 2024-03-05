@@ -87,7 +87,6 @@ export default [
                 component: () => import('../views/task/create.vue'),
                 meta: { breadCrumb: 'techer'}
             },
-<<<<<<< HEAD
             {
                 name: 'CreateTest',
                 path: 'createTest',
@@ -96,8 +95,6 @@ export default [
                 beforeEnter: requireLogin,
 
             }
-=======
->>>>>>> c67954b846adaccb54787855c85cf5fb6ee958cf
         ]
     },
 
