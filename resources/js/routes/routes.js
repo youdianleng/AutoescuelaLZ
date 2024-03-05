@@ -82,12 +82,6 @@ export default [
                 beforeEnter: requireLogin,
             },
             {
-                name: 'CreateStudent',
-                path: 'createStudent',
-                component: () => import('../views/teacher/createStudent.vue'),
-                meta: { breadCrumb: 'techer'}
-            },
-            {
                 name: 'crearTask',
                 path: 'createTasks',
                 component: () => import('../views/task/create.vue'),
@@ -145,6 +139,12 @@ export default [
                 path: '',
                 component: () => import('../views/teacher/index.vue'),
                 //meta: { breadCrumb: 'Test' }
+            },
+            {
+                name: 'CreateStudent',
+                path: 'createStudent',
+                component: () => import('../views/teacher/createStudent.vue'),
+                meta: { breadCrumb: 'techer'}
             },
             
         ]

@@ -4,63 +4,14 @@
 
         <!-- Carrousel para mostrar los informaciones general de autoescuela -->
         <div id="carouselExampleAutoplaying" class="carousel slide border-bottom bg-white" data-bs-ride="carousel">
-        <div class="carousel-indicators">
-            <button type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-            <button type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide-to="1" aria-label="Slide 2"></button>
-            <button type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide-to="2" aria-label="Slide 3"></button>
-        </div>
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <div class="col-12 d-flex">
-                    <img src="/images/imagesCarrouselHome/perfectStudyEnvironment.jpeg" class="d-block col-6" alt="...">
-                    <div class="col-6 boxInformacionAmbiento">
-                        <div class="d-flex">
-                            <div class="row ">
-                                <div>
-                                 <h3 class="col-12 d-flex justify-content-start">Ambiente Perfecto De Estudio</h3>
-                                </div>
-                                <div>
-                                    <h5 class="col-12 d-flex justify-content-start">Publicado por Zhiou Zhu</h5>
-                                    <h6 class="col-12 d-flex justify-content-start">Publicado en 29/02/2024</h6>
-                                </div>
-                                <div class="mt-5">
-                                    <p>
-                                        Nuestro autoescuela esta muy dedicado de mejorar el ambiento de estudio para que los estudiantes que vengan pueden sentir de forma mas comodo que sea para poder trabajar y aprender los conocimientos
-                                        , tenemos los mejores profes de conducción que tiene mas de 20 años de experiencia de conducir.
-                                    </p>
-                                </div>
-                            </div>
-                            
-                        </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="col-12 d-flex">
+                        <img src="/images/imagesCarrouselHome/comienzaAConducir.jpg" class="d-block col-12" alt="..." height="700px">
                     </div>
-                </div>
-            
-            </div>
-            <div class="carousel-item">
-                <div class="col-12 d-flex">
-                    <img src="/images/imagesCarrouselHome/perfectStudyEnvironment.jpeg" class="d-block col-6" alt="...">
-                    <div class="col-6">
-                        <p>Great Environment of the Schools</p>
-                    </div>
+                
                 </div>
             </div>
-            <div class="carousel-item">
-                <div class="col-12 d-flex">
-                    <img src="/images/imagesCarrouselHome/perfectStudyEnvironment.jpeg" class="d-block col-6" alt="...">
-                    <div class="col-6">
-                        <p>Great Environment of the Schools</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
         </div>
 
         <!-- Crear el section de Informacion de Coche y Informacion de Motos -->
