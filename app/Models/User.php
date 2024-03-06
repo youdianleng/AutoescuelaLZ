@@ -52,9 +52,14 @@ class User extends Authenticatable
         $this->notify(new UserResetPasswordNotification($token));
     }
 
+    // public function teacher(): HasOne
+    // {
+    //     return $this->hasOne(User::class);
+    // }
+
     public function teacher(): HasOne
     {
-        return $this->hasOne(User::class);
+        return $this->hasOne(User::class,'students_teachers');
     }
 
     public function isTeacher()

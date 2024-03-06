@@ -85,7 +85,6 @@ const student = reactive({
     name,
 })
 
-
 const strSuccess = ref();
 const strError = ref();
 
@@ -94,7 +93,7 @@ onMounted(() => {
     axios.get('/api/student/' + route.params.id)
     .then(response => {
         console.log(response);
-        student.name = response.data.name;
+        student.name = response.data.data.name;
     })
     .catch(function(error) {
         console.log(error);
