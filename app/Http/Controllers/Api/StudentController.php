@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
+use App\Models\Student;
 use Illuminate\Http\Request;
 
 class StudentController extends Controller
@@ -11,7 +11,7 @@ class StudentController extends Controller
     public function index()
     {
 
-        $students = User::whereHas('roles')->get();
+        $students = Student::with('teachers')->get();
         // $tasks = User::withRole()->get();
          return $students;
     }
@@ -32,16 +32,16 @@ class StudentController extends Controller
 
         $task = $request->all();
         $teacher_id = $task["teacher_id"];
-        $tarea = User::create($task);
+        $tarea = Student::create($task);
 
-        $tarea->teacher()->attach($teacher_id);
+        $tarea->teachers()->attach($teacher_id);
         
         return response()->json(['success' => true, 'data' => $tarea]);
     }
 
     public function update(Request $request)
     {
-        $task = User::find();
+        $task = Student::find();
         $request->validate([
             'name' => 'required|max:10',
             'surname' => 'required',
@@ -65,7 +65,7 @@ class StudentController extends Controller
     public function findStudent($id, Request $request)
     {
         
-        $student = User::find($id);
+        $student = Student::find($id);
         if (!$student) {
             return response()->json(['success' => false, 'message' => 'Estudiante no encontrado'], 404);
         }
@@ -76,7 +76,7 @@ class StudentController extends Controller
     //Destroy the specific student with the same id we sended
     public function destroy($id, Request $request)
     {
-        $task = User::find($id);
+        $task = Student::find($id);
         $task->delete();
 
 

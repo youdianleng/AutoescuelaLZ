@@ -14,10 +14,10 @@ return new class extends Migration
             $table->string("name")->nullable();
             $table->string("surname")->nullable();
             $table->string("password")->nullable();
-            $table->unsignedBigInteger('teacher_id')->nullable();
             $table->string("email")->nullable();
             $table->string("address")->nullable();
             $table->string("image")->nullable();
+            $table->unsignedBigInteger('teacher_id')->nullable();
             $table->unsignedBigInteger("license_id")->nullable();
             $table->foreign('teacher_id')->references('id')->on('teachers')->onDelete('cascade');
             $table->foreign('license_id')->references('id')->on('licenses')->onDelete('cascade');
