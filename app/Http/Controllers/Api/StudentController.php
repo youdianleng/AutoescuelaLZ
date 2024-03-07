@@ -10,8 +10,10 @@ class StudentController extends Controller
 {
     public function index()
     {
-        $tasks = User::with("teacher")->get();
-        return $tasks;
+
+        $students = User::whereHas('roles')->get();
+        // $tasks = User::withRole()->get();
+         return $students;
     }
 
 
@@ -33,6 +35,7 @@ class StudentController extends Controller
         $tarea = User::create($task);
 
         $tarea->teacher()->attach($teacher_id);
+        
         return response()->json(['success' => true, 'data' => $tarea]);
     }
 

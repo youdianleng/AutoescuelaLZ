@@ -40,7 +40,7 @@
                             Hola, {{ user.name }}
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
-                            <li><router-link class="dropdown-item" to="profile">Perfil</router-link></li>
+                            <li><router-link class="dropdown-item" to="/teacher/profile">Perfil</router-link></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="javascript:void(0)" @click="logout">Logout</a></li>
                         </ul>

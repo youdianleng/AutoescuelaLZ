@@ -1,6 +1,5 @@
 <template>
-    <div class="grid">
-        <h1 class="ms-3">Panel de Creación</h1>
+    <div class="grid mt-5">
         <!-- Exist Student Panel (Edit Student or Delete Student)-->
         <div class="col-12 row justify-content-center">
             <div class="principalEdit card col-11">

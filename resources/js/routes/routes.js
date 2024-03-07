@@ -134,13 +134,13 @@ export default [
                 name: 'CreateStudent',
                 path: 'createStudent',
                 component: () => import('../views/teacher/createStudent.vue'),
-                meta: { breadCrumb: 'techer'},
+                meta: { breadCrumb: 'CreateStudent'},
             },
             {
                 name: 'EditStudent',
                 path: 'editStudent/:id',
                 component: () => import('../views/teacher/editStudent.vue'),
-                meta: { breadCrumb: 'createStudent'}
+                meta: { breadCrumb: 'EditStudent'}
             },
             {
                 name: 'Profile',
