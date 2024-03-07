@@ -1,53 +1,52 @@
 <template>
     <div class="grid">
-        <h1 class="ms-3">Panel de Editación</h1>
-        <div class="col-12 d-flex">
-            <div class="col-4">
-                <div class="menuSelect">
-                    <div class="borderCreacion">
-                        <h3>Menu de Editación</h3>
-                        <div class="row col-12 justify-content-center mb-5">
-                            <div class="d-flex botoneCreacionAlumno justify-content-center">
-                                <img src="/public/images/ImagenCrear/crearUsuario.png">
-                                <button class="btn btn-white">Editar Estudiante</button>
-                            </div>                            
-                        </div>
-                    </div>
-                    
-                </div>
-            </div>
-            <div class="row col-8">
-                <div class="card col-11 ms-5 ">
+            <div class="col-12 d-flex justify-content-center mt-5">
+            <div class="row col-11">
+                <div class="card col-12 ">
                     <div class="formularioCrearStudent">
                         <div class="contenidoStudent">
                             <h2>Editar Estudiante</h2>   
                             <div class="d-flex">
                                 <div class="col-12 row">
-                                    <form class="col-12 row">
-                                        <input v-model="student.name" name="name" required>
-                                        <input class="mt-4" name="surname" placeholder="Apellido">
-                                        <input class="mt-4" name="image" placeholder="Imagen">
-                                        <input type="mail" name="email" class="mt-4" placeholder="Email" required>
-                                        <input class="mt-4" name="password" placeholder="Contraseña" required>
-                                        <select class="mt-4" name="license_id" required>
+                                    <form @submit.prevent="createStudent" class="col-12 row">
+                                        <input placeholder="Nombre" v-model="student.name" name="name" required>
+                                        {{ errors.name }}
+                                        {{ name }}
+                                        <input class="mt-4" name="surname" v-model="student.surname" placeholder="Apellido">
+                                        <input class="mt-4" name="image" v-model="student.image" placeholder="Imagen">
+                                        <input type="mail" name="email" v-model="student.email" class="mt-4" placeholder="Email" required>
+                                        {{ errors.email }}
+                                        <input class="mt-4" name="password" v-model="student.password" placeholder="Contraseña" required>
+                                        {{ errors.password }}
+                                        <select class="mt-4" name="license_id" v-model="student.license_id" required>
                                             <option>1</option>
                                             <option>2</option>
                                         </select>
-                                        <select class="mt-4" name="teacher_id" required>
+                                        {{ errors.licencia_id }}
+                                        <select class="mt-4" name="teacher_id" v-model="student.teacher_id" required>
                                             <option>1</option>
                                             <option>2</option>
                                         </select>
+                                        {{ errors.teacher_id }}
                                         <div class="col-12 d-flex justify-content-end">
-                                            <button type="submit" class="col-5 mt-3 btn btn-dark">Editar</button>
+                                            <form @submit.prevent="saveTask" class="col-4">
+                                                <button type="submit" class="col-12 mt-3 btn btn-dark">Editar</button>
+                                            </form>
                                         </div>
                                         
-                                    </form> 
+                                    </form>
+                                
                                 </div>
+                            
                             </div>
+                           
                         </div>
+                        
+
                     </div>
                 </div>
             </div>
+            
         </div>
     </div>
 </template>
@@ -76,13 +75,23 @@ setLocale(es);
 
 
 const { value: name } = useField('name', null, { initialValue: '' });
-const { value: description } = useField('description', null, { initialValue: '' });
-const { value: date_open } = useField('date_open', null, { initialValue: '' });
-const { value: date_close } = useField('date_close', null, { initialValue: '' });
+const { value: surname } = useField('surname', null, { initialValue: '' });
+const { value: image } = useField('image', null, { initialValue: '' });
+const { value: email } = useField('email', null, { initialValue: '' });
+const { value: password } = useField('password', null, { initialValue: '' });
+const { value: license_id } = useField('license_id', null, { initialValue: '' });
+const { value: teacher_id } = useField('teacher_id', null, { initialValue: '' });
+
 
 
 const student = reactive({
     name,
+    surname,
+    image,
+    email,
+    password,
+    license_id,
+    teacher_id
 })
 
 const strSuccess = ref();
@@ -92,8 +101,13 @@ const strError = ref();
 onMounted(() => {
     axios.get('/api/student/' + route.params.id)
     .then(response => {
-        console.log(response);
         student.name = response.data.data.name;
+        student.surname = response.data.data.surname;
+        student.image = response.data.data.image;
+        student.email = response.data.data.email;
+        student.password = response.data.data.password;
+        student.license_id = response.data.data.license_id;
+        student.teacher_id = response.data.data.teacher_id;
     })
     .catch(function(error) {
         console.log(error);
@@ -107,7 +121,7 @@ function saveTask() {
     validate().then(form => {
         console.log('validate');
         if (form.valid) {
-            axios.post('/api/student/update/', task)
+            axios.put('/api/student/update/'+route.params.id, student)
                 .then(response => {
                     strError.value = ""
                     strSuccess.value = response.data.success

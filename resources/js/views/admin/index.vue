@@ -1,16 +1,104 @@
 <template>
-    VISTA PROFESOR CARNET COCHE/MOTO
-    <div class="grid">
-        <div class="col-4">foto</div>
-        <div class="col-8">
-            <p>Nombre</p>
-            <p>Apellidos</p>
-            <p>Direccón</p>
+    <div class="grid col-12">
+        <div class="col-12 mt-5 row justify-content-center">
+            <div class="card col-11 d-flex">
+                <div class="col-12 d-flex justify-content-center">
+                    <div class="col-4 d-flex justify-content-center">
+                        <img src="/images/perfil.png">
+                    </div>
+                    
+                    <div class="col-8">
+                        <h2 class="mb-5">Profesor de Coche/Moto</h2>
+                        <h3>Zhiou</h3>
+                        <h3>Zhu</h3>
+                        <h3>Molins de Rei, Bernat el Ferrer</h3>
+                    </div>
+                </div>
+                
+            </div>
+
+            <div class="card col-11 d-flex">
+                <div class="col-12 justify-content-center">
+                    <h3 class="col-12 d-flex justify-content-center">Preguntas Creados</h3>
+                    <table class="col-12 mt-5">
+                        <tbody class="col-12">
+                            <tr class="col-12 border-top border-bottom bg-body-tertiary">
+                                <th class="col-3 text-center">Pregunta</th>
+                                <th class="col-3 text-center">Numero Opcion Correcta</th>
+                                <th class="col-3 text-center">Dificuldad</th>
+                                <th class="col-3 text-center">Fecha Creado</th>
+                            </tr>
+                            <tr v-for="student in students" class="col-12">
+                                <td class="col-3 text-center">{{ student.name }}</td>
+                                <td class="col-3 text-center">{{ student.surname }}</td>
+                                <td class="col-3 text-center">{{ student.email }}</td>
+                                <td class="col-3 text-center">{{ student.license_id }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+            </div>
+
+            <div class="card col-11 d-flex">
+                <div class="col-12 justify-content-center">
+                    <h3 class="col-12 d-flex justify-content-center">Alumnos Asignados</h3>
+                    <table class="col-12 mt-5">
+                        <tbody class="col-12">
+                            <tr class="col-12 border-top border-bottom bg-body-tertiary">
+                                <th class="col-3 text-center">Nombre</th>
+                                <th class="col-3 text-center">Apellido</th>
+                                <th class="col-3 text-center">Email</th>
+                                <th class="col-3 text-center">Licencia</th>
+                            </tr>
+                            <tr v-for="student in students" class="col-12">
+                                <td class="col-3 text-center">{{ student.name }}</td>
+                                <td class="col-3 text-center">{{ student.surname }}</td>
+                                <td class="col-3 text-center">{{ student.email }}</td>
+                                <td class="col-3 text-center">{{ student.license_id }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+            </div>
+            
         </div>
     </div>
 </template>
 
 <script setup>
+// Import all the library 
+import { ref, onMounted, reactive, createElementBlock } from "vue";
+import { useForm, useField } from "vee-validate";
+import { useRoute } from "vue-router";
+import * as yup from 'yup';
+import { es } from 'yup-locales';
+import { setLocale } from 'yup';
+// import useUsers from "../../composables/users";
+// const {users, getUsers, deleteUser} = useUsers()
+
+// Get all the student we have in bbdd
+const students = ref();
+
+onMounted(() => {
+
+    // getUsers();
+    axios.get('/api/student')
+        .then(response => {
+            students.value = response.data;
+
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+})
+
+
 </script>
 
-<style scoped></style>
+<style scoped>
+h3{
+    margin: 0px;
+}
+</style>

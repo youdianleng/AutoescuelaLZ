@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
+use App\Models\Student;
 use Illuminate\Http\Request;
 
 class StudentController extends Controller
@@ -11,7 +11,7 @@ class StudentController extends Controller
     public function index()
     {
 
-        $students = User::whereHas('roles')->get();
+        $students = Student::with('teachers')->get();
         // $tasks = User::withRole()->get();
          return $students;
     }
@@ -32,16 +32,16 @@ class StudentController extends Controller
 
         $task = $request->all();
         $teacher_id = $task["teacher_id"];
-        $tarea = User::create($task);
+        $tarea = Student::create($task);
 
-        $tarea->teacher()->attach($teacher_id);
+        $tarea->teachers()->attach($teacher_id);
         
         return response()->json(['success' => true, 'data' => $tarea]);
     }
 
-    public function update(Request $request)
+    public function update($id, Request $request)
     {
-        $task = User::find();
+        $student = Student::find($id);
         $request->validate([
             'name' => 'required|max:10',
             'surname' => 'required',
@@ -55,17 +55,19 @@ class StudentController extends Controller
 
 
         $dataToUpdate = $request->all();
-        $task->update($dataToUpdate);
+        
+        $student->update($dataToUpdate);
+        $teacher_id = $dataToUpdate["teacher_id"];
+        $student->teachers()->sync($teacher_id);
 
-
-        return response()->json(['success' => true, 'data' => $task]);
+        return response()->json(['success' => true, 'data' => $student]);
     }
 
     //Find the student with the specific ID
     public function findStudent($id, Request $request)
     {
         
-        $student = User::find($id);
+        $student = Student::find($id);
         if (!$student) {
             return response()->json(['success' => false, 'message' => 'Estudiante no encontrado'], 404);
         }
@@ -76,8 +78,10 @@ class StudentController extends Controller
     //Destroy the specific student with the same id we sended
     public function destroy($id, Request $request)
     {
-        $task = User::find($id);
-        $task->delete();
+        $student = Student::find($id);
+        $student->delete();
+
+        $student->teachers()->sync([]);
 
 
         return response()->json(['success' => true, 'data' => "Deleted"]);

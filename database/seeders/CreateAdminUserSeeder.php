@@ -48,6 +48,8 @@ class CreateAdminUserSeeder extends Seeder
             'password' => bcrypt('12345678'),
             'teacher_id' => $teacher->id
         ]);
+
+        
         $student->assignRole([$roleStudent->id]);
     }
 }
