@@ -21,9 +21,14 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
-        'email',
-        'password',
+        "name",
+        "surname",
+        "password",
+        "teacher_id",
+        "license_id",
+        "email",
+        'address',
+        'image'
     ];
 
     /**
@@ -33,7 +38,7 @@ class User extends Authenticatable
      */
     protected $hidden = [
         'password',
-        'remember_token',
+        // 'remember_token',
     ];
 
     /**
@@ -41,9 +46,9 @@ class User extends Authenticatable
      *
      * @var array<string, string>
      */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+    // protected $casts = [
+    //     'email_verified_at' => 'datetime',
+    // ];
 
     protected $with = ['roles'];
 
@@ -62,8 +67,11 @@ class User extends Authenticatable
         return $this->hasOne(User::class,'students_teachers');
     }
 
+
     public function isTeacher()
     {
         return $this->hasRole('teacher');
     }
+
+
 }

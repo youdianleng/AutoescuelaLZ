@@ -16,7 +16,7 @@
             <div class="cajaDeInformacion col-8 d-flex justify-content-center">
                 <div class="col-12 d-flex justify-content-around cajaInformacionSegundario">
                     <div class="card cardInformacion">
-                        <h3>MÉTODOS DE ENSEÑANZA</h3>
+                        <h3>ENSEÑANZA</h3>
                         <h5 class="mb-4">AMBIENTE CONFORTABLE</h5>
                         <p>La autoescuela ha pasado por una serie de pruebas para conseguir el ambiente más cómodo para los alumnos,
                              cada año también enviaremos un formulario para pedir a los alumnos su opinión y mejoras al respecto.
@@ -26,11 +26,10 @@
                         <h3>NUESTRO PROFES</h3>
                         <h5 class="mb-4">AMABLE Y RESPONSABLE</h5>
                         <p>Cada profe es divertido y responsable y tiene al menos 15 años de experiencia en conducción y un rico conocimiento de respuesta a emergencias.
-                             También brindaremos el más alto nivel de medidas de protección de seguridad.
                         </p>
                     </div>
                     <div class="card cardInformacion mb-0">
-                        <h3>PATRÓN DE EXAMEN</h3>
+                        <h3>PATRÓN EXAMEN</h3>
                         <h5 class="mb-4">EXAMEN COMPRENSIVO</h5>
                         <p>La autoescuela ha pasado por una serie de pruebas para conseguir el ambiente más cómodo para los alumnos,
                              cada año también enviaremos un formulario para pedir a los alumnos su opinión y mejoras al respecto.
@@ -66,7 +65,7 @@
                         <h3 class="pt-5">CARNET COCHE</h3>
                         <p class="mt-3">El permiso de conducción de automóviles requiere que los estudiantes realicen una serie de estudios teóricos de al menos 1 mes y al menos 20 lecciones de conducción.
                              Proporcionaremos a los estudiantes materiales de aprendizaje y maestros para ayudarlos en el aprendizaje.
-                             Si desea obtener información más detallada, haga clic en el botón para saltar.</p>
+                             <br>Si desea obtener información más detallada, haga clic en el botón para saltar.</p>
                         <div class="col-12 mt-4">
                             <button class="col-3 btn btn-primary">Ver Más</button>   
                         </div>
@@ -75,7 +74,7 @@
                         <h3 class="pt-5">CARNET MOTO</h3>
                         <p class="mt-3">El permiso de conducción de motocicletas requiere que los estudiantes realicen una serie de estudios teóricos de al menos 1 mes y al menos 20 lecciones de conducción.
                              Proporcionaremos a los estudiantes materiales de aprendizaje y maestros para ayudarlos en el aprendizaje.
-                             Si desea obtener información más detallada, haga clic en el botón para saltar.</p>
+                             <br>Si desea obtener información más detallada, haga clic en el botón para saltar.</p>
                         <div class="col-12 mt-4">
                             <button class="col-3 btn btn-primary">Ver Más</button>   
                         </div>
@@ -99,12 +98,11 @@
                         <h1>NUESTRO ESTUDIANTES DESTACADAS</h1>
                         
                     </div>
-                    
                 </div>
             </div>
             <div class="d-flex col-12 justify-content-around bg-white pb-5">
-                <div class="card bg-body-tertiary estudianteDestacada">
-                    <img src="/images/imgEstudianteDestacada/Estudiante1.png">
+                <div v-for="index in 4" :key="index" class="card bg-body-tertiary estudianteDestacada">
+                    <img :src="`/images/imgEstudianteDestacada/Estudiante${index}.png`">
                     <div class="mt-4">
                         <h3>MENSAJE ESTUDIANTIL</h3>
                         <h4>Henry Joseph</h4>
@@ -123,66 +121,7 @@
                         </p>
                     </div>
                 </div>
-                <div class="card bg-body-tertiary estudianteDestacada">
-                    <img src="/images/imgEstudianteDestacada/Estudiante2.png">
-                    <div class=" mt-4">
-                        <h3>MENSAJE ESTUDIANTIL</h3>
-                        <h4>Alex Julian</h4>
-                        <div class="mt-2">
-                            <img src="/images/assets/Estrella.png" class="col-1" style="padding-left: 0px;" >
-                            <img src="/images/assets/Estrella.png" class="col-1" style="padding-left: 0px;">
-                            <img src="/images/assets/Estrella.png" class="col-1" style="padding-left: 0px;">
-                            <img src="/images/assets/Estrella.png" class="col-1" style="padding-left: 0px;">
-                            <img src="/images/assets/Estrella.png" class="col-1" style="padding-left: 0px;">
-                        </div>
-                        <p>
-                            ¡El ambiente de enseñanza perfecto! ! Profesores y compañeros muy amables, 
-                            siempre que tengo dudas o problemas siempre se pueden solucionar a tiempo.
-                            Si alguna vez planeo tomar otro examen de licencia de conducir,
-                            ¡aun así vendré aquí!
-                        </p>
-                    </div>
-                </div>
-                <div class="card bg-body-tertiary estudianteDestacada">
-                    <img src="/images/imgEstudianteDestacada/Estudiante3.png">
-                    <div class=" mt-4">
-                        <h3>MENSAJE ESTUDIANTIL</h3>
-                        <h4>Jenifer Lopez</h4>
-                        <div class="mt-2">
-                            <img src="/images/assets/Estrella.png" class="col-1" style="padding-left: 0px;" >
-                            <img src="/images/assets/Estrella.png" class="col-1" style="padding-left: 0px;">
-                            <img src="/images/assets/Estrella.png" class="col-1" style="padding-left: 0px;">
-                            <img src="/images/assets/Estrella.png" class="col-1" style="padding-left: 0px;">
-                            <img src="/images/assets/Estrella.png" class="col-1" style="padding-left: 0px;">
-                        </div>
-                        <p>
-                            ¡El ambiente de enseñanza perfecto! ! Profesores y compañeros muy amables, 
-                            siempre que tengo dudas o problemas siempre se pueden solucionar a tiempo.
-                            Si alguna vez planeo tomar otro examen de licencia de conducir,
-                            ¡aun así vendré aquí!
-                        </p>
-                    </div>
-                </div>
-                <div class="card bg-body-tertiary estudianteDestacada">
-                    <img src="/images/imgEstudianteDestacada/Estudiante4.png">
-                    <div class=" mt-4">
-                        <h3>MENSAJE ESTUDIANTIL</h3>
-                        <h4>Mac Alexixe</h4>
-                        <div class="mt-2">
-                            <img src="/images/assets/Estrella.png" class="col-1" style="padding-left: 0px;" >
-                            <img src="/images/assets/Estrella.png" class="col-1" style="padding-left: 0px;">
-                            <img src="/images/assets/Estrella.png" class="col-1" style="padding-left: 0px;">
-                            <img src="/images/assets/Estrella.png" class="col-1" style="padding-left: 0px;">
-                            <img src="/images/assets/Estrella.png" class="col-1" style="padding-left: 0px;">
-                        </div>
-                        <p>
-                            ¡El ambiente de enseñanza perfecto! ! Profesores y compañeros muy amables, 
-                            siempre que tengo dudas o problemas siempre se pueden solucionar a tiempo.
-                            Si alguna vez planeo tomar otro examen de licencia de conducir,
-                            ¡aun así vendré aquí!
-                        </p>
-                    </div>
-                </div>
+                {{ index }}
             </div>
         </section>
 
@@ -193,7 +132,7 @@
                 <img src="/images/assets/images.png" class="col-8">
                 <div class="formlulario">
                     <h2 class="text-white">Contactar con Nosotros</h2>
-                    <form class="row col-7 mt-5">
+                    <form class="row col-7 mt-3">
                         <input  class=" mt-5" placeholder="Nombre">
                         <input  class="mt-5" placeholder="Apelildo">
                         <input  class="mt-5" placeholder="Email"> 
@@ -213,7 +152,7 @@
 
 .formlulario{
     position: absolute;
-    top: 10%;
+    top: 3%;
     left: 50%;
 }
 
@@ -243,10 +182,6 @@
 
 .cardCarnet button{
     float: right;
-}
-
-.cardInformacion{
-    margin-bottom: 0px;
 }
 
 .carouselExampleIndicators{
@@ -315,10 +250,11 @@ h6{
     width: 30%;
     box-shadow: 0px 0px 2px 1px;
     text-align: center;
+    margin-bottom: 0px;
 }
 
 .cardInformacion p{
-    text-align: justify;
+    text-align: start;
 }
 
 

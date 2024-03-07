@@ -31,7 +31,8 @@ class StudentController extends Controller
         $task = $request->all();
         $teacher_id = $task["teacher_id"];
         $tarea = User::create($task);
-        $tarea->teacher()->sync([1]);
+
+        $tarea->teacher()->attach($teacher_id);
         return response()->json(['success' => true, 'data' => $tarea]);
     }
 

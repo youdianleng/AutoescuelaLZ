@@ -7,13 +7,13 @@
                 <span></span>
             </router-link>
 
-            <router-link to="info">
+            <router-link to="/info">
                 <button class="p-link layout-topbar-button layout-topbar-button-c">
                     Información
                 </button>
             </router-link>
 
-            <router-link to="CreateStudent">
+            <router-link to="/teacher/createStudent">
                 <button v-if="role === 'teacher'" class="p-link layout-topbar-button layout-topbar-button-c">
                 Estudiantes
                 </button>

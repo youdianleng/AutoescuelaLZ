@@ -1,74 +1,18 @@
 <template>
     <div class="grid">
         <h1 class="ms-3">Panel de Creación</h1>
-        <div class="col-12 d-flex">
-            
-            <div class="col-4">
-                <div class="menuSelect">
-                    <div class="borderCreacion">
-                        <h3>Menu de Creación</h3>
-                        <div class="row col-12 justify-content-center mb-5">
-                            <div class="d-flex botoneCreacionAlumno justify-content-center">
-                                <img src="/public/images/ImagenCrear/crearUsuario.png">
-                                <button class="btn btn-white">Alta Alumnnos</button>
-                            </div>                            
-                        </div>
-                    </div>
-                    
-                </div>
-            </div>
-            <div class="row col-8">
-                <div class="card col-11 ms-5 ">
-                    <div class="formularioCrearStudent">
-                        <div class="contenidoStudent">
-                            <h2>Nuevas Estudiantes</h2>   
-                            <div class="d-flex">
-                                <div class="col-8 row">
-                                    <form @submit.prevent="createStudent" class="col-12 row">
-                                        <input placeholder="Nombre" v-model="student.name" name="name" required>
-                                        <input class="mt-4" name="surname" v-model="student.surname" placeholder="Apellido">
-                                        <input class="mt-4" name="image" v-model="student.image" placeholder="Imagen">
-                                        <input type="mail" name="email" v-model="student.email" class="mt-4" placeholder="Email" required>
-                                        <input class="mt-4" name="password" v-model="student.password" placeholder="Contraseña" required>
-                                        <select class="mt-4" name="license_id" v-model="student.license_id" required>
-                                            <option>1</option>
-                                            <option>2</option>
-                                        </select>
-                                        <select class="mt-4" name="teacher_id" v-model="student.teacher_id" required>
-                                            <option>1</option>
-                                            <option>2</option>
-                                        </select>
-                                        <div class="col-12 d-flex justify-content-end">
-                                            <button type="submit" class="col-5 mt-3 btn btn-dark">Crear</button>
-                                        </div>
-                                        
-                                    </form>
-                                
-                                </div>
-                                <div class="col-4 textoDeRecuerdo">
-                                    <h4>Notificaciones</h4>
-                                    <p>Para poder crear Estudiante nueva hay que asegurar el estudiante
-                                        ha entregado todos los documento de forma correcta y que es obligatorio 
-                                        tener los identidad y el tipo de carnet que desea sacar.
-                                    </p>
-                                </div>
-                            
-                            </div>
-                           
-                        </div>
-                        
-
-                    </div>
-                </div>
-            </div>
-            
-        </div>
-
         <!-- Exist Student Panel (Edit Student or Delete Student)-->
         <div class="col-12 row justify-content-center">
             <div class="principalEdit card col-11">
                 <h2>Editar Estudiantes</h2>
                 <div class="muestraEstudiantes col-12 mt-5">
+                    <div class="d-flex justify-content-end col-12">
+                        <div class="col-4 d-flex justify-content-around">   
+                            <button class="btn btn-dark col-5 border">Nueva Estudiante</button>
+                            <button class="btn btn-dark col-5 border">Editar Estudiante</button>
+                        </div>
+                    </div>
+                    
                     <table class="col-12 d-flex justify-content-around">
                         <tbody class="col-12 row justify-content-around">
                             <tr class="col-12 d-flex justify-content-around border-top border-bottom">
@@ -100,6 +44,48 @@
                 </div>
             </div>
         </div>
+
+        <!-- {{ users.data[0]}} -->
+        <div class="col-12 d-flex justify-content-center">
+            <div class="row col-11">
+                <div class="card col-12 ">
+                    <div class="formularioCrearStudent">
+                        <div class="contenidoStudent">
+                            <h2>Nuevas Estudiantes</h2>   
+                            <div class="d-flex">
+                                <div class="col-12 row">
+                                    <form @submit.prevent="createStudent" class="col-12 row">
+                                        <input placeholder="Nombre" v-model="student.name" name="name" required>
+                                        <input class="mt-4" name="surname" v-model="student.surname" placeholder="Apellido">
+                                        <input class="mt-4" name="image" v-model="student.image" placeholder="Imagen">
+                                        <input type="mail" name="email" v-model="student.email" class="mt-4" placeholder="Email" required>
+                                        <input class="mt-4" name="password" v-model="student.password" placeholder="Contraseña" required>
+                                        <select class="mt-4" name="license_id" v-model="student.license_id" required>
+                                            <option>1</option>
+                                            <option>2</option>
+                                        </select>
+                                        <select class="mt-4" name="teacher_id" v-model="student.teacher_id" required>
+                                            <option>1</option>
+                                            <option>2</option>
+                                        </select>
+                                        <div class="col-12 d-flex justify-content-end">
+                                            <button type="submit" class="col-3 mt-3 btn btn-dark">Crear</button>
+                                        </div>
+                                        
+                                    </form>
+                                
+                                </div>
+                            
+                            </div>
+                           
+                        </div>
+                        
+
+                    </div>
+                </div>
+            </div>
+            
+        </div>
     </div>
 </template>
 
@@ -111,10 +97,15 @@ import { useRoute } from "vue-router";
 import * as yup from 'yup';
 import { es } from 'yup-locales';
 import { setLocale } from 'yup';
+// import useUsers from "../../composables/users";
+// const {users, getUsers, deleteUser} = useUsers()
+
 // Get all the student we have in bbdd
 const students = ref();
 
 onMounted(() => {
+
+    // getUsers();
     axios.get('/api/student')
         .then(response => {
             students.value = response.data;
