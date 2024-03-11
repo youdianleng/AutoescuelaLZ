@@ -15,7 +15,7 @@
 
             <router-link to="/teacher/createStudent">
                 <button v-if="role === 'teacher'" class="p-link layout-topbar-button layout-topbar-button-c">
-                Estudiantes
+                    Estudiantes
                 </button>
             </router-link>
             

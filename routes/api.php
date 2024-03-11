@@ -37,7 +37,8 @@ Route::post('reset-password', [ResetPasswordController::class, 'reset'])->name('
 Route::get('student', [StudentController::class, 'index']);
 Route::post('student/create', [StudentController::class, 'store']);
 Route::get('student/{id}', [StudentController::class, 'findStudent']);
-Route::put('student/update', [StudentController::class, 'update']);
+Route::put('student/update/{id}', [StudentController::class, 'update']);
+Route::delete('student/{id}', [StudentController::class, 'destroy']);
 
 // Funciones para Teachers
 

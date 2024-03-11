@@ -39,9 +39,13 @@ class StudentController extends Controller
         return response()->json(['success' => true, 'data' => $tarea]);
     }
 
-    public function update(Request $request)
+    public function update($id, Request $request)
     {
+<<<<<<< HEAD
+        $student = Student::find($id);
+=======
         $task = Student::find();
+>>>>>>> 5de6efd73ed4c702d2927595ae67802a578f9bef
         $request->validate([
             'name' => 'required|max:10',
             'surname' => 'required',
@@ -55,10 +59,12 @@ class StudentController extends Controller
 
 
         $dataToUpdate = $request->all();
-        $task->update($dataToUpdate);
+        
+        $student->update($dataToUpdate);
+        $teacher_id = $dataToUpdate["teacher_id"];
+        $student->teachers()->sync($teacher_id);
 
-
-        return response()->json(['success' => true, 'data' => $task]);
+        return response()->json(['success' => true, 'data' => $student]);
     }
 
     //Find the student with the specific ID
@@ -76,8 +82,15 @@ class StudentController extends Controller
     //Destroy the specific student with the same id we sended
     public function destroy($id, Request $request)
     {
+<<<<<<< HEAD
+        $student = Student::find($id);
+        $student->delete();
+
+        $student->teachers()->sync([]);
+=======
         $task = Student::find($id);
         $task->delete();
+>>>>>>> 5de6efd73ed4c702d2927595ae67802a578f9bef
 
 
         return response()->json(['success' => true, 'data' => "Deleted"]);
