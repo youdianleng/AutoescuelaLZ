@@ -98,8 +98,7 @@ defineRule('min', min);
 
 const schema = {
     title: 'required|min:5',
-    content: 'required|min:50',
-    categories: 'required'
+    content: 'required|min:50'
 }
 
 const { validate, errors, resetForm } = useForm({ validationSchema: schema })

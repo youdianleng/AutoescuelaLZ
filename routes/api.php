@@ -25,6 +25,8 @@ Route::post('reset-password', [ResetPasswordController::class, 'reset'])->name('
 
 // Funciones para Students
 Route::get('student', [StudentController::class, 'index']);
+Route::get('license', [StudentController::class, 'license']);
+Route::get('teacher', [StudentController::class, 'teacher']);
 Route::post('student/create', [StudentController::class, 'store']);
 Route::get('student/{id}', [StudentController::class, 'findStudent']);
 Route::put('student/update/{id}', [StudentController::class, 'update']);
