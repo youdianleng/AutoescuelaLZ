@@ -14,6 +14,16 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Api\TaskController;
+use App\Http\Controllers\Api\TestController;
+
+
+// Tests
+Route::get('tests', [TestController::class, 'index']);
+Route::post('tests', [TestController::class, 'store']);
+Route::put('tests/update/{id}', [TestController::class, 'update']);
+Route::delete('tests/{id}', [TestController::class, 'destroy']);
+Route::get('tests/{tests}', [TestController::class,'show']);
+
 
 
 Route::get('tasks', [TaskController::class, 'index']);
