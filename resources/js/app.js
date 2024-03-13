@@ -46,7 +46,7 @@ import ConfirmationService from 'primevue/confirmationservice';
 import DialogService from 'primevue/dialogservice';
 //import Divider from 'primevue/divider';
 //import Dock from 'primevue/dock';
-//import Dropdown from 'primevue/dropdown';
+import Dropdown from 'primevue/dropdown';
 //import DynamicDialog from 'primevue/dynamicdialog';
 //import Fieldset from 'primevue/fieldset';
 //import FileUpload from 'primevue/fileupload';
@@ -117,9 +117,9 @@ import 'sweetalert2/dist/sweetalert2.min.css';
 import 'vue-select/dist/vue-select.css';
 
 import "primeflex/primeflex.css";
-import '../css/theme.css';
+//import '../css/theme.css';
 //import "primevue/resources/themes/lara-light-teal/theme.css";
-//import "primevue/resources/themes/viva-light/theme.css";
+import "primevue/resources/themes/viva-light/theme.css";
 import "primeicons/primeicons.css";
 
 
@@ -183,7 +183,7 @@ app.use(ConfirmationService);
 //app.component('Dialog', Dialog);
 //app.component('Divider', Divider);
 //app.component('Dock', Dock);
-//app.component('Dropdown', Dropdown);
+app.component('Dropdown', Dropdown);
 //app.component('DynamicDialog', DynamicDialog);
 //app.component('Fieldset', Fieldset);
 //app.component('FileUpload', FileUpload);
