@@ -47,9 +47,10 @@
                             <div class="card col-12 ">
                                 <div class="formularioCrearStudent">
                                     <div class="contenidoStudent">
-                                        <h2>Nuevas Estudiantes</h2>   
+                                        
                                         <div class="d-flex">
                                             <div class="col-8">
+                                                <h2 class="ps-2">Nuevas Estudiantes</h2>   
                                                 <form @submit.prevent="createStudent" class="col-12 row">
                                                     <input placeholder="Nombre" v-model="student.name" name="name" required>
                                                     {{ errors.name }}
@@ -74,22 +75,25 @@
                                                 </form>
                                             
                                             </div>
-                                            <div class="col-4">
+                                            <div class="col-4 imgBox">
                                                 <div class="mb-3">
                                                     <DropZone />
                                                     <div class="text-danger mt-1">
-                                                        <div >
-                                                           
+                                                        <div v-for="message in validationErrors?.thumbnail">
+                                                            {{ message }}
                                                         </div>
+                                                    </div>
+                                                    <div class="mt-3 text-center">
+                                                        <button :disabled="isLoading" class="btn btn btn-primary me-2 w-100">
+                                                            <div v-show="isLoading" class=""></div>
+                                                            <span v-if="isLoading">Processing...</span>
+                                                            <span v-else>Guardar</span>
+                                                        </button>
                                                     </div>
                                                 </div>
                                             </div>
-                                        
                                         </div>
-                                    
                                     </div>
-                                    
-
                                 </div>
                             </div>
                         </div>
@@ -99,12 +103,6 @@
                 </div>
             </div>
         </div>
-
-
-         
-
-
-
         <!-- {{ users.data[0]}} -->
         
     </div>
@@ -113,7 +111,7 @@
 
 <script setup>
 // Import all the library 
-import { ref, onMounted, reactive, createElementBlock } from "vue";
+import { ref, onMounted, reactive, createElementBlock,watchEffect } from "vue";
 import { useForm, useField } from "vee-validate";
 import { useRoute } from "vue-router";
 import * as yup from 'yup';
@@ -141,7 +139,6 @@ onMounted(() => {
         });
 })
 
-
 onMounted(() => {
 // getLicencia();
 axios.get('/api/license')
@@ -153,7 +150,6 @@ axios.get('/api/license')
         console.log(error);
     });
 })
-
 
 onMounted(() => {
 // getTeacher();
@@ -257,7 +253,38 @@ validate().then(form => {
 
 }
 
-// let mostrarDiv = 1;
+
+
+import useCategories from "@/composables/categories";
+import useExercises from "@/composables/exercises";
+import {defineRule } from "vee-validate";
+import { required, min } from "@/validation/rules"
+import TextEditorComponent from "@/components/TextEditorComponent.vue";
+defineRule('required', required)
+defineRule('min', min);
+
+
+const { value: title } = useField('title', null, { initialValue: '' });
+const { value: content } = useField('content', null, { initialValue: '' });
+const { value: categories } = useField('categories', null, { initialValue: '', label: 'category' });
+const { categoryList, getCategoryList } = useCategories()
+const { exercise: exerciseData, getExercise, updateExercise, validationErrors, isLoading } = useExercises()
+
+
+const exercise = reactive({
+    title,
+    content,
+    categories,
+    thumbnail: ''
+})
+
+watchEffect(() => {
+    exercise.id = exerciseData.value.id
+    exercise.title = exerciseData.value.title
+    exercise.content = exerciseData.value.content
+    exercise.thumbnail = exerciseData.value.original_image
+    exercise.categories = exerciseData.value.categories
+})
 
 
 </script>
@@ -353,16 +380,16 @@ validate().then(form => {
         padding: 20px;
     }
 
-
-    .dropzone-container {
-        height: 400px;
+    .imgBox{
         display: flex;
         align-items: center;
     }
 
     .file-label{
-        display: flex!important;
-        align-items: center;
-        height: 400px;
+        padding-top: 70px;
+    }
+
+    .file-label{
+        padding-bottom: 70px;
     }
 </style>
