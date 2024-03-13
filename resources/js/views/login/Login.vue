@@ -1,11 +1,10 @@
 <template>
-    <div class="bg-image">
-        <div class="container">
-            <div class="row justify-content-center" >
+        <div class="container col-12">
+            <div class="row justify-content-center col-12" >
                 <div class="col-md-6 d-flex">
                     <div class="col-12 card border-0 shadow-sm loginBox ">
                         <div class="col-12 d-flex boxShadowBox">
-                            <div class="card-body col-6">
+                            <div class="card-body col-8">
                                 <form @submit.prevent="submitLogin" class="ps-3 pt-3 pb-3 pe-3">
                                     <div class="">
                                         <!-- Email -->
@@ -51,8 +50,8 @@
                                     <router-link :to="{name: 'auth.forgot-password'}" class="forgotPassword">{{ $t('forgot_password')}}</router-link>
                                 </form>
                             </div>
-                            <div class="col-6 noPadding imgDriveHiddenPart">
-                                
+                            <div class="col-4 noPadding imgDriveHiddenPart">
+                                <Image width="100%" src="/images/login/loginImage.png" alt="Image" />
                             </div>
                         </div>
                     
@@ -62,12 +61,12 @@
                 </div>
             </div>
         </div>
-    </div>
 </template>
 
 <script setup>
 
 import useAuth from '@/composables/auth'
+import Image from 'primevue/image';
 
 const { loginForm, validationErrors, processing, submitLogin } = useAuth();
 
@@ -87,8 +86,11 @@ const { loginForm, validationErrors, processing, submitLogin } = useAuth();
     padding: 0px;
 }
 
-.bg-image{
+.container{
+    max-width: 100%;
     background-image: url("/images/Drive.jpg");
+    margin-left: 0px;
+    margin-right: 0px;
 }
 
 .boxShadowBox{
@@ -105,7 +107,6 @@ const { loginForm, validationErrors, processing, submitLogin } = useAuth();
 
 .imgDriveHiddenPart{
     overflow: hidden;
-    background-image: url("/images/Drive.jpg");
 }
 
 #email{

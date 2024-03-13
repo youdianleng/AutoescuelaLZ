@@ -107,6 +107,8 @@ const { value: content } = useField('content', null, { initialValue: '' });
 const { value: categories } = useField('categories', null, { initialValue: '', label: 'category' });
 const { categoryList, getCategoryList } = useCategories()
 const { exercise: exerciseData, getExercise, updateExercise, validationErrors, isLoading } = useExercises()
+
+
 const exercise = reactive({
     title,
     content,
