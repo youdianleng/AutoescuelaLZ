@@ -34,14 +34,29 @@
 
 
             <div class="d-flex col-12 justify-content-around bg-white pb-5">
-                <div class="col-5 card bg-body-tertiary">
-                    <Image src="/images/infoAutoescuela/practicaCoche.jpg" alt="Image" width="100%" id="mueveImagen" />
-                    <button class="btn btn-primary" id="cambiarEstilo">Ver más</button>
+                <div class="row col-5">
+                    <div class="col-12 card bg-body-tertiary">
+                        <Image src="/images/infoAutoescuela/practicaCoche.png" alt="Image" width="100%" id="mueveImagen" />
+                        <div class="texto col-12">
+                            <h2>Licencia Coche</h2>
+                            <p>Si desea obtener una licencia de conducir de vehículos motorizados, 
+                                los estudiantes deben familiarizarse primero con las reglas y señales de conducción, 
+                                luego realizar primero un examen teórico y luego tomar 20 lecciones prácticas como estándar para dominar la conducción.
+                                 son capaces de conducir solos. Puede solicitar la prueba y confirmar si debe emitir una licencia de conducir de vehículos motorizados según los resultados de la prueba.</p>
+                        </div>
+                    </div>
                 </div>
-
-                <div class="col-5 card bg-body-tertiary">
-                    <Image src="/images/infoAutoescuela/practicaMoto.jpg" alt="Image" width="100%" id="mueveImagen"/>
-                    <button class="btn btn-primary" id="cambiarEstilo">Ver más</button>
+                <div class="row col-5">
+                    <div class="col-12 card bg-body-tertiary">
+                        <Image src="/images/infoAutoescuela/practicaMoto.png" alt="Image" width="100%" id="mueveImagen"/>
+                        <div class="texto col-12">
+                            <h2>Licencia Moto</h2>
+                            <p>Si desea obtener una licencia de conducir de vehículos motorizados, 
+                                los estudiantes deben familiarizarse primero con las reglas y señales de conducción, 
+                                luego realizar primero un examen teórico y luego tomar 20 lecciones prácticas como estándar para dominar la conducción.
+                                 son capaces de conducir solos. Puede solicitar la prueba y confirmar si debe emitir una licencia de conducir de vehículos motorizados según los resultados de la prueba.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
            
@@ -51,15 +66,10 @@
     
 </template>
 
-<script>
-    document.getElementById("cambiarEstilo").addEventListener("click", function() {
-        var boton = document.getElementById("mueveImagen");
-        if (boton.classList.contains("moverImagen")) {
-            boton.classList.remove("moverImagen");
-        } else {
-            boton.classList.add("moverImagen");
-        }
-    });
+<script setup>
+function moverImagen(){
+
+}
 </script>
 
 <style>
@@ -89,18 +99,34 @@
         padding: 70px;
     }
     .infoSobre{
-        font-size: 12px;
+        font-size: 14px;
     }
 
     .card{
         margin-bottom: 0px;
         position: relative;
+       overflow: hidden;
     }
 
-    .card button{
+    .card img{
+        position: relative;
+        z-index: 1;
+    }
+
+    .card:hover img{
+        translate: 100% 0px;
+        transition: 5s;
+    }
+
+    .card img{
+        translate: 0% 0px;
+        transition: 5s;
+    }
+
+    .texto{
         position: absolute;
-        top: 85%;
-        left: 6%;
+        z-index: 0;
+        padding: 60px;
     }
 
     .moverImagen{
