@@ -103,9 +103,6 @@ class StudentController extends Controller
 
         $student->teachers()->sync([]);
 
-        $task = Student::find($id);
-        $task->delete();
-
 
 
         return response()->json(['success' => true, 'data' => "Deleted"]);

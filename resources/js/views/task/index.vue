@@ -46,7 +46,7 @@
 
 
 <script setup>
-import {ref, onMounted} from "vue"
+import {ref, onMounted, swal} from "vue"
 const tasks = ref();
 
     onMounted(()=>{
@@ -55,6 +55,7 @@ const tasks = ref();
         .then(response => {
             tasks.value = response.data;
             console.log(response.data);
+            
         })  
     });
 
