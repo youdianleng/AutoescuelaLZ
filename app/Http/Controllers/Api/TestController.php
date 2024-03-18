@@ -15,9 +15,11 @@ class TestController extends Controller
         return response()->json($tests);
     }
     public function show(Test $test) {
+
     }
 
     public function store(Request $request) {
+        
         $request->validate([
             'question_text'  => 'required',
             'option_text' => 'required',

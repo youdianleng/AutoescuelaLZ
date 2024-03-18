@@ -13,9 +13,9 @@ class QuestionController extends Controller
     {
         $this->authorize('question-create');
 
-        if ($request->hasFile('thumbnail')) {
-            $question->addMediaFromRequest('thumbnail')->preservingOriginal()->toMediaCollection('images-questions');
-        }
+        // if ($request->hasFile('thumbnail')) {
+        //     $question->addMediaFromRequest('thumbnail')->preservingOriginal()->toMediaCollection('images-questions');
+        // }
 
     }
 

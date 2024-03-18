@@ -19,7 +19,11 @@ use App\Http\Controllers\Api\TestController;
 
 // Tests
 Route::get('tests', [TestController::class, 'index']);
+
+
 Route::post('tests', [TestController::class, 'store']);
+
+
 Route::put('tests/update/{id}', [TestController::class, 'update']);
 Route::delete('tests/{id}', [TestController::class, 'destroy']);
 Route::get('tests/{tests}', [TestController::class,'show']);
@@ -41,6 +45,16 @@ Route::post('student/create', [StudentController::class, 'store']);
 Route::get('student/{id}', [StudentController::class, 'findStudent']);
 Route::put('student/update/{id}', [StudentController::class, 'update']);
 Route::delete('student/{id}', [StudentController::class, 'destroy']);
+
+
+
+
+
+
+
+
+
+
 
 // Funciones para Teachers
 
