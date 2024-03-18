@@ -32,6 +32,7 @@ export default function usExercises() {
             }
         }
 
+        //Watch there
         axios.post('/api/exercises', serializedExercise, {
             headers: {
                 "content-type": "multipart/form-data"

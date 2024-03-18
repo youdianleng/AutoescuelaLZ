@@ -121,8 +121,8 @@ import DropZone from "@/components/DropZone.vue";
 import Dialog from "primevue/dialog";
 import usExercises from "@/composables/student";
 import useExercises from "@/composables/exercises";
-const { exercise: storeExercise} = usExercises();
-// const { exercise: exerciseData, getExercise, updateExercise, validationErrors, isLoading } = useExercises()
+// const { exercise: storeExercise} = usExercises();
+const { exercise: exerciseData, getExercise, updateExercise, validationErrors, isLoading } = useExercises()
 
 //Swal
 const swal = inject('$swal');
