@@ -17,13 +17,11 @@ class QuestionController extends Controller
     {
         $this->authorize('question-create');
 
-<<<<<<< HEAD
+
         // if ($request->hasFile('thumbnail')) {
         //     $question->addMediaFromRequest('thumbnail')->preservingOriginal()->toMediaCollection('images-questions');
         // }
 
-=======
->>>>>>> 608a9b5344827a76f14587c12cf7771789a41550
     }
 
 }

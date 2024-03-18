@@ -92,6 +92,8 @@ const options = ref([
     { name: 'Option 3', code: '3', value: 'third_option' },
 ]);
 
+
+
 const selectedLevel = ref();
 const levels = ref([
     { name: 'Baja', code: 'low', value: 'low' },
@@ -137,21 +139,23 @@ setLocale(es);
 
 const { value: question } = useField('question', null, { initialValue: '' });
 const { value: difficulty } = useField('difficulty', null, { initialValue: '' });
+
 const { value: first_option } = useField('first_option', null, { initialValue: '' });
 const { value: second_option } = useField('second_option', null, { initialValue: '' });
 const { value: third_option } = useField('third_option', null, { initialValue: '' });
+
+
 const { value: is_correct } = useField('is_correct', null, { initialValue: '' });
 
-
 const test = reactive({
-    question,
+    // question,
+    
     first_option,
     second_option,
     third_option,
-    difficulty,
+    // difficulty,
     is_correct
 })
-
 
 const strSuccess = ref();
 const strError = ref();
@@ -171,9 +175,11 @@ onMounted(() => {
         });
 })
 
+
 function createTest() {
     validate().then(form => {
         if (form.valid) {
+            // Bucle crear
             axios.post('/api/tests', test)
                 .then(response => {
                     strError.value = ""
@@ -185,7 +191,6 @@ function createTest() {
                 });
         }
     })
-
 }
 
 // function createTest() {
