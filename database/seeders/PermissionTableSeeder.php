@@ -49,7 +49,13 @@ class PermissionTableSeeder extends Seeder
             'test-list',
             'test-create',
             'test-edit',
-            'test-delete'
+            'test-delete',
+            'question-create',
+            'question-edit',
+            'question-delete',
+            'option-create',
+            'option-edit',
+            'option-delete'
         ];
 
         foreach ($permissions as $permission) {

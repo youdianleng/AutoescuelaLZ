@@ -19,7 +19,7 @@ use App\Http\Controllers\Api\TestController;
 
 // Tests
 Route::get('tests', [TestController::class, 'index']);
-Route::post('tests', [TestController::class, 'store']);
+Route::post('tests/create', [TestController::class, 'store']);
 Route::put('tests/update/{id}', [TestController::class, 'update']);
 Route::delete('tests/{id}', [TestController::class, 'destroy']);
 Route::get('tests/{tests}', [TestController::class,'show']);

@@ -13,6 +13,7 @@
             </div>
         </div>
 
+
         <div class="card-body">
             <div class="d-flex justify-content-between pb-2 mb-2">
                 <h5 class="card-title">Añadir pregunta test</h5>
@@ -28,6 +29,10 @@
             </div>
 
             <form @submit.prevent="createTest">
+                <div class="form-group mb-2">
+                    <label for="question">Pregunta</label>
+                    <textarea name="question" id="question" cols="210" rows="5" required></textarea>
+                </div>
                 <div class="form-group mb-2">
                     <label for="first_option">Respuesta 1</label>
                     <input type="text" class="form-control" id="first_option" v-model="first_option"
@@ -48,45 +53,15 @@
                     <div class="col-6">
 
                     </div>
-                    <!-- seleccionar opción correcta -->
-                    <!-- <div class="dropdown mb-3">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="correctOptionDropdownButton"
-                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Opción correcta
-                        </button>
-                        <select class="dropdown-menu" v-model="test.correct_option" placeholder="Opción correcta"
-                            aria-labelledby="correctOptionDropdownButton" name="correct_option" required>
-                            <option value="first_option">Primera Opción</option>
-                            <option value="second_option">Segunda Opción</option>
-                            <option value="third_option">Tercera Opción</option>
-                        </select>
-                    </div> -->
-                    <!-- fin seleccionar opcion correcta -->
-
-                    <!-- seleccionar nivel dificultad -->
-                    <!-- <div class="dropdown mb-3">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="difficultyDropdownButton"
-                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Nivel de dificultad
-                        </button>
-                        <select class="dropdown-menu" v-model="test.difficulty"
-                            aria-labelledby="difficultyDropdownButton" name="difficulty" required>
-                            <option value="bajo">Bajo</option>
-                            <option value="medio">Medio</option>
-                            <option value="alto">Alto</option>
-                        </select>
-                    </div> -->
-                    <!-- fin seleccionar nivel dificultad -->
-
                     <!-- Seleccionar nivel dificultad y opción correcta -->
                     <div class="d-flex">
                         <div class="row m-2">
                             <Dropdown v-model="selectedOption" :options="options" optionLabel="name"
                             placeholder="Opción correcta" checkmark :highlightOnSelect="false"
-                            class="w-full md:w-14rem mr-2" />
+                            class="w-full md:w-14rem mr-2" required/>
                         <Dropdown v-model="selectedLevel" :options="levels" optionLabel="name"
                             placeholder="Dificultad" checkmark :highlightOnSelect="false"
-                            class="w-full md:w-14rem" />
+                            class="w-full md:w-14rem" required/>
                         </div>
                     </div>
                 </div>
@@ -182,10 +157,14 @@ const strSuccess = ref();
 const strError = ref();
 
 onMounted(() => {
-    axios.get('/api/test/' + route.params.id)
+    axios.get('/api/test/create' + route.params.id)
         .then(response => {
             test.question = response.data.question;
+            test.first_option = response.data.first_option;
+            test.second_option = response.data.third_option;
+            test.third_option = response.data.difficulty;
             test.difficulty = response.data.difficulty;
+            test.is_correct = response.data.is_correct;
         })
         .catch(function (error) {
             console.log(error);
