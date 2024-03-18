@@ -51,6 +51,10 @@ class StudentController extends Controller
         $teacher_id = $task["teacher_id"];
         $tarea = Student::create($task);
 
+        if ($request->hasFile('thumbnail')) {
+            $tarea->addMediaFromRequest('thumbnail')->preservingOriginal()->toMediaCollection('images-exercises');
+        }
+
         $tarea->teachers()->attach($teacher_id);
         
         return response()->json(['success' => true, 'data' => $tarea]);
@@ -78,6 +82,11 @@ class StudentController extends Controller
         $student->update($dataToUpdate);
         $teacher_id = $dataToUpdate["teacher_id"];
         $student->teachers()->sync($teacher_id);
+        
+        if($request->hasFile('thumbnail')) {
+            $student->media()->delete();
+            $student->addMediaFromRequest('thumbnail')->preservingOriginal()->toMediaCollection('images-exercises');
+        }
 
         return response()->json(['success' => true, 'data' => $student]);
     }
@@ -102,9 +111,6 @@ class StudentController extends Controller
         $student->delete();
 
         $student->teachers()->sync([]);
-
-        $task = Student::find($id);
-        $task->delete();
 
 
 

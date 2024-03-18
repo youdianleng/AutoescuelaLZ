@@ -3,12 +3,15 @@ import { useRouter } from 'vue-router'
 
 export default function useExercises() {
     const exercises = ref({})
+
+
     const exercise = ref({
-        title: '',
-        content: '',
-        category_id: '',
+        // title: '',
+        // content: '',
+        // category_id: '',
         thumbnail: ''
     })
+
     const router = useRouter()
     const validationErrors = ref({})
     const isLoading = ref(false)
@@ -44,6 +47,8 @@ export default function useExercises() {
             })
     }
 
+
+    // Este parte importante
     const storeExercise = async (exercise) => {
         if (isLoading.value) return;
 
@@ -76,6 +81,8 @@ export default function useExercises() {
             })
             .finally(() => isLoading.value = false)
     }
+
+
 
     const updateExercise = async (exercise) => {
         if (isLoading.value) return;

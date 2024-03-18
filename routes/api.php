@@ -50,10 +50,18 @@ Route::group(['middleware' => 'auth:sanctum'], function() {
     Route::apiResource('categories', CategoryController::class);
     Route::apiResource('roles', RoleController::class);
     //Route::apiResource('exercises', ExerciseController::class);
+
+    
     Route::post('exercises/', [ExerciseController::class,'store']); //Guardar
+
+
     Route::get('exercises', [ExerciseController::class,'index']); //Listar
     Route::get('exercises/{exercise}', [ExerciseController::class,'show']); //Mostrar
+
+
     Route::post('exercises/update/{id}', [ExerciseController::class,'update']); //Editar
+
+
 
     Route::get('role-list', [RoleController::class, 'getList']);
     Route::get('role-permissions/{id}', [PermissionController::class, 'getRolePermissions']);

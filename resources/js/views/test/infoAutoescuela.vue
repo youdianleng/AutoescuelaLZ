@@ -1,72 +1,70 @@
 <template>
     <div class="lg-container">
-        <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-indicators">
-                <button type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                <button type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                <button type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide-to="2" aria-label="Slide 3"></button>
+         <div class="col-12">
+            <Image src="/images/infoAutoescuela/via.png" alt="Image" width="100%" />
+         </div>
+
+         <div class="col-12 imgVia d-flex justify-content-around"> 
+            <div class="col-6">
+                <Image src="/images/infoAutoescuela/coche.jpg" alt="Image" width="100%" />
             </div>
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img src="/images/calle1.jpg" class="d-block w-100" alt="...">
-                </div>
-                <div class="carousel-item">
-                    <img src="/images/calle1.jpg" class="d-block w-100" alt="...">
-                </div>
-                <div class="carousel-item">
-                    <img src="/images/calle1.jpg" class="d-block w-100" alt="...">
-                </div>
+            <div class="col-5">
+                <h3>Sobre Nosotros</h3>
+                <h6>Mejor Autoescuela que puedes encontrar en EUROPEA</h6>
+                <p class="infoSobre">AutoEscuela LZ se estableció a finales de 2019 y ha ayudado/asistido a más de 6.000 estudiantes a realizar su sueño de conducir. 
+                    Tenemos más del 40% de la experiencia docente en escuelas de manejo de todo el mundo y todos los profesores de nuestra escuela son conductores. 
+                    élites Como líder en información sobre vehículos, estamos comprometidos a brindar a los estudiantes el mejor ambiente de aprendizaje y los métodos de enseñanza más cómodos.</p>
             </div>
-        </div>
+         </div>
 
-        <div class="sobreNosotros col-12 d-flex">
-            <div class="col-8">
-                <h2>Sobre Nosotros</h2>
-                <h4>AutoescuelaLZ</h4>
-                <p>Nuestra escuela de manejo se estableció en Barcelona, ​​España en el año 2000. Contamos con el sistema de enseñanza más vanguardista y 
-                    el método de enseñanza más cómodo. En los últimos años, nuestra escuela de manejo ha tenido el honor de ser invitada a varias ceremonias de premios, 
-                    entre ellas, entre otros, la mejor escuela de manejo de 2010, el mejor maestro en 2013, el mejor maestro en 2015 y otros honores.
-​                  </p>
-            </div>
-            <div class="col-4">
-                <img class="col-12" src="/images/calle1.jpg">
-            </div>
-            
-        </div>
-
-
-        <div class="col-12 informacionCarnet">
-            <div class="col-12">
-                <h2>Tipos de Carnet</h2>
-                <div class="col-12 bg-white mt-3 d-flex justify-content-between">
-                    <h4>Coche</h4>
-                    <img src="/images/assets/flechaAbajoMenu.png" height="30px" width="30px">
-                </div>
-                <div class="col-12 bg-white mt-3 ">
-                    <div class="d-flex justify-content-between">
-                        <h4>Moto</h4>
-                        <img src="/images/assets/flechaArribaMenu.png" height="30px" width="30px">
-                    </div>
-                    
-
-                    <div class="col-12 border-top pt-5">
-                        <h2>Obtener Carnet Moto</h2>
-                        <p>Para poder obtener carnet de Moto en nuestro autoescuela tienes que seguir a siguiente LINK para 
-                            elegir el plan de pago y conocer los fechas de examen. Nosotros sumistramos materiales como libros,
-                            acceso a plataforma de test online y otros cosas mas.
-                        </p>
-
-                        <button>Apuntar a Moto</button>
+         <!-- Create the section for student message -->
+        <section class="col-12 carnets bg-white" id="carnetCoche">
+            <div class="informacionCarnet ">
+                <div class="col-12 d-flex justify-content-center">
+                    <div>
+                        <div class="d-flex justify-content-center align-items-center">
+                            <img src="/images/assets/LZ.png" style="height: 30px;">
+                            <h3 class="d-flex justify-content-center ms-2">Autoescuela Perfecta</h3>
+                        </div>
+                        <h1>LICENCIA DE CONDUCIR PROPORCIONADA</h1>
+                        
                     </div>
                 </div>
             </div>
-        </div>
 
 
+            <div class="d-flex col-12 justify-content-around bg-white pb-5">
+                <div class="row col-5">
+                    <div class="col-12 card bg-body-tertiary">
+                        <Image src="/images/infoAutoescuela/practicaCoche.png" class="imgCarnet" alt="Image" width="100%" id="mueveImagen" />
+                        <div class="texto col-12">
+                            <h2>Licencia Coche</h2>
+                            <p>Una licencia de conducir de automóvil es una licencia que requiere mucho tiempo para practicar, generalmente toma entre 2 y 4 meses, 
+                                generalmente puedes aprender suficientes conocimientos teóricos para participar en el primer al segundo mes, después de uno o dos meses de comenzar. 
+                                , podemos realizar el examen práctico y tras aprobarlo podremos obtener el permiso de conducir.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row col-5">
+                    <div class="col-12 card bg-body-tertiary">
+                        <Image src="/images/infoAutoescuela/practicaMoto.png" class="imgCarnet d-flex justify-content-end" alt="Image" width="100%" id="mueveImagen"/>
+                        <div class="texto col-12">
+                            <h2>Licencia Moto</h2>
+                            <p>Si desea obtener una licencia de conducir de vehículos motorizados, 
+                                los estudiantes deben familiarizarse primero con las reglas y señales de conducción, 
+                                luego realizar primero un examen teórico y luego tomar 20 lecciones prácticas como estándar para dominar la conducción.
+                                 son capaces de conducir solos. Puede solicitar la prueba y confirmar si debe emitir una licencia de conducir de vehículos motorizados según los resultados de la prueba.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+           
+        </section>
 
     </div>
     
 </template>
+
 <style>
     .carousel-inner{
         height: 300px;
@@ -85,4 +83,47 @@
     h4{
         margin: 0px;
     }
+
+    .col-12{
+        padding: 0px;
+    }
+
+    .imgVia{
+        padding: 70px;
+    }
+    .infoSobre{
+        font-size: 14px;
+    }
+
+    .card{
+        margin-bottom: 0px;
+        position: relative;
+       overflow: hidden;
+    }
+
+    .card .imgCarnet{
+        position: relative;
+        z-index: 1;
+    }
+
+    .card:hover .imgCarnet{
+        translate: 100% 0px;
+        transition: 5s;
+    }
+
+    .card .imgCarnet{
+        translate: 0% 0px;
+        transition: 5s;
+    }
+
+    .texto{
+        position: absolute;
+        z-index: 0;
+        padding: 60px;
+    }
+
+    .carnets{
+        padding-bottom: 50px;
+    }
+
 </style>

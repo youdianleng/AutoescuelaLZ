@@ -8,7 +8,7 @@
             </router-link>
 
             <router-link to="/info">
-                <button class="p-link layout-topbar-button layout-topbar-button-c">
+                <button class="p-link layout-topbar-button layout-topbar-button-c" id="Information">
                     Información
                 </button>
             </router-link>

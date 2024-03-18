@@ -6,9 +6,8 @@
                 <h2>Editar Estudiantes</h2>
                 <div class="muestraEstudiantes col-12 mt-5 ">
                     <div class="d-flex justify-content-end col-12">
-                        <div class="col-4 d-flex justify-content-around" >   
-                            <button  @click="mostrarDiv = 1" class="btn btn-dark col-5 border">Nueva Estudiante</button>
-                            <button  @click="mostrarDiv = 2" class="btn btn-dark col-5 border">Edit Student</button>
+                        <div class="col-4 d-flex justify-content-end" >   
+                            <button  @click="visible = true" class="btn btn-dark col-5 border">Nueva Estudiante</button>
                         </div>
                     </div>
                     <!-- v-if="mostrarDiv == 1" -->
@@ -40,86 +39,94 @@
                             </tbody>
                         </table>
                     </div>
-
-                    <!-- v-if="mostrarDiv == 2" -->
-                    <div  class="col-12 d-flex justify-content-center">
-                        <div class="row col-11">
-                            <div class="card col-12 ">
-                                <div class="formularioCrearStudent">
-                                    <div class="contenidoStudent">
-                                        
-                                        <div class="d-flex">
-                                            <div class="col-8">
-                                                <h2 class="ps-2">Nuevas Estudiantes</h2>   
-                                                <form @submit.prevent="createStudent" class="col-12 row">
-                                                    <input placeholder="Nombre" v-model="student.name" name="name" required>
-                                                    {{ errors.name }}
-                                                    {{ name }}
-                                                    <input class="mt-4" name="surname" v-model="student.surname" placeholder="Apellido">
-                                                    <input type="mail" name="email" v-model="student.email" class="mt-4" placeholder="Email" required>
-                                                    {{ errors.email }}
-                                                    <input class="mt-4" name="password" v-model="student.password" placeholder="Contraseña" required>
-                                                    {{ errors.password }}
-                                                    <select class="mt-4" name="license_id" v-model="student.license_id" required>
-                                                        <option v-for="license in licenses" :value="license.id">{{ license.type }}</option>
-                                                    </select>
-                                                    {{ errors.licencia_id }}
-                                                    <select class="mt-4" name="teacher_id" v-model="student.teacher_id" required>
-                                                        <option v-for="teacher in teachers" :value="teacher.id">{{ teacher.name }}</option>
-                                                    </select>
-                                                    {{ errors.teacher_id }}
-                                                    <div class="col-12 d-flex justify-content-end">
-                                                        <button type="submit" class="col-3 mt-3 btn btn-dark">Crear</button>
-                                                    </div>
-                                                    
-                                                </form>
-                                            
-                                            </div>
-                                            <div class="col-4 imgBox">
-                                                <div class="mb-3">
-                                                    <DropZone />
-                                                    <div class="text-danger mt-1">
-                                                        <div v-for="message in validationErrors?.thumbnail">
-                                                            {{ message }}
-                                                        </div>
-                                                    </div>
-                                                    <div class="mt-3 text-center">
-                                                        <button :disabled="isLoading" class="btn btn btn-primary me-2 w-100">
-                                                            <div v-show="isLoading" class=""></div>
-                                                            <span v-if="isLoading">Processing...</span>
-                                                            <span v-else>Guardar</span>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                    </div>
                     
                 </div>
             </div>
         </div>
-        <!-- {{ users.data[0]}} -->
-        
     </div>
+
+    <Dialog v-model:visible="visible" modal header="Edit Profile" :style="{ width: '90%' }">
+        <div  class="col-12 d-flex justify-content-center">
+            <div class="row col-11">
+                <div class="card col-12 ">
+                    <div class="formularioCrearStudent">
+                        <div class="contenidoStudent">
+                            
+                            <div class="d-flex">
+                                <div class="col-8">
+                                    <h2 class="ps-2">Nuevas Estudiantes</h2>   
+                                    <form @submit.prevent="createStudent" class="col-12 row">
+                                        <input placeholder="Nombre" v-model="student.name" name="name" required>
+                                        {{ errors.name }}
+                                        {{ name }}
+                                        <input class="mt-4" name="surname" v-model="student.surname" placeholder="Apellido">
+                                        <input type="mail" name="email" v-model="student.email" class="mt-4" placeholder="Email" required>
+                                        {{ errors.email }}
+                                        <input class="mt-4" name="password" v-model="student.password" placeholder="Contraseña" required>
+                                        {{ errors.password }}
+                                        <select class="mt-4" name="license_id" v-model="student.license_id" required>
+                                            <option v-for="license in licenses" :value="license.id">{{ license.type }}</option>
+                                        </select>
+                                        {{ errors.licencia_id }}
+                                        <select class="mt-4" name="teacher_id" v-model="student.teacher_id" required>
+                                            <option v-for="teacher in teachers" :value="teacher.id">{{ teacher.name }}</option>
+                                        </select>
+                                        {{ errors.teacher_id }}
+                                        <div class="col-12 d-flex justify-content-end">
+                                            <button label="Search" icon="pi pi-search" :loading="loading" @click="load">Crear</button>
+                                        </div>
+                                        
+                                    </form>
+                                
+                                </div>
+                                <form @submit.prevent="submitFormStore">
+                                    <div class="col-4 imgBox">
+                                        <div class="mb-3">
+                                            <DropZone v-model="thumbnail"/>
+                                            <div class="text-danger mt-1">
+                                                <div v-for="message in validationErrors?.thumbnail">
+                                                    {{ message }}
+                                                </div>
+                                            </div>
+                                            <div class="mt-3 text-center">
+                                                <button :disabled="isLoading" class="btn btn btn-primary me-2 w-100">
+                                                    <div v-show="isLoading" class=""></div>
+                                                    <span v-if="isLoading">Processing...</span>
+                                                    <span v-else>Guardar</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>         
+        </div>
+    </Dialog>
+
 </template>
   
 
 <script setup>
 // Import all the library 
-import { ref, onMounted, reactive, createElementBlock,watchEffect } from "vue";
+import { ref, onMounted, reactive, inject } from "vue";
 import { useForm, useField } from "vee-validate";
 import { useRoute } from "vue-router";
 import * as yup from 'yup';
 import { es } from 'yup-locales';
 import { setLocale } from 'yup';
 import DropZone from "@/components/DropZone.vue";
-// import useUsers from "../../composables/users";
-// const {users, getUsers, deleteUser} = useUsers()
+import Dialog from "primevue/dialog";
+import usExercises from "@/composables/student";
+import useExercises from "@/composables/exercises";
+// const { exercise: storeExercise} = usExercises();
+const { exercise: exerciseData, getExercise, updateExercise, validationErrors, isLoading } = useExercises()
+
+//Swal
+const swal = inject('$swal');
+
 
 // Get all the student we have in bbdd
 const students = ref();
@@ -163,16 +170,13 @@ axios.get('/api/teacher')
     });
 })
 
-
-
-
 // asigment of the required validation fields
 const schema = yup.object({
-    name: yup.string().required().max(5).label('Nombre'),
-    password: yup.string().required().label('password'),
-    email: yup.string().required().label('email'),
-    license_id: yup.string().required().label('license_id'),
-    teacher_id: yup.string().required().label('teacher_id'),
+    // name: yup.string().required().max(5).label('Nombre'),
+    // password: yup.string().required().label('password'),
+    // email: yup.string().required().label('email'),
+    // license_id: yup.string().required().label('license_id'),
+    // teacher_id: yup.string().required().label('teacher_id'),
 
 })
 
@@ -195,6 +199,7 @@ const { value: email } = useField('email', null, { initialValue: '' });
 const { value: password } = useField('password', null, { initialValue: '' });
 const { value: license_id } = useField('license_id', null, { initialValue: '' });
 const { value: teacher_id } = useField('teacher_id', null, { initialValue: '' });
+const { value: thumbnail } = useField('thumbnail', null, { initialValue: '' });
 
 // Create an array with all the value send by form
 const student = reactive({
@@ -205,6 +210,10 @@ const student = reactive({
     password,
     license_id,
     teacher_id
+})
+
+const exercise = reactive({
+    thumbnail,
 })
 
 
@@ -230,62 +239,56 @@ validate().then(form => {
 
 }
 
+// Cargar Imagen al Crear
+function submitFormStore() {
+    validate().then(form => {
+        if (form.valid) storeExercise(exercise)
+    })
+}
+
+// Cargar Imagen al update
+function submitForm() {
+    validate().then(form => { if (form.valid) updateExercise(exercise) })
+}
+
 
 // Delete the user
 function deleteStudent($id) {
 // if validate 
-validate().then(form => {
-    console.log('validate');
-    //If the content of the form is validate
-    if (form.valid) {
-        // Call the funtion with all the content we saved (Sending as $request)
-        axios.delete('/api/student/'+$id)
-            .then(response => {
-                strError.value = ""
-                strSuccess.value = response.data.success
+    // Call the funtion with all the content we saved (Sending as $request)
+    axios.delete('/api/student/' + $id)
+        .then(response => {
+            strError.value = ""
+            strSuccess.value = response.data.success
+            swal({
+                icon: "success",
+                title: "Usuario ha sido eliminidado"
             })
-            .catch(function (error) {
-                strSuccess.value = ""
-                strError.value = error.response.data.message
-            });
-    }
-})
-
+            location.reload(); 
+        })
+        .catch(function (error) {
+            strSuccess.value = ""
+            strError.value = error.response.data.message
+        });
 }
 
 
 
-import useCategories from "@/composables/categories";
-import useExercises from "@/composables/exercises";
-import {defineRule } from "vee-validate";
-import { required, min } from "@/validation/rules"
-import TextEditorComponent from "@/components/TextEditorComponent.vue";
-defineRule('required', required)
-defineRule('min', min);
 
 
-const { value: title } = useField('title', null, { initialValue: '' });
-const { value: content } = useField('content', null, { initialValue: '' });
-const { value: categories } = useField('categories', null, { initialValue: '', label: 'category' });
-const { categoryList, getCategoryList } = useCategories()
-const { exercise: exerciseData, getExercise, updateExercise, validationErrors, isLoading } = useExercises()
+// Diseño Prime Vues
+//Loading 
+const loading = ref(false);
 
+const load = () => {
+    loading.value = true;
+    setTimeout(() => {
+        loading.value = false;
+    }, 2000);
+};
 
-const exercise = reactive({
-    title,
-    content,
-    categories,
-    thumbnail: ''
-})
-
-watchEffect(() => {
-    exercise.id = exerciseData.value.id
-    exercise.title = exerciseData.value.title
-    exercise.content = exerciseData.value.content
-    exercise.thumbnail = exerciseData.value.original_image
-    exercise.categories = exerciseData.value.categories
-})
-
+// Dialog
+const visible = ref(false);
 
 </script>
 
