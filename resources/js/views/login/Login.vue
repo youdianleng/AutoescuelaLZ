@@ -51,9 +51,30 @@
                                 </form>
                             </div>
                             <div class="col-4 noPadding imgDriveHiddenPart">
-                                <Image width="100%" src="/images/login/loginImage.png" alt="Image" />
+                                <div class="nubePrincipal col-12"></div>
+                                <div class="d-flex">
+                                    <div class="nube1"></div>
+                                    <div class="nube2"></div>
+                                </div>
+                                     
+                                        <div class="nieves col-12">
+                                            <span style="--i:11"></span>
+                                            <span style="--i:12"></span>
+                                            <span style="--i:15"></span>
+                                            <span style="--i:17"></span>
+                                            <span style="--i:18"></span>
+                                            <span style="--i:13"></span>
+                                            <span style="--i:14"></span>
+                                            <span style="--i:19"></span>
+                                            <span style="--i:20"></span>
+                                            <span style="--i:10"></span>
+                                            <span style="--i:24"></span>
+                                            <span style="--i:21"></span>
+                                            <span style="--i:23"></span>
+                                            <span style="--i:22"></span>
+                                        </div>
+                                    </div>
                             </div>
-                        </div>
                     
                         
                         
@@ -91,6 +112,7 @@ const { loginForm, validationErrors, processing, submitLogin } = useAuth();
     background-image: url("/images/Drive.jpg");
     margin-left: 0px;
     margin-right: 0px;
+    background-size: cover;
 }
 
 .boxShadowBox{
@@ -106,7 +128,10 @@ const { loginForm, validationErrors, processing, submitLogin } = useAuth();
 }
 
 .imgDriveHiddenPart{
+    position: relative;
     overflow: hidden;
+    background-image: url("/images/semana_santa.png");
+    background-size: cover;
 }
 
 #email{
@@ -146,5 +171,60 @@ const { loginForm, validationErrors, processing, submitLogin } = useAuth();
     transition: 1s;
 }
 
+.nubePrincipal{
+    position: absolute;
+    width: 100%;
+    height: 30px;
+    background-color: white;
+}
+
+.nube1{
+    position: relative;
+    width: 60%;
+    height: 50px;
+    background-color: white;
+    border-radius: 50%;
+}
+
+.nube2{
+    position: relative;
+    width: 40%;
+    height: 40px;
+    background-color: white;
+    border-radius: 50%;
+}
+
+.nieves{
+    position: relative;
+    display: flex;
+    height: 100%;
+}
+
+.nieves span{
+    position: relative;
+    width: 5%!important;
+    height: 20px!important;
+    background-color: white;
+    margin:2%;
+    padding-bottom: 10%;
+    border-radius: 50%;
+    filter: blur(1px);
+    animation: nevendo 5s linear infinite;
+    animation-duration:
+        calc(35s / var(--i));
+
+}
+
+@keyframes nevendo {
+    0% {
+        transform: translateX(0) translateY(0);
+    }
+    70% {
+        transform: translateX(0) translateY(300px) scale(1);
+    }
+    100% {
+        transform: translateX(0) translateY(300px) scale(0);
+    }
+}
 
 </style>

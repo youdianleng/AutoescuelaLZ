@@ -56,7 +56,7 @@ class ExerciseController extends Controller
     public function update($id, StoreExerciseRequest $request)
     {
 
-        $this->authorize('exercise-edit');
+        // $this->authorize('exercise-edit');
 
         $exercise = Exercise::find($id);
 

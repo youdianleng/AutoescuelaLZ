@@ -79,24 +79,25 @@
                                     </form>
                                 
                                 </div>
-                                
-                                <div class="col-4 imgBox">
-                                    <div class="mb-3">
-                                        <DropZone v-model="imagen"/>
-                                        <div class="text-danger mt-1">
-                                            <div v-for="message in validationErrors?.thumbnail">
-                                                {{ message }}
+                                <form @submit.prevent="submitFormStore">
+                                    <div class="col-4 imgBox">
+                                        <div class="mb-3">
+                                            <DropZone v-model="thumbnail"/>
+                                            <div class="text-danger mt-1">
+                                                <div v-for="message in validationErrors?.thumbnail">
+                                                    {{ message }}
+                                                </div>
+                                            </div>
+                                            <div class="mt-3 text-center">
+                                                <button :disabled="isLoading" class="btn btn btn-primary me-2 w-100">
+                                                    <div v-show="isLoading" class=""></div>
+                                                    <span v-if="isLoading">Processing...</span>
+                                                    <span v-else>Guardar</span>
+                                                </button>
                                             </div>
                                         </div>
-                                        <div class="mt-3 text-center">
-                                            <button :disabled="isLoading" class="btn btn btn-primary me-2 w-100">
-                                                <div v-show="isLoading" class=""></div>
-                                                <span v-if="isLoading">Processing...</span>
-                                                <span v-else>Guardar</span>
-                                            </button>
-                                        </div>
                                     </div>
-                                </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -118,7 +119,10 @@ import { es } from 'yup-locales';
 import { setLocale } from 'yup';
 import DropZone from "@/components/DropZone.vue";
 import Dialog from "primevue/dialog";
-
+import usExercises from "@/composables/student";
+import useExercises from "@/composables/exercises";
+const { exercise: storeExercise} = usExercises();
+// const { exercise: exerciseData, getExercise, updateExercise, validationErrors, isLoading } = useExercises()
 
 //Swal
 const swal = inject('$swal');
@@ -128,7 +132,6 @@ const swal = inject('$swal');
 const students = ref();
 const licenses = ref();
 const teachers = ref();
-const imagen = ref();
 
 onMounted(() => {
 
@@ -167,16 +170,13 @@ axios.get('/api/teacher')
     });
 })
 
-
-
-
 // asigment of the required validation fields
 const schema = yup.object({
-    name: yup.string().required().max(5).label('Nombre'),
-    password: yup.string().required().label('password'),
-    email: yup.string().required().label('email'),
-    license_id: yup.string().required().label('license_id'),
-    teacher_id: yup.string().required().label('teacher_id'),
+    // name: yup.string().required().max(5).label('Nombre'),
+    // password: yup.string().required().label('password'),
+    // email: yup.string().required().label('email'),
+    // license_id: yup.string().required().label('license_id'),
+    // teacher_id: yup.string().required().label('teacher_id'),
 
 })
 
@@ -199,6 +199,7 @@ const { value: email } = useField('email', null, { initialValue: '' });
 const { value: password } = useField('password', null, { initialValue: '' });
 const { value: license_id } = useField('license_id', null, { initialValue: '' });
 const { value: teacher_id } = useField('teacher_id', null, { initialValue: '' });
+const { value: thumbnail } = useField('thumbnail', null, { initialValue: '' });
 
 // Create an array with all the value send by form
 const student = reactive({
@@ -209,6 +210,10 @@ const student = reactive({
     password,
     license_id,
     teacher_id
+})
+
+const exercise = reactive({
+    thumbnail,
 })
 
 
@@ -232,6 +237,18 @@ validate().then(form => {
     }
 })
 
+}
+
+// Cargar Imagen al Crear
+function submitFormStore() {
+    validate().then(form => {
+        if (form.valid) storeExercise(exercise)
+    })
+}
+
+// Cargar Imagen al update
+function submitForm() {
+    validate().then(form => { if (form.valid) updateExercise(exercise) })
 }
 
 

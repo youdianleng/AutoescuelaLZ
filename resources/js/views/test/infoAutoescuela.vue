@@ -18,8 +18,8 @@
          </div>
 
          <!-- Create the section for student message -->
-        <section class="col-12">
-            <div class="informacionCarnet bg-white">
+        <section class="col-12 carnets bg-white" id="carnetCoche">
+            <div class="informacionCarnet ">
                 <div class="col-12 d-flex justify-content-center">
                     <div>
                         <div class="d-flex justify-content-center align-items-center">
@@ -36,19 +36,18 @@
             <div class="d-flex col-12 justify-content-around bg-white pb-5">
                 <div class="row col-5">
                     <div class="col-12 card bg-body-tertiary">
-                        <Image src="/images/infoAutoescuela/practicaCoche.png" alt="Image" width="100%" id="mueveImagen" />
+                        <Image src="/images/infoAutoescuela/practicaCoche.png" class="imgCarnet" alt="Image" width="100%" id="mueveImagen" />
                         <div class="texto col-12">
                             <h2>Licencia Coche</h2>
-                            <p>Si desea obtener una licencia de conducir de vehículos motorizados, 
-                                los estudiantes deben familiarizarse primero con las reglas y señales de conducción, 
-                                luego realizar primero un examen teórico y luego tomar 20 lecciones prácticas como estándar para dominar la conducción.
-                                 son capaces de conducir solos. Puede solicitar la prueba y confirmar si debe emitir una licencia de conducir de vehículos motorizados según los resultados de la prueba.</p>
+                            <p>Una licencia de conducir de automóvil es una licencia que requiere mucho tiempo para practicar, generalmente toma entre 2 y 4 meses, 
+                                generalmente puedes aprender suficientes conocimientos teóricos para participar en el primer al segundo mes, después de uno o dos meses de comenzar. 
+                                , podemos realizar el examen práctico y tras aprobarlo podremos obtener el permiso de conducir.</p>
                         </div>
                     </div>
                 </div>
                 <div class="row col-5">
                     <div class="col-12 card bg-body-tertiary">
-                        <Image src="/images/infoAutoescuela/practicaMoto.png" alt="Image" width="100%" id="mueveImagen"/>
+                        <Image src="/images/infoAutoescuela/practicaMoto.png" class="imgCarnet d-flex justify-content-end" alt="Image" width="100%" id="mueveImagen"/>
                         <div class="texto col-12">
                             <h2>Licencia Moto</h2>
                             <p>Si desea obtener una licencia de conducir de vehículos motorizados, 
@@ -65,12 +64,6 @@
     </div>
     
 </template>
-
-<script setup>
-function moverImagen(){
-
-}
-</script>
 
 <style>
     .carousel-inner{
@@ -108,17 +101,17 @@ function moverImagen(){
        overflow: hidden;
     }
 
-    .card img{
+    .card .imgCarnet{
         position: relative;
         z-index: 1;
     }
 
-    .card:hover img{
+    .card:hover .imgCarnet{
         translate: 100% 0px;
         transition: 5s;
     }
 
-    .card img{
+    .card .imgCarnet{
         translate: 0% 0px;
         transition: 5s;
     }
@@ -129,8 +122,8 @@ function moverImagen(){
         padding: 60px;
     }
 
-    .moverImagen{
-        translate: 100% 0px;
-        transition: 5s;
+    .carnets{
+        padding-bottom: 50px;
     }
+
 </style>

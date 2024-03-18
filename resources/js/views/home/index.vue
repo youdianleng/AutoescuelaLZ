@@ -67,7 +67,7 @@
                              Proporcionaremos a los estudiantes materiales de aprendizaje y maestros para ayudarlos en el aprendizaje.
                              <br>Si desea obtener información más detallada, haga clic en el botón para saltar.</p>
                         <div class="col-12 mt-4">
-                            <button class="col-3 btn btn-primary">Ver Más</button>   
+                            <router-link to="/info#carnetCoche" class="col-3 btn btn-primary">Ver Más</router-link>  
                         </div>
                     </div>
                     <div class="card col-6 ms-3 cardCarnet">
@@ -76,7 +76,7 @@
                              Proporcionaremos a los estudiantes materiales de aprendizaje y maestros para ayudarlos en el aprendizaje.
                              <br>Si desea obtener información más detallada, haga clic en el botón para saltar.</p>
                         <div class="col-12 mt-4">
-                            <button class="col-3 btn btn-primary">Ver Más</button>   
+                            <router-link to="/info#carnetCoche" class="col-3 btn btn-primary">Ver Más</router-link>   
                         </div>
                         
                     </div>
