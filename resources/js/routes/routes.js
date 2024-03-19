@@ -75,13 +75,6 @@ export default [
                 beforeEnter: requireLogin,
             },
             {
-                name: 'Profile',
-                path: 'profile',
-                component: () => import('../views/admin/index.vue'),
-                meta: { breadCrumb: 'Profile' },
-                beforeEnter: requireLogin,
-            },
-            {
                 name: 'crearTask',
                 path: 'createTasks',
                 component: () => import('../views/task/create.vue'),
@@ -150,12 +143,6 @@ export default [
                 component: () => import('../views/teacher/editStudent.vue'),
                 meta: { breadCrumb: 'EditStudent'}
             },
-            {
-                name: 'Profile',
-                path: 'profile',
-                component: () => import('../views/admin/index.vue'),
-                meta: { breadCrumb: 'Profile' },
-            }
             
         ]
     },
