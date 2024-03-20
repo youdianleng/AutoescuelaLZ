@@ -10,8 +10,9 @@ class Question extends Model
     use HasFactory;
 
     protected $fillable = [
-        'question_text',
-        'difficulty'
+        'question',
+        'difficulty',
+        'carnet',
     ];
 
     public function test() {

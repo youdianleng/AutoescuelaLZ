@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\PermissionController;
 use App\Http\Controllers\Api\PostController;
 use App\Http\Controllers\Api\ExerciseController;
+use App\Http\Controllers\api\OptionController;
 use App\Http\Controllers\Api\ProfileController;
 use App\Http\Controllers\Api\RoleController;
 use App\Http\Controllers\api\StudentController;
@@ -15,20 +16,20 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Api\TaskController;
 use App\Http\Controllers\Api\TestController;
+use App\Http\Controllers\Api\QuestionController;
+use App\Models\Question;
 
+// Preguntas
+Route::get('tests', [QuestionController::class, 'index']);
+Route::post('question', [QuestionController::class, 'store']);
 
-// Tests
-Route::get('tests', [TestController::class, 'index']);
-
-
-Route::post('tests', [TestController::class, 'store']);
+//Optiones
+Route::post('option', [OptionController::class, 'store']);
 
 
 Route::put('tests/update/{id}', [TestController::class, 'update']);
 Route::delete('tests/{id}', [TestController::class, 'destroy']);
 Route::get('tests/{tests}', [TestController::class,'show']);
-
-
 
 Route::get('tasks', [TaskController::class, 'index']);
 Route::post('tasks/', [TaskController::class, 'store']);
@@ -36,6 +37,10 @@ Route::put('tasks/update/{id}', [TaskController::class, 'update']);
 Route::delete('tasks/{id}', [TaskController::class, 'destroy']);
 Route::post('forget-password', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('forget.password.post');
 Route::post('reset-password', [ResetPasswordController::class, 'reset'])->name('password.reset');
+
+
+
+
 
 // Funciones para Students
 Route::get('student', [StudentController::class, 'index']);

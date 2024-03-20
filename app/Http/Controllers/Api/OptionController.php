@@ -16,19 +16,6 @@ class OptionController extends Controller
     }
 
     public function store(Request $request){
-
-        $request->validate([
-            'option_text' => 'required',
-            'is_correct'
-        ]);
-        $datos = $request->all();
-        return $datos;
-
-        $test = Option::create($request->all());
-
-        $test->tests();
-
-        return response()->json(['success' => true, 'data' => $test]);
     }
 
 }

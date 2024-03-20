@@ -172,12 +172,11 @@ axios.get('/api/teacher')
 
 // asigment of the required validation fields
 const schema = yup.object({
-    // name: yup.string().required().max(5).label('Nombre'),
-    // password: yup.string().required().label('password'),
-    // email: yup.string().required().label('email'),
-    // license_id: yup.string().required().label('license_id'),
-    // teacher_id: yup.string().required().label('teacher_id'),
-
+    name: yup.string().required().max(5).label('Nombre'),
+    password: yup.string().required().label('password'),
+    email: yup.string().required().label('email'),
+    license_id: yup.string().required().label('license_id'),
+    teacher_id: yup.string().required().label('teacher_id'),
 })
 
 // Define the validate using form fields

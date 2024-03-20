@@ -4,23 +4,52 @@ namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Option;
+use App\Models\Question;
 
 class QuestionController extends Controller
 {
 
-    public function options() {
-        $option = Option::all();
-        return $option;
+    public function index(){
+        $Questions = Question::all();
+        return response()->json($Questions);
     }
+
+    // public function options() {
+    //     $option = Option::all();
+    //     return $option;
+    // }
+
     public function store(Request $request)
     {
-        $this->authorize('question-create');
+        $request->validate([
+            'question'  => 'required',
+            'difficulty.name' => 'required', // Validar que 'difficulty.name' esté presente en la solicitud
+            'carnet.name' => 'required',
+        ]);
+        
+    
+        // Obtener el nombre de la dificultad del request
+        $difficultyName = $request->input('difficulty.name');
+        $carnetName = $request->input('carnet.name');
+        // Crear la pregunta utilizando los datos del request
+        $test = Question::create([
+            'question' => $request->input('question'),
+            'difficulty' => $difficultyName, // Asignar el nombre de la dificultad
+            'carnet' => $carnetName,
+        ]);
+
+        //$test->options()->delete();
+        $test->options()->createMany($request->respuestas);
+        return response()->json(['success' => true, 'data' => $test]);
+
+
+        // $this->authorize('question-create');
 
 
         // if ($request->hasFile('thumbnail')) {
         //     $question->addMediaFromRequest('thumbnail')->preservingOriginal()->toMediaCollection('images-questions');
         // }
+
 
     }
 
