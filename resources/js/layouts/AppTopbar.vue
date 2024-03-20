@@ -21,7 +21,12 @@
             
             <router-link to="CreateTest">
                 <button v-if="role === 'teacher'" class="p-link layout-topbar-button layout-topbar-button-c">
-                Tests
+                Preguntas test
+                </button>
+            </router-link>
+            <router-link to="Test">
+                <button class="p-link layout-topbar-button layout-topbar-button-c">
+                Test
                 </button>
             </router-link>
         

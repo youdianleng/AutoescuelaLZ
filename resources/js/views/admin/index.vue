@@ -8,12 +8,13 @@
                     </div>
                     
                     <div class="col-8">
-                        <h2 class="mb-5">Profesor de Coche/Moto</h2>
+                        <h2 class="mb-5" v-if="role === 'teacher'">Profesor de {{ user.license_id }}</h2>
+                        <h2 class="mb-5" v-if="role === 'student'">Alumno de {{ user.license_id }}</h2>
                         <h3>{{ user.name }} {{ user.surname }}</h3>
-                        <h3>{{ user.address }}</h3> <!-- CORREGIR -->
+                        <h3>{{ user.address }}</h3> 
                         <h3>{{ user.email }}</h3>
                         <h3>{{ user.license_id }}</h3>
-                        <h3>Profesor: {{ user.teacher_id}}</h3>
+                        <h3 v-if="role === 'student'">Profesor: {{ user.teacher_id}} </h3>
                     </div>
                 </div>
                
@@ -86,7 +87,7 @@ import { useStore } from 'vuex';
 const students = ref();
 const store = useStore();
 const user = computed(() => store.state.auth.user)
-// const role = computed(() => store.state.auth.role)
+const role = computed(() => store.state.auth.role)
 
 onMounted(() => {
 
