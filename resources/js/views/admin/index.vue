@@ -4,17 +4,19 @@
             <div class="card col-11 d-flex">
                 <div class="col-12 d-flex justify-content-center">
                     <div class="col-4 d-flex justify-content-center">
-                        <img src="/images/perfil.png">
+                        <img src="/images/perfil.png"> 
                     </div>
                     
                     <div class="col-8">
                         <h2 class="mb-5">Profesor de Coche/Moto</h2>
-                        <h3>Zhiou</h3>
-                        <h3>Zhu</h3>
-                        <h3>Molins de Rei, Bernat el Ferrer</h3>
+                        <h3>{{ user.name }} {{ user.surname }}</h3>
+                        <h3>{{ user.address }}</h3> <!-- CORREGIR -->
+                        <h3>{{ user.email }}</h3>
+                        <h3>{{ user.license_id }}</h3>
+                        <h3>Profesor: {{ user.teacher_id}}</h3>
                     </div>
                 </div>
-                
+               
             </div>
 
             <div class="card col-11 d-flex">
@@ -69,17 +71,22 @@
 
 <script setup>
 // Import all the library 
-import { ref, onMounted, reactive, createElementBlock } from "vue";
+import { ref, onMounted, reactive, createElementBlock, computed } from "vue";
 import { useForm, useField } from "vee-validate";
 import { useRoute } from "vue-router";
 import * as yup from 'yup';
 import { es } from 'yup-locales';
 import { setLocale } from 'yup';
+import axios from 'axios';
+import { useStore } from 'vuex';
 // import useUsers from "../../composables/users";
 // const {users, getUsers, deleteUser} = useUsers()
 
 // Get all the student we have in bbdd
 const students = ref();
+const store = useStore();
+const user = computed(() => store.state.auth.user)
+// const role = computed(() => store.state.auth.role)
 
 onMounted(() => {
 

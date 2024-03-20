@@ -15,8 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string("option_text");
             $table->boolean("is_correct");
-            $table->unsignedBigInteger("question_id");
-            $table->foreign('question_id')->references('id')->on('questions')->onDelete('cascade');
         });
     }
 
