@@ -41,21 +41,33 @@ class CreateAdminUserSeeder extends Seeder
 
         $teacher = User::create([
             'name' => 'Teacher',
-            'surname' => '1',
+            'surname' => 'Surname',
             'email' => 'teacher@gmail.com',
+            'address' => 'Carrer Major',
             'password' => bcrypt('12345678')
         ]);
         $teacher->assignRole([$roleTeacher->id]);
 
         $student = User::create([
-            'name' => 'Student',
-            'surname' => '1',
+            'name' => 'Jane',
+            'surname' => 'Doe',
             'email' => 'student@gmail.com',
+            'address' => 'Carrer Magallanes',
             'password' => bcrypt('12345678'),
             'teacher_id' => $teacher->id
         ]);
 
+        $student = User::create([
+            'name' => 'Laia',
+            'surname' => 'Vizcarro',
+            'email' => 'laia@gmail.com',
+            'address' => 'Carrer Nou',
+            'password' => bcrypt('12345'),
+            'teacher_id' => $teacher->id
+            // license_id FALTA
+        ]);
         
         $student->assignRole([$roleStudent->id]);
+
     }
 }
