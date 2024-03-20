@@ -122,7 +122,7 @@ import Dialog from "primevue/dialog";
 import usExercises from "@/composables/student";
 import useExercises from "@/composables/exercises";
 // const { exercise: storeExercise} = usExercises();
-const { exercise: exerciseData, getExercise, updateExercise, validationErrors, isLoading } = useExercises()
+const { exercise: exerciseData, getExercise, updateExercise, validationErrors, isLoading, storeExercise } = useExercises()
 
 //Swal
 const swal = inject('$swal');
@@ -228,10 +228,19 @@ validate().then(form => {
             .then(response => {
                 strError.value = ""
                 strSuccess.value = response.data.success
+                swal({
+                    icon: "success",
+                    title: "Usuario creado con exito"
+                })
             })
             .catch(function (error) {
                 strSuccess.value = ""
                 strError.value = error.response.data.message
+                swal({
+                    icon: "error",
+                    title: "Correo ya registrado"
+                })
+
             });
     }
 })
@@ -253,8 +262,6 @@ function submitForm() {
 
 // Delete the user
 function deleteStudent($id) {
-// if validate 
-    // Call the funtion with all the content we saved (Sending as $request)
     axios.delete('/api/student/' + $id)
         .then(response => {
             strError.value = ""
@@ -268,6 +275,10 @@ function deleteStudent($id) {
         .catch(function (error) {
             strSuccess.value = ""
             strError.value = error.response.data.message
+            swal({
+                icon: "error",
+                title: "No ha podido eliminar el usuario"
+            })
         });
 }
 

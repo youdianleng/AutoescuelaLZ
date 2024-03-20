@@ -7,6 +7,7 @@ use App\Models\Student;
 use App\Models\License;
 use App\Models\Teacher;
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class StudentController extends Controller
 {
@@ -36,6 +37,7 @@ class StudentController extends Controller
 
     public function store(Request $request)
     {
+
         $request->validate([
             'name' => 'required|max:10',
             'surname' => 'required',
@@ -47,17 +49,30 @@ class StudentController extends Controller
             'license_id' => 'required',
         ]);
 
-        $task = $request->all();
-        $teacher_id = $task["teacher_id"];
-        $tarea = Student::create($task);
-
-        if ($request->hasFile('thumbnail')) {
-            $tarea->addMediaFromRequest('thumbnail')->preservingOriginal()->toMediaCollection('images-exercises');
-        }
-
-        $tarea->teachers()->attach($teacher_id);
+        $comprobarExistencia = Student::where('email', $request["email"])->get();
         
-        return response()->json(['success' => true, 'data' => $tarea]);
+        if(!$comprobarExistencia->isEmpty()){
+            $student = Student::where('name', $request["name"])->get();
+            return $student;
+        }{
+            $task = $request->all();
+            $teacher_id = $task["teacher_id"];
+            $tarea = Student::create($task);
+
+            $userStudent = User::create($task);
+            $userStudent->assignRole(["student"]);
+
+
+            if ($request->hasFile('thumbnail')) {
+                $tarea->addMediaFromRequest('thumbnail')->preservingOriginal()->toMediaCollection('images-exercises');
+            }
+    
+            $tarea->teachers()->attach($teacher_id);
+            
+            return response()->json(['success' => true, 'data' => $tarea]);
+        }
+        
+        
     }
 
     public function update($id, Request $request)

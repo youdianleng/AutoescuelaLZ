@@ -19,13 +19,11 @@
                                         <input class="mt-4" name="password" v-model="student.password" placeholder="Contraseña" required>
                                         {{ errors.password }}
                                         <select class="mt-4" name="license_id" v-model="student.license_id" required>
-                                            <option>1</option>
-                                            <option>2</option>
+                                            <option v-for="license in licenses" :value="license.id">{{ license.type }}</option>
                                         </select>
                                         {{ errors.licencia_id }}
                                         <select class="mt-4" name="teacher_id" v-model="student.teacher_id" required>
-                                            <option>1</option>
-                                            <option>2</option>
+                                            <option v-for="teacher in teachers" :value="teacher.id">{{ teacher.name }}</option>
                                         </select>
                                         {{ errors.teacher_id }}
                                         <div class="col-12 d-flex justify-content-end">
@@ -52,7 +50,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, reactive } from "vue";
+import { ref, onMounted, reactive, inject } from "vue";
 import { useForm, useField} from "vee-validate";
 import { useRoute } from "vue-router";
 import * as yup from 'yup';
@@ -96,6 +94,9 @@ const student = reactive({
 
 const strSuccess = ref();
 const strError = ref();
+const licenses = ref();
+const teachers = ref();
+const swal = inject('$swal');
 
 
 onMounted(() => {
@@ -114,6 +115,31 @@ onMounted(() => {
     });
 })
 
+onMounted(() => {
+// getLicencia();
+axios.get('/api/license')
+    .then(response => {
+        licenses.value = response.data;
+
+    })
+    .catch(function (error) {
+        console.log(error);
+    });
+})
+
+onMounted(() => {
+// getTeacher();
+axios.get('/api/teacher')
+    .then(response => {
+        teachers.value = response.data;
+
+    })
+    .catch(function (error) {
+        console.log(error);
+    });
+})
+
+
 
 
 
@@ -125,10 +151,20 @@ function saveTask() {
                 .then(response => {
                     strError.value = ""
                     strSuccess.value = response.data.success
+                    swal({
+                        icon: "success",
+                        title: "Datos Cambiados"
+                    })
+                    location.reload(); 
                 })
                 .catch(function (error) {
                     strSuccess.value = ""
                     strError.value = error.response.data.message
+                    swal({
+                        icon: "error",
+                        title: "Datos Incorrectos"
+                    })
+                    location.reload(); 
                 });
         }
     })
