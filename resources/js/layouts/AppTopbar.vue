@@ -25,7 +25,7 @@
                 </button>
             </router-link>
             <router-link to="Test">
-                <button class="p-link layout-topbar-button layout-topbar-button-c">
+                <button  v-if="role === 'teacher' || role === 'student'" class="p-link layout-topbar-button layout-topbar-button-c">
                 Test
                 </button>
             </router-link>
