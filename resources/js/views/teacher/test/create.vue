@@ -32,7 +32,7 @@
             <form @submit.prevent="createQuestion">
                 <div class="form-group mb-2">
                     <label>Pregunta</label>
-                    <textarea name="question" v-model="Questiones.question" cols="210" rows="5" ></textarea>
+                    <textarea name="question" v-model="Questiones.question" class="col-12" ></textarea>
                     {{ question }}
                 </div>
                 <div v-for="respuesta in respuestas" class="form-group mb-2  col-12">
