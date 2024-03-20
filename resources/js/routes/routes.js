@@ -111,7 +111,7 @@ export default [
             {
                 name: 'student.index',
                 path: '',
-                component: () => import('../views/student/index.vue'),
+                component: () => import('../views/teacher/create.vue'),
                 //meta: { breadCrumb: 'Student' }
             },
         ]
