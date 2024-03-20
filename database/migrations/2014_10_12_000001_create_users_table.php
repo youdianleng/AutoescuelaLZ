@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->string('name');
             $table->string('surname');
             $table->string('image')->nullable();
@@ -26,6 +27,7 @@ return new class extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
+            $table->foreign('user_id')->references('id')->on('students')->onDelete('cascade');
             $table->foreign('teacher_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('license_id')->references('id')->on('licenses')->onDelete('cascade');
         });

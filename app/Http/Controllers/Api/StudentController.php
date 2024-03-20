@@ -37,7 +37,6 @@ class StudentController extends Controller
 
     public function store(Request $request)
     {
-
         $request->validate([
             'name' => 'required|max:10',
             'surname' => 'required',
@@ -58,16 +57,25 @@ class StudentController extends Controller
             $task = $request->all();
             $teacher_id = $task["teacher_id"];
             $tarea = Student::create($task);
-
-            $userStudent = User::create($task);
-            $userStudent->assignRole(["student"]);
-
-
             if ($request->hasFile('thumbnail')) {
                 $tarea->addMediaFromRequest('thumbnail')->preservingOriginal()->toMediaCollection('images-exercises');
             }
-    
             $tarea->teachers()->attach($teacher_id);
+
+
+            $userStudent = User::create([
+                'user_id' => $tarea['id'],
+                'name' => $request["name"],
+                'surname' => $request["surname"],
+                'email' => $request["email"],
+                'password' => bcrypt($request["password"]),
+                'teacher_id' => $teacher_id
+                ]
+            );
+            $userStudent->assignRole(["student"]);
+
+
+            
             
             return response()->json(['success' => true, 'data' => $tarea]);
         }
@@ -79,7 +87,7 @@ class StudentController extends Controller
     {
 
         $student = Student::find($id);
-
+        $comprobarExistencia = Student::where('email', $request["email"])->get();
         $request->validate([
             'name' => 'required|max:10',
             'surname' => 'required',
