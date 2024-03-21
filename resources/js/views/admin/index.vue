@@ -21,7 +21,7 @@
             </div>
 
             <div v-if="role === 'teacher'">
-                <div class="card col-11 d-flex">
+                <!-- <div class="card col-11 d-flex">
                     <div class="col-12 justify-content-center">
                         <h3 class="col-12 d-flex justify-content-center">Preguntas Creados</h3>
                         <table class="col-12 mt-5">
@@ -41,8 +41,7 @@
                             </tbody>
                         </table>
                     </div>
-                    
-                </div>
+                </div> -->
                 <div class="card col-11 d-flex">
                     <div class="col-12 justify-content-center">
                         <h3 class="col-12 d-flex justify-content-center">Alumnos Asignados</h3>

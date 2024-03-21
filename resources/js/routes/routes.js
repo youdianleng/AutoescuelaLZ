@@ -97,12 +97,18 @@ export default [
 
             },
             {
+                name: 'Test',
+                path: 'Test',
+                component: () => import('../views/test/index.vue'),
+                meta: { breadCrumb: 'Test'},
+                beforeEnter: requireLogin,
+
+            },
+            {
                 name: 'EditExamples',
                 path: 'createCategoryExample',
                 component: () => import('../views/admin/categories/Create.vue'),
                 meta: { breadCrumb: 'createTest'},
-                beforeEnter: requireLogin,
-
             }
         ]
     },
