@@ -8,7 +8,7 @@ use App\Models\License;
 use App\Models\Teacher;
 use Illuminate\Http\Request;
 use App\Models\User;
-
+use App\Http\Resources\StudentResource;
 class StudentController extends Controller
 {
     public function index()
@@ -37,6 +37,7 @@ class StudentController extends Controller
 
     public function store(Request $request)
     {
+        return $request;
         $request->validate([
             'name' => 'required|max:10',
             'surname' => 'required',
@@ -48,8 +49,10 @@ class StudentController extends Controller
             'license_id' => 'required',
         ]);
 
+        // Comprobar si el email de estudiante esta creado o no
         $comprobarExistencia = Student::where('email', $request["email"])->get();
         
+        //Verifica si el email se encuentra o no
         if(!$comprobarExistencia->isEmpty()){
             $student = Student::where('name', $request["name"])->get();
             return $student;
@@ -57,12 +60,17 @@ class StudentController extends Controller
             $task = $request->all();
             $teacher_id = $task["teacher_id"];
             $tarea = Student::create($task);
+
             if ($request->hasFile('thumbnail')) {
                 $tarea->addMediaFromRequest('thumbnail')->preservingOriginal()->toMediaCollection('images-exercises');
+                return "Success";
+            }else{
+                return $request;
             }
+
             $tarea->teachers()->attach($teacher_id);
 
-
+            //Crear user 
             $userStudent = User::create([
                 'user_id' => $tarea['id'],
                 'name' => $request["name"],
@@ -72,12 +80,12 @@ class StudentController extends Controller
                 'teacher_id' => $teacher_id
                 ]
             );
+            //Asignar role para este usuario
             $userStudent->assignRole(["student"]);
 
 
-            
-            
-            return response()->json(['success' => true, 'data' => $tarea]);
+            //Crear el imagen
+            return new StudentResource($tarea);
         }
         
         
@@ -87,7 +95,7 @@ class StudentController extends Controller
     {
 
         $student = Student::find($id);
-        $comprobarExistencia = Student::where('email', $request["email"])->get();
+
         $request->validate([
             'name' => 'required|max:10',
             'surname' => 'required',

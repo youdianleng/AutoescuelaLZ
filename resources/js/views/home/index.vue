@@ -14,7 +14,7 @@
                 
             </div>
             <div class="cajaDeInformacion col-8 d-flex justify-content-center">
-                <div class="col-12 d-flex justify-content-around cajaInformacionSegundario">
+                <div class="col-12 d-lg-flex justify-content-around cajaInformacionSegundario">
                     <div class="card cardInformacion">
                         <h3>ENSEÑANZA</h3>
                         <h5 class="mb-4">AMBIENTE CONFORTABLE</h5>
@@ -46,8 +46,8 @@
 
         </div>
         <section class="col-12">
-            <div class="informacionCarnet d-flex justify-content-between">
-                <div class="col-4">
+            <div class="informacionCarnet d-lg-flex justify-content-between">
+                <div class="col-lg-4 col-md-12 tipoCarnetPeque">
                     <h3>Tipo de Carnet</h3>
                     <p>Proporcionamos a los estudiantes dos tipos de permisos de conducir: permiso de conducir de automóvil y permiso de conducir de motocicleta. 
                         También puede encontrar formas y métodos para obtener otros permisos de conducir en nuestro sitio web.</p>
@@ -60,8 +60,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-7 d-flex justify-content-between">
-                    <div class="card col-6 cardCarnet">
+                <div class="col-lg-7 col-md-12 d-lg-flex justify-content-between padding20">
+                    <div class="card col-lg-6 col-md-12 cardCarnet">
                         <h3 class="pt-5">CARNET COCHE</h3>
                         <p class="mt-3">El permiso de conducción de automóviles requiere que los estudiantes realicen una serie de estudios teóricos de al menos 1 mes y al menos 20 lecciones de conducción.
                              Proporcionaremos a los estudiantes materiales de aprendizaje y maestros para ayudarlos en el aprendizaje.
@@ -70,7 +70,7 @@
                             <router-link to="/info#carnetCoche" class="col-3 btn btn-primary">Ver Más</router-link>  
                         </div>
                     </div>
-                    <div class="card col-6 ms-3 cardCarnet">
+                    <div class="card col-lg-6 col-md-12 ms-3 cardCarnet motoTopMargin">
                         <h3 class="pt-5">CARNET MOTO</h3>
                         <p class="mt-3">El permiso de conducción de motocicletas requiere que los estudiantes realicen una serie de estudios teóricos de al menos 1 mes y al menos 20 lecciones de conducción.
                              Proporcionaremos a los estudiantes materiales de aprendizaje y maestros para ayudarlos en el aprendizaje.
@@ -100,7 +100,7 @@
                     </div>
                 </div>
             </div>
-            <div class="d-flex col-12 justify-content-around bg-white pb-5">
+            <div class="d-flex col-12 justify-content-around bg-white pb-5 resenyaCol12">
                 <div v-for="index in 4" :key="index" class="card bg-body-tertiary estudianteDestacada">
                     <img :src="`/images/imgEstudianteDestacada/Estudiante${index}.png`">
                     <div class="mt-4">
@@ -121,8 +121,32 @@
                         </p>
                     </div>
                 </div>
-                {{ index }}
             </div>
+
+            <div class="d-flex col-12 justify-content-around bg-white pb-5 resenyaCol6">
+                <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                        <img src="" class="d-block w-100" alt="...">
+                        </div>
+                        <div class="carousel-item">
+                        <img src="" class="d-block w-100" alt="...">
+                        </div>
+                        <div class="carousel-item">
+                        <img src="" class="d-block w-100" alt="...">
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                    </div>
+            </div>
+
         </section>
 
 
@@ -294,5 +318,43 @@ h6{
 textarea {
     height: 86px;
     resize: none;
+}
+
+@media only screen and (max-width: 1150px) {
+    .cajaInformacionSegundario{
+        visibility: hidden;
+        padding: 10px;
+    }
+    .caja-inferior{
+        margin: 0px;
+    }
+
+    .informacionCarnet{
+        padding: 0px;
+    }
+
+    .tipoCarnetPeque{
+        padding: 20px;
+    }
+
+    .cardCarnet{
+        padding: 20px;
+        margin: 0px!important;
+    }
+
+    .padding20{
+        padding: 20px;
+    }
+    .motoTopMargin{
+        margin-top: 20px!important;
+    }
+
+    .resenyaCol12{
+        visibility: hidden;
+        height: 0px;
+    }
+    .resenyaCol6{
+        visibility: visible;
+    }
 }
 </style>

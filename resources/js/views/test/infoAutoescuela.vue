@@ -4,11 +4,11 @@
             <Image src="/images/infoAutoescuela/via.png" alt="Image" width="100%" />
          </div>
 
-         <div class="col-12 imgVia d-flex justify-content-around"> 
-            <div class="col-6">
+         <div class="col-lg-12 imgVia d-lg-flex justify-content-lg-around"> 
+            <div class="col-lg-6 col-md-12 padding30px">
                 <Image src="/images/infoAutoescuela/coche.jpg" alt="Image" width="100%" />
             </div>
-            <div class="col-5">
+            <div class="col-lg-6 col-md-12 padding30px mdTextoPadding30">
                 <h3>Sobre Nosotros</h3>
                 <h6>Mejor Autoescuela que puedes encontrar en EUROPEA</h6>
                 <p class="infoSobre">AutoEscuela LZ se estableció a finales de 2019 y ha ayudado/asistido a más de 6.000 estudiantes a realizar su sueño de conducir. 
@@ -33,8 +33,8 @@
             </div>
 
 
-            <div class="d-flex col-12 justify-content-around bg-white pb-5">
-                <div class="row col-5">
+            <div class="d-lg-flex col-12 justify-content-around bg-white pb-5">
+                <div class="row col-lg-5 col-md-12">
                     <div class="col-12 card bg-body-tertiary">
                         <Image src="/images/infoAutoescuela/practicaCoche.png" class="imgCarnet" alt="Image" width="100%" id="mueveImagen" />
                         <div class="texto col-12">
@@ -45,7 +45,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row col-5">
+                <div class="row col-lg-5 col-md-12 topMoto">
                     <div class="col-12 card bg-body-tertiary">
                         <Image src="/images/infoAutoescuela/practicaMoto.png" class="imgCarnet d-flex justify-content-end" alt="Image" width="100%" id="mueveImagen"/>
                         <div class="texto col-12">
@@ -124,6 +124,47 @@
 
     .carnets{
         padding-bottom: 50px;
+    }
+
+    .padding30px{
+        padding: 30px;
+    }
+
+    @media only screen and (max-width: 1150px) {
+        .imgVia{
+            padding: 0px;
+        }
+
+        .mdTextoPadding30{
+            padding-top: 0px!important;
+        }
+
+        h1{
+            font-size: medium;
+            font-weight: bold;
+            margin-top: 0px;
+        }
+
+        h2{
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .card{
+            border-radius: 0px;
+        }
+
+        .texto{
+            padding: 15px;
+        }
+
+        .texto p{
+            font-size: 12px;
+        }
+
+        .topMoto{
+            margin-top: 20px;
+        }
     }
 
 </style>

@@ -95,6 +95,14 @@ export default [
                 meta: { breadCrumb: 'createTest'},
                 beforeEnter: requireLogin,
 
+            },
+            {
+                name: 'EditExamples',
+                path: 'createCategoryExample',
+                component: () => import('../views/admin/categories/Create.vue'),
+                meta: { breadCrumb: 'createTest'},
+                beforeEnter: requireLogin,
+
             }
         ]
     },

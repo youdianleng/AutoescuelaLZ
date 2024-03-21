@@ -65,6 +65,14 @@
                     </div>
                 </div>
             </div>
+
+            <div v-if="role === 'student'" class="col-12 row justify-content-center">
+                <div class="card col-11 d-flex">
+                   <div>
+                        <h3></h3>
+                   </div>
+                </div>
+            </div>
             
         </div>
     </div>

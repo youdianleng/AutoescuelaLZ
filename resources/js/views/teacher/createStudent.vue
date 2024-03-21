@@ -29,7 +29,7 @@
                                     <td class="col-2" v-if="student.license_id === 1">Coche</td>
                                     <td class="col-2" v-else="student.license_id === 2">Moto</td>
                                     <td class="col-2">{{ student.teacher_id }}</td>
-                                    <td class="col-2 d-flex justify-content-between">
+                                    <td class="col-2 d-flex justify-content-around">
                                         <router-link :to="{ name: 'EditStudent', params: { id: student.id } }">
                                             <button type="submit" class="editButton btn btn-primary">Editar</button>
                                         </router-link>
@@ -75,14 +75,9 @@
                                         <div class="col-12 d-flex justify-content-end">
                                             <button label="Search" icon="pi pi-search" :loading="loading" @click="load">Crear</button>
                                         </div>
-                                        
-                                    </form>
-                                
-                                </div>
-                                <form @submit.prevent="submitFormStore">
-                                    <div class="col-4 imgBox">
+                                        <div class="col-4 imgBox">
                                         <div class="mb-3">
-                                            <DropZone v-model="thumbnail"/>
+                                            <DropZone v-model="thumbnail" name="thumbnail"/>
                                             <div class="text-danger mt-1">
                                                 <div v-for="message in validationErrors?.thumbnail">
                                                     {{ message }}
@@ -97,7 +92,10 @@
                                             </div>
                                         </div>
                                     </div>
-                                </form>
+                                    </form>
+                                
+                                </div>
+                                    
                             </div>
                         </div>
                     </div>
@@ -120,9 +118,6 @@ import { setLocale } from 'yup';
 import DropZone from "@/components/DropZone.vue";
 import Dialog from "primevue/dialog";
 import usExercises from "@/composables/student";
-import useExercises from "@/composables/exercises";
-// const { exercise: storeExercise} = usExercises();
-const { exercise: exerciseData, getExercise, updateExercise, validationErrors, isLoading, storeExercise } = useExercises()
 
 //Swal
 const swal = inject('$swal');
@@ -208,11 +203,8 @@ const student = reactive({
     email,
     password,
     license_id,
-    teacher_id
-})
-
-const exercise = reactive({
-    thumbnail,
+    teacher_id,
+    thumbnail: ''
 })
 
 
@@ -246,19 +238,6 @@ validate().then(form => {
 })
 
 }
-
-// Cargar Imagen al Crear
-function submitFormStore() {
-    validate().then(form => {
-        if (form.valid) storeExercise(exercise)
-    })
-}
-
-// Cargar Imagen al update
-function submitForm() {
-    validate().then(form => { if (form.valid) updateExercise(exercise) })
-}
-
 
 // Delete the user
 function deleteStudent($id) {

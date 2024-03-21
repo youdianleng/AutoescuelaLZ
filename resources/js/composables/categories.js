@@ -44,7 +44,7 @@ export default function useCategories() {
 
         isLoading.value = true
         validationErrors.value = {}
-
+        
         axios.post('/api/categories', category)
             .then(response => {
                 router.push({name: 'categories.index'})
@@ -52,11 +52,13 @@ export default function useCategories() {
                     icon: 'success',
                     title: 'Category saved successfully'
                 })
+                return "hola";
             })
             .catch(error => {
                 if (error.response?.data) {
                     validationErrors.value = error.response.data.errors
                 }
+                return "adios";
             })
             .finally(() => isLoading.value = false)
     }

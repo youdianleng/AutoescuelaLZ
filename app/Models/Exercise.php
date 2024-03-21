@@ -24,11 +24,6 @@ class Exercise extends Model implements HasMedia
     /**
      * Get the category that owns the post.
      */
-    public function categories()
-    {
-        return $this->belongsToMany(Category::class, 'category_exercise');
-    }
-
     public function registerMediaCollections(): void
     {
         $this->addMediaCollection('images/exercises')
