@@ -95,6 +95,14 @@ export default [
                 meta: { breadCrumb: 'createTest'},
                 beforeEnter: requireLogin,
 
+            },
+            {
+                name: 'Test',
+                path: 'Test',
+                component: () => import('../views/test/index.vue'),
+                meta: { breadCrumb: 'Test'},
+                beforeEnter: requireLogin,
+
             }
         ]
     },
