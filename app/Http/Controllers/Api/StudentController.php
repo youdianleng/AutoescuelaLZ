@@ -13,10 +13,8 @@ class StudentController extends Controller
 {
     public function index()
     {
-
-        $students = Student::with('teachers')->get();
-        // $tasks = User::withRole()->get();
-         return $students;
+        $students = Student::with('teachers')->with("media")->get();
+        return StudentResource::collection($students);
     }
 
     public function license()
@@ -37,7 +35,7 @@ class StudentController extends Controller
 
     public function store(Request $request)
     {
-        return $request;
+
         $request->validate([
             'name' => 'required|max:10',
             'surname' => 'required',
@@ -45,10 +43,9 @@ class StudentController extends Controller
             'teacher_id' => 'required',
             'email' => 'required|email',
             'address',
-            'image',
             'license_id' => 'required',
+            'thumbnail',
         ]);
-
         // Comprobar si el email de estudiante esta creado o no
         $comprobarExistencia = Student::where('email', $request["email"])->get();
         
@@ -63,9 +60,7 @@ class StudentController extends Controller
 
             if ($request->hasFile('thumbnail')) {
                 $tarea->addMediaFromRequest('thumbnail')->preservingOriginal()->toMediaCollection('images-exercises');
-                return "Success";
             }else{
-                return $request;
             }
 
             $tarea->teachers()->attach($teacher_id);

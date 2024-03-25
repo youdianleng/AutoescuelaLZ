@@ -1,15 +1,15 @@
 <template>
     <div class="card">
         <div class="d-flex justify-content-end col-12">
-            <div class="col-4">
-                <button class="btn btn-secondary col-5 border">Añadir pregunta</button>
+            <div class="d-flex justify-content-end col-6">
+                <div class="col-4">
+                    <button class="btn btn-secondary col-11 border">Añadir pregunta</button>
+                </div>
+                <div class="col-4">
+                    <button class="btn btn-secondary col-11 border">Consultar los tests</button>
+                </div>
             </div>
-            <div class="col-4">
-                <button class="btn btn-secondary col-5 border">Consultar preguntas</button>
-            </div>
-            <div class="col-4">
-                <button class="btn btn-secondary col-5 border">Consultar los tests</button>
-            </div>
+                
         </div>
 
 

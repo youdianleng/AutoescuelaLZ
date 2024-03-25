@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string("password")->nullable();
             $table->string("email")->nullable();
             $table->string("address")->nullable();
-            $table->string("image")->nullable();
             $table->unsignedBigInteger('teacher_id')->nullable();
             $table->unsignedBigInteger("license_id")->nullable();
             $table->foreign('teacher_id')->references('id')->on('teachers')->onDelete('cascade');

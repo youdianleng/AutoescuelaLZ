@@ -147,7 +147,7 @@ function saveTask() {
     validate().then(form => {
         console.log('validate');
         if (form.valid) {
-            axios.put('/api/student/update/'+route.params.id, student)
+            axios.post('/api/student/update/'+route.params.id, student)
                 .then(response => {
                     strError.value = ""
                     strSuccess.value = response.data.success

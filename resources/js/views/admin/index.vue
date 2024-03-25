@@ -20,7 +20,7 @@
                
             </div>
 
-            <div v-if="role === 'teacher'">
+            <div v-if="role === 'teacher'" class="col-12 row justify-content-center">
                 <!-- <div class="card col-11 d-flex">
                     <div class="col-12 justify-content-center">
                         <h3 class="col-12 d-flex justify-content-center">Preguntas Creados</h3>
@@ -89,8 +89,8 @@ import axios from 'axios';
 import { useStore } from 'vuex';
 // import useUsers from "../../composables/users";
 // const {users, getUsers, deleteUser} = useUsers()
-
 // Get all the student we have in bbdd
+
 const students = ref();
 const store = useStore();
 const user = computed(() => store.state.auth.user)

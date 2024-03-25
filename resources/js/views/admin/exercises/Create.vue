@@ -114,14 +114,16 @@ const dropZoneActive = ref(true)
 const schema = {
     title: 'required|min:5',
     content: 'required|min:50',
-    categories: 'required'
 }
 const {validate, errors} = useForm({validationSchema: schema})
 const {value: title} = useField('title', null, {initialValue: ''});
 const {value: content} = useField('content', null, {initialValue: ''});
 const {value: categories} = useField('categories', null, {initialValue: '', label: 'category'});
+
+
 const {categoryList, getCategoryList} = useCategories()
 const {storeExercise, validationErrors, isLoading} = useExercises()
+
 const exercise = reactive({
     title,
     content,

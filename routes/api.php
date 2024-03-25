@@ -48,7 +48,7 @@ Route::get('license', [StudentController::class, 'license']);
 Route::get('teacher', [StudentController::class, 'teacher']);
 Route::post('student/create', [StudentController::class, 'store']);
 Route::get('student/{id}', [StudentController::class, 'findStudent']);
-Route::put('student/update/{id}', [StudentController::class, 'update']);
+Route::post('student/update/{id}', [StudentController::class, 'update']);
 Route::delete('student/{id}', [StudentController::class, 'destroy']);
 
 

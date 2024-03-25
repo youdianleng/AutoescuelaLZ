@@ -24,7 +24,7 @@
                                 </tr>
                                 <tr v-for="student in students" class="col-12 d-flex justify-content-around">
                                     <td class="col-2">{{ student.name }}  {{ student.surname }}</td>
-                                    <td class="col-2">{{ student.email }}</td>
+                                    <td class="col-2"><img :src="`${students.original_data}`"></td>
                                     <td class="col-2">{{ student.password }}</td>
                                     <td class="col-2" v-if="student.license_id === 1">Coche</td>
                                     <td class="col-2" v-else="student.license_id === 2">Moto</td>
@@ -33,7 +33,7 @@
                                         <router-link :to="{ name: 'EditStudent', params: { id: student.id } }">
                                             <button type="submit" class="editButton btn btn-primary">Editar</button>
                                         </router-link>
-                                        <button @click.prevent="deleteStudent(student.id)" class="editButton btn btn-primary">Eliminar</button>
+                                        <button @click.prevent="deleteSubmit(student.id)" class="editButton btn btn-primary">Eliminar</button>
                                     </td>
                                 </tr>
                             </tbody>
@@ -44,58 +44,57 @@
             </div>
         </div>
     </div>
-
     <Dialog v-model:visible="visible" modal header="Edit Profile" :style="{ width: '90%' }">
         <div  class="col-12 d-flex justify-content-center">
             <div class="row col-11">
                 <div class="card col-12 ">
                     <div class="formularioCrearStudent">
                         <div class="contenidoStudent">
-                            
-                            <div class="d-flex">
-                                <div class="col-8">
+                            <div class="d-flex col-12">
+                                <div class="col-12">
+                                    {{ student }}
                                     <h2 class="ps-2">Nuevas Estudiantes</h2>   
-                                    <form @submit.prevent="createStudent" class="col-12 row">
-                                        <input placeholder="Nombre" v-model="student.name" name="name" required>
-                                        {{ errors.name }}
-                                        {{ name }}
-                                        <input class="mt-4" name="surname" v-model="student.surname" placeholder="Apellido">
-                                        <input type="mail" name="email" v-model="student.email" class="mt-4" placeholder="Email" required>
-                                        {{ errors.email }}
-                                        <input class="mt-4" name="password" v-model="student.password" placeholder="Contraseña" required>
-                                        {{ errors.password }}
-                                        <select class="mt-4" name="license_id" v-model="student.license_id" required>
-                                            <option v-for="license in licenses" :value="license.id">{{ license.type }}</option>
-                                        </select>
-                                        {{ errors.licencia_id }}
-                                        <select class="mt-4" name="teacher_id" v-model="student.teacher_id" required>
-                                            <option v-for="teacher in teachers" :value="teacher.id">{{ teacher.name }}</option>
-                                        </select>
-                                        {{ errors.teacher_id }}
-                                        <div class="col-12 d-flex justify-content-end">
-                                            <button label="Search" icon="pi pi-search" :loading="loading" @click="load">Crear</button>
+                                    <form @submit.prevent="submitStudent" class="col-12 d-flex">
+                                        <div class="col-8 row">
+                                            <input placeholder="Nombre" v-model="student.name" name="name" required>
+                                            {{ errors.name }}
+                                            {{ name }}
+                                            <input class="mt-4" name="surname" v-model="student.surname" placeholder="Apellido">
+                                            <input type="mail" name="email" v-model="student.email" class="mt-4" placeholder="Email" required>
+                                            {{ errors.email }}
+                                            <input class="mt-4" name="password" v-model="student.password" placeholder="Contraseña" required>
+                                            {{ errors.password }}
+                                            <select class="mt-4" name="license_id" v-model="student.license_id" required>
+                                                <option v-for="license in licenses" :value="license.id">{{ license.type }}</option>
+                                            </select>
+                                            {{ errors.licencia_id }}
+                                            <select class="mt-4" name="teacher_id" v-model="student.teacher_id" required>
+                                                <option v-for="teacher in teachers" :value="teacher.id">{{ teacher.name }}</option>
+                                            </select>
+                                            {{ errors.teacher_id }}
+                                            <div class="col-12 d-flex justify-content-end">
+                                                <button label="Search" icon="pi pi-search" class="btn btn-primary mt-3" :loading="loading" @click="load">Crear</button>
+                                            </div>
                                         </div>
-                                        <div class="col-4 imgBox">
-                                        <div class="mb-3">
-                                            <DropZone v-model="thumbnail" name="thumbnail"/>
-                                            <div class="text-danger mt-1">
-                                                <div v-for="message in validationErrors?.thumbnail">
-                                                    {{ message }}
+                                        <div class="col-4 imgBox justify-content-end ms-5">
+                                            <div class="mb-3">
+                                                <DropZone v-model="student.thumbnail" name="thumbnail"/>
+                                                <!-- <div class="text-danger mt-1">
+                                                    <div v-for="message in validationErrors?.thumbnail">
+                                                        {{ message }}
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="mt-3 text-center">
-                                                <button :disabled="isLoading" class="btn btn btn-primary me-2 w-100">
-                                                    <div v-show="isLoading" class=""></div>
-                                                    <span v-if="isLoading">Processing...</span>
-                                                    <span v-else>Guardar</span>
-                                                </button>
+                                                <div class="mt-3 text-center">
+                                                    <button :disabled="isLoading" class="btn btn btn-primary me-2 w-100">
+                                                        <div v-show="isLoading" class=""></div>
+                                                        <span v-if="isLoading">Processing...</span>
+                                                        <span v-else>Guardar</span>
+                                                    </button>
+                                                </div> -->
                                             </div>
                                         </div>
-                                    </div>
                                     </form>
-                                
                                 </div>
-                                    
                             </div>
                         </div>
                     </div>
@@ -113,57 +112,31 @@ import { ref, onMounted, reactive, inject } from "vue";
 import { useForm, useField } from "vee-validate";
 import { useRoute } from "vue-router";
 import * as yup from 'yup';
-import { es } from 'yup-locales';
-import { setLocale } from 'yup';
 import DropZone from "@/components/DropZone.vue";
 import Dialog from "primevue/dialog";
-import usExercises from "@/composables/student";
-
-//Swal
-const swal = inject('$swal');
-
-
-// Get all the student we have in bbdd
-const students = ref();
-const licenses = ref();
-const teachers = ref();
+import useStudent from "@/composables/student";
+import useOnMount from "@/composables/common";
+const { getStudents, students, getTeachers, getLicense, teachers, licenses } = useOnMount();
+const { createStudent, deleteStudent} = useStudent();
+// 
 
 onMounted(() => {
-
-    // getUsers();
-    axios.get('/api/student')
-        .then(response => {
-            students.value = response.data;
-
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
+   getStudents();
+   getTeachers();
+   getLicense();
+   
 })
 
-onMounted(() => {
-// getLicencia();
-axios.get('/api/license')
-    .then(response => {
-        licenses.value = response.data;
-
+function submitStudent(){
+    
+    validate().then(form => {
+        if (form.valid) createStudent(student);
     })
-    .catch(function (error) {
-        console.log(error);
-    });
-})
+}
 
-onMounted(() => {
-// getTeacher();
-axios.get('/api/teacher')
-    .then(response => {
-        teachers.value = response.data;
-
-    })
-    .catch(function (error) {
-        console.log(error);
-    });
-})
+function deleteSubmit(id){
+    deleteStudent(id);
+}
 
 // asigment of the required validation fields
 const schema = yup.object({
@@ -178,91 +151,25 @@ const schema = yup.object({
 const { validate, errors } = useForm({ validationSchema: schema })
 const route = useRoute()
 
-// Set the Success and Error message
-const strSuccess = ref();
-const strError = ref();
-
-setLocale(es);
-
-
 // Get the value from the form Inputs
 const { value: name } = useField('name', null, { initialValue: '' });
 const { value: surname } = useField('surname', null, { initialValue: '' });
-const { value: image } = useField('image', null, { initialValue: '' });
 const { value: email } = useField('email', null, { initialValue: '' });
 const { value: password } = useField('password', null, { initialValue: '' });
 const { value: license_id } = useField('license_id', null, { initialValue: '' });
 const { value: teacher_id } = useField('teacher_id', null, { initialValue: '' });
-const { value: thumbnail } = useField('thumbnail', null, { initialValue: '' });
+const { value: thumbnail } = useField('thumbnail',null, { initialValue: '' });
 
 // Create an array with all the value send by form
 const student = reactive({
     name,
     surname,
-    image,
     email,
     password,
     license_id,
     teacher_id,
     thumbnail: ''
 })
-
-
-// Send to create one Student calling the function we defined in API
-function createStudent() {
-// if validate 
-validate().then(form => {
-    console.log('validate');
-    //If the content of the form is validate
-    if (form.valid) {
-        // Call the funtion with all the content we saved (Sending as $request)
-        axios.post('/api/student/create', student)
-            .then(response => {
-                strError.value = ""
-                strSuccess.value = response.data.success
-                swal({
-                    icon: "success",
-                    title: "Usuario creado con exito"
-                })
-            })
-            .catch(function (error) {
-                strSuccess.value = ""
-                strError.value = error.response.data.message
-                swal({
-                    icon: "error",
-                    title: "Correo ya registrado"
-                })
-
-            });
-    }
-})
-
-}
-
-// Delete the user
-function deleteStudent($id) {
-    axios.delete('/api/student/' + $id)
-        .then(response => {
-            strError.value = ""
-            strSuccess.value = response.data.success
-            swal({
-                icon: "success",
-                title: "Usuario ha sido eliminidado"
-            })
-            location.reload(); 
-        })
-        .catch(function (error) {
-            strSuccess.value = ""
-            strError.value = error.response.data.message
-            swal({
-                icon: "error",
-                title: "No ha podido eliminar el usuario"
-            })
-        });
-}
-
-
-
 
 
 // Diseño Prime Vues

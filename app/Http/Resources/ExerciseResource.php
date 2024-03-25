@@ -35,6 +35,7 @@ class ExerciseResource extends JsonResource
             'resized_image' => $resized_image,
             'created_at' => $this->created_at?->toDateString()
         ];
+        
         return parent::toArray($request);
     }
 }

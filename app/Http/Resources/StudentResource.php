@@ -30,11 +30,16 @@ class StudentResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'surname' => $this->surname,
+            'password' => $this->password,
             'email' => $this->email,
+            'address' => $this->address,
+            'teacher_id' => $this->teacher_id,
+            'license_id' => $this->license_id,
             'original_image' => count($this->getMedia('*')) > 0 ? $this->getMedia('*')[0]->getUrl() : null,
             'resized_image' => $resized_image,
             'created_at' => $this->created_at?->toDateString()
         ];
+        
         return parent::toArray($request);
     }
 }

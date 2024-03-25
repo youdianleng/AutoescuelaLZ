@@ -78,7 +78,7 @@ export default [
                 name: 'crearTask',
                 path: 'createTasks',
                 component: () => import('../views/task/create.vue'),
-                meta: { breadCrumb: 'techer'}
+                meta: { breadCrumb: 'teacher'}
             },
             {
                 name: 'CreateTest',
@@ -91,7 +91,7 @@ export default [
             {
                 name: 'EditExample',
                 path: 'EditExample',
-                component: () => import('../views/admin/exercises/Edit.vue'),
+                component: () => import('../views/admin/exercises/Create.vue'),
                 meta: { breadCrumb: 'createTest'},
                 beforeEnter: requireLogin,
 

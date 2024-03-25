@@ -2,54 +2,72 @@
 import { ref, inject } from 'vue'
 import { useRouter } from 'vue-router'
 
-export default function usExercises() {
-        const exercises = ref({})
-
-
-        const exercise = ref({
-            // title: '',
-            // content: '',
-            // category_id: '',
-            thumbnail: ''
-        })
-
-        const router = useRouter()
-        const validationErrors = ref({})
-        const isLoading = ref(false)
-        const swal = inject('$swal')
-
-
-    const storeExercise = async (exercise) => {
-        if (isLoading.value) return;
-
-        isLoading.value = true
-        validationErrors.value = {}
-
-        let serializedExercise = new FormData()
-        for (let item in exercise) {
-            if (exercise.hasOwnProperty(item)) {
-                serializedExercise.append(item, exercise[item])
+export default function useStudent() {
+    //Swal
+    const swal = inject('$swal');
+    // Set the Success and Error message
+    const strSuccess = ref();
+    const strError = ref();
+    // Create an array with all the value send by form
+    const createStudent = async(student) =>{
+        strSuccess.value = {};
+        strError.value = {};
+        let serializedPost = new FormData()
+        for (let item in student) {
+            if (student.hasOwnProperty(item)) {
+                serializedPost.append(item, student[item])
             }
         }
-
-        //Watch there
-        axios.post('/api/exercises', serializedExercise, {
+        // Call the funtion with all the content we saved (Sending as $request)
+        axios.post('/api/student/create', serializedPost, {
             headers: {
                 "content-type": "multipart/form-data"
             }
         })
             .then(response => {
-                router.push({ name: 'exercises.index' })
+                strError.value = ""
+                strSuccess.value = response.data.success
                 swal({
-                    icon: 'success',
-                    title: 'Exercise saved successfully'
+                    icon: "success",
+                    title: "Usuario creado con exito"
                 })
             })
-            .catch(error => {
+            .catch(function (error) {
+                strSuccess.value = ""
                 if (error.response?.data) {
-                    validationErrors.value = error.response.data.errors
+                   strError.value = error.response.data.errors
                 }
+                swal({
+                    icon: "error",
+                    title: "Correo ya registrado"
+                })
+
+            });
+    }
+
+    const deleteStudent = async($id) =>{
+        axios.delete('/api/student/' + $id)
+        .then(response => {
+            strError.value = ""
+            strSuccess.value = response.data.success
+            swal({
+                icon: "success",
+                title: "Usuario ha sido eliminidado"
             })
-            .finally(() => isLoading.value = false)
+            location.reload(); 
+        })
+        .catch(function (error) {
+            strSuccess.value = ""
+            strError.value = error.response.data.message
+            swal({
+                icon: "error",
+                title: "No ha podido eliminar el usuario"
+            })
+        });
+    }
+
+    return{
+        createStudent,
+        deleteStudent
     }
 }

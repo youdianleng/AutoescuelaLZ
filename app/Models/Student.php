@@ -19,8 +19,7 @@ class Student extends Model implements HasMedia
         "teacher_id",
         "license_id",
         "email",
-        'address',
-        'image'
+        'address'
     ];
 
     public function teachers()
@@ -35,7 +34,7 @@ class Student extends Model implements HasMedia
 
     public function registerMediaCollections(): void
     {
-        $this->addMediaCollection('images/exercises')
+        $this->addMediaCollection('images/students')
             ->useFallbackUrl('/images/placeholder.jpg')
             ->useFallbackPath(public_path('/images/placeholder.jpg'));
     }
