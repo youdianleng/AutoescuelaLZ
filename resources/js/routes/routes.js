@@ -109,6 +109,16 @@ export default [
                 path: 'createCategoryExample',
                 component: () => import('../views/admin/categories/Create.vue'),
                 meta: { breadCrumb: 'createTest'},
+            },
+            {
+                name: 'SelectLevel',
+                path: 'selectLevel',
+                component: () => import('../views/teacher/test/selectLevel.vue'),
+            },
+            {
+                name: 'facilTests',
+                path: 'facilTests',
+                component: () => import('../views/teacher/test/facilTest.vue'),
             }
         ]
     },
@@ -128,6 +138,7 @@ export default [
                 component: () => import('../views/teacher/create.vue'),
                 //meta: { breadCrumb: 'Student' }
             },
+            
         ]
     },
     {

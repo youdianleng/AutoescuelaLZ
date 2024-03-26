@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('tests', function (Blueprint $table) {
             $table->id();
-            $table->integer("question_id");
             $table->integer('errors');
         });
     }

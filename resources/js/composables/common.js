@@ -17,6 +17,18 @@ export default function useOnMount() {
         });
     }
 
+
+    const getSpecificStudents = async() =>{
+        // getUsers();
+       axios.get('/api/student' + )
+       .then(response => {
+           students.value = response.data.data;
+       })
+       .catch(function (error) {
+           console.log(error);
+       });
+   }
+
     const getTeachers = async() =>{
         // getUsers();
         axios.get('/api/teacher')
