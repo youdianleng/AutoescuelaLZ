@@ -38,4 +38,18 @@ class TestController extends Controller
 
     public function destroy(Test $test) {
     }
+
+
+    public function facil() {
+        $tests = Test::where('level', "Baja")->get();
+        return response()->json($tests);
+    }
+    public function normal() {
+        $tests = Test::where('level', "normal")->get();
+        return response()->json($tests);
+    }
+    public function dificil() {
+        $tests = Test::where('level', "dificil")->get();
+        return response()->json($tests);
+    }
 }

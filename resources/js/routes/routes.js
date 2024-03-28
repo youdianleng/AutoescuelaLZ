@@ -97,14 +97,6 @@ export default [
 
             },
             {
-                name: 'Test',
-                path: 'Test',
-                component: () => import('../views/test/index.vue'),
-                meta: { breadCrumb: 'Test'},
-                beforeEnter: requireLogin,
-
-            },
-            {
                 name: 'EditExamples',
                 path: 'createCategoryExample',
                 component: () => import('../views/admin/categories/Create.vue'),
@@ -112,14 +104,21 @@ export default [
             },
             {
                 name: 'SelectLevel',
-                path: 'selectLevel',
+                path: 'selectLevel/:id',
                 component: () => import('../views/teacher/test/selectLevel.vue'),
+                beforeEnter: requireLogin,
             },
             {
                 name: 'facilTests',
-                path: 'facilTests',
+                path: 'facilTests/:id',
                 component: () => import('../views/teacher/test/facilTest.vue'),
-            }
+            },
+            {
+                name: 'Test',
+                path: 'Test/:id',
+                component: () => import('../views/test/index.vue'),
+
+            },
         ]
     },
 

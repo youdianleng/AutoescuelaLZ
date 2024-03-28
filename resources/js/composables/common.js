@@ -18,11 +18,12 @@ export default function useOnMount() {
     }
 
 
-    const getSpecificStudents = async() =>{
+    const getSpecificStudents = async(id) =>{
         // getUsers();
-       axios.get('/api/student' + )
+       axios.get('/api/student/' + id )
        .then(response => {
            students.value = response.data.data;
+
        })
        .catch(function (error) {
            console.log(error);
@@ -60,6 +61,7 @@ export default function useOnMount() {
         students,
         getStudents,
         getTeachers,
-        getLicense
+        getLicense,
+        getSpecificStudents
     }
 }

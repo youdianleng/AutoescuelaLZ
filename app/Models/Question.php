@@ -13,6 +13,7 @@ class Question extends Model
         'question',
         'difficulty',
         'carnet',
+        'test_id'
     ];
 
     public function test() {

@@ -24,8 +24,8 @@
                 Preguntas test
                 </button>
             </router-link>
-            <router-link to="Test">
-                <button  v-if="role === 'teacher' || role === 'student'" class="p-link layout-topbar-button layout-topbar-button-c">
+            <router-link v-if="role === 'student'" :to="{ name: 'SelectLevel', params: { id: user.user_id } }">
+                <button   class="p-link layout-topbar-button layout-topbar-button-c">
                 Test
                 </button>
             </router-link>

@@ -5,7 +5,7 @@
             <div class="d-flex justify-content-between col-12">
                 <div class="col-4 card padding30">
        
-                    <h3>{{  }}</h3>
+                    <h3>{{ students.name }}</h3>
                     <div class="col-12">
                         <h4 class="mt-2">Has realizado: Test Facil</h4>
                         <h4 class="mt-3">Has realizado: Test Normal</h4>
@@ -15,17 +15,18 @@
                 <div class="col-7 card padding30">
                     <h3>Selecciona el nivel de Test</h3>
                     <div class="d-flex col-12 justify-content-around">
-                        <div class="card col-3 padding60 text-center facil">
-                            <h4>Facil</h4>
-                        </div>
-
-                        <div class="card col-3 padding60 text-center normal">
-                            <h4>Normal</h4>
-                        </div>
-
-                        <div class="card col-3 padding60 text-center dificil">
-                            <h4>Dificil</h4>
-                        </div>
+                        <router-link class="card col-3 padding60 text-center facil" :to="{ name: 'facilTests', params: { id: route.params.user_id } }">
+                                <h4>Facil</h4>
+                        </router-link>
+                        
+                        <router-link class="card col-3 padding60 text-center normal" to="normalTest">
+                                <h4>Normal</h4>
+                        </router-link>
+                        
+                        <router-link class="card col-3 padding60 text-center dificil" to="dificilTest">
+                             <h4>Dificil</h4>
+                        </router-link>
+                        
                     </div>
                 </div>
             </div>
@@ -40,11 +41,15 @@ import { useRoute } from "vue-router";
 import * as yup from 'yup';
 import axios from 'axios';
 import useOnMount from '@/composables/common';
-const { getStudents} = useOnMount();
+const { getSpecificStudents, students} = useOnMount();
+const route = useRoute()
+
+
 
 
 onMounted(() => {
-   getStudents();
+
+    getSpecificStudents(route.params.id);
    
 })
 

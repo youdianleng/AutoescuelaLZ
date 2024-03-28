@@ -56,6 +56,10 @@
                             name="carnet"
                             placeholder="Tipo Carnet" checkmark :highlightOnSelect="false"
                             class="w-full md:w-14rem" required/>
+
+                            <select name="test">
+                                <option v-for="tes in test">{{ tes.id }}</option>
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -68,7 +72,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, reactive } from "vue";
+import { ref, onMounted, reactive, computed } from "vue";
 import { useForm, useField } from "vee-validate"; 
 import { useRoute } from "vue-router";
 import * as yup from 'yup';
@@ -115,6 +119,8 @@ const { value: difficulty } = useField('difficulty', null, { initialValue: '' })
 const { value: is_correct } = useField('is_correct', null, { initialValue: '' });
 const { value: carnet } = useField('carnet', null, { initialValue: '' });
 const { value: respuestas } = useField('respuesta', null, { initialValue: [{},{},{}] });
+const { value: test } = useField('test', null, { initialValue: '' });
+
 
 const Questiones = reactive({
     carnet,
@@ -122,7 +128,8 @@ const Questiones = reactive({
     difficulty,
     respuestas,
     carnet,
-    is_correct
+    is_correct,
+    test
 })
 
 
@@ -131,9 +138,20 @@ const strError = ref();
 const questions = ref();
 
 onMounted(() => {
-    axios.get('/api/tests')
+    axios.get('/api/question')
         .then(response => {
             questions.value = response.data;
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+})
+
+
+onMounted(() => {
+    axios.get('/api/test')
+        .then(response => {
+            test.value = response.data;
         })
         .catch(function (error) {
             console.log(error);

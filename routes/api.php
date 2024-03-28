@@ -20,17 +20,14 @@ use App\Http\Controllers\Api\QuestionController;
 use App\Models\Question;
 
 // Preguntas
-Route::get('tests', [QuestionController::class, 'index']);
+Route::get('question', [QuestionController::class, 'index']);
 Route::post('question', [QuestionController::class, 'store']);
 
 //Optiones
 Route::post('option', [OptionController::class, 'store']);
 
 
-Route::put('tests/update/{id}', [TestController::class, 'update']);
-Route::delete('tests/{id}', [TestController::class, 'destroy']);
-Route::get('tests/{tests}', [TestController::class,'show']);
-
+//Example 
 Route::get('tasks', [TaskController::class, 'index']);
 Route::post('tasks/', [TaskController::class, 'store']);
 Route::put('tasks/update/{id}', [TaskController::class, 'update']);
@@ -53,15 +50,21 @@ Route::delete('student/{id}', [StudentController::class, 'destroy']);
 
 
 
-
-
-
-
-
-
-
-
 // Funciones para Teachers
+
+
+
+
+//Funciones para Test
+Route::get('test', [TestController::class, 'index']);
+Route::put('tests/update/{id}', [TestController::class, 'update']);
+Route::delete('tests/{id}', [TestController::class, 'destroy']);
+Route::get('tests/{tests}', [TestController::class,'show']);
+Route::get('facilTest', [TestController::class, 'facil']);
+Route::get('normalTest', [TestController::class, 'normal']);
+Route::get('dificilTest', [TestController::class, 'dificil']);
+
+
 
 Route::group(['middleware' => 'auth:sanctum'], function() {
     Route::apiResource('users', UserController::class);

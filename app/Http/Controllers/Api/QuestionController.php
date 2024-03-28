@@ -25,17 +25,20 @@ class QuestionController extends Controller
             'question'  => 'required',
             'difficulty.name' => 'required', // Validar que 'difficulty.name' esté presente en la solicitud
             'carnet.name' => 'required',
+            'test' => 'required'
         ]);
         
     
         // Obtener el nombre de la dificultad del request
         $difficultyName = $request->input('difficulty.name');
         $carnetName = $request->input('carnet.name');
+        $test = $request->input('test');
         // Crear la pregunta utilizando los datos del request
         $test = Question::create([
             'question' => $request->input('question'),
             'difficulty' => $difficultyName, // Asignar el nombre de la dificultad
             'carnet' => $carnetName,
+            'test_id' => $test,
         ]);
 
         //$test->options()->delete();
