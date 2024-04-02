@@ -22,6 +22,8 @@ use App\Models\Question;
 // Preguntas
 Route::get('question', [QuestionController::class, 'index']);
 Route::post('question', [QuestionController::class, 'store']);
+Route::get('question/{level}', [QuestionController::class, 'difficultyQuestions']);
+
 
 //Optiones
 Route::post('option', [OptionController::class, 'store']);

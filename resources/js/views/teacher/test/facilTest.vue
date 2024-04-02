@@ -9,7 +9,7 @@
                         <img src="/images/assets/images.png" class="card-img-top" alt="...">
                         <div class="card-body">
                             <p class="card-text">Test 1</p>
-                            <router-link :to="{ name: 'Test' , params: { id: tes.level }}" class="btn btn-primary col-12">Realizar</router-link>
+                            <router-link :to="{ name: 'Test' , params: { level: tes.level }}" class="btn btn-primary col-12">Realizar</router-link>
                         </div>
                     </div>
                 </div>

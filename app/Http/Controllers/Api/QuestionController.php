@@ -56,4 +56,16 @@ class QuestionController extends Controller
 
     }
 
+    public function difficultyQuestions($Difficulty){
+        $Questions = Question::with('options')->where('difficulty', $Difficulty)->get();
+        
+        return response()->json($Questions);
+    }
+
+    public function especificQuestions($idQuestion){
+        $Questions = Question::where('difficulty', $idQuestion)->get();
+        
+        return response()->json($Questions);
+    }
+
 }
