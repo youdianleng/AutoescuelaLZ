@@ -20,25 +20,24 @@ class QuestionController extends Controller
     // }
 
     public function store(Request $request)
-    {
+    {   
         $request->validate([
             'question'  => 'required',
             'difficulty.name' => 'required', // Validar que 'difficulty.name' esté presente en la solicitud
             'carnet.name' => 'required',
             'test' => 'required'
         ]);
-        
     
         // Obtener el nombre de la dificultad del request
         $difficultyName = $request->input('difficulty.name');
         $carnetName = $request->input('carnet.name');
-        $test = $request->input('test');
+        $test_id = $request->input('test');
         // Crear la pregunta utilizando los datos del request
         $test = Question::create([
             'question' => $request->input('question'),
             'difficulty' => $difficultyName, // Asignar el nombre de la dificultad
             'carnet' => $carnetName,
-            'test_id' => $test,
+            'test_id' => $test_id,
         ]);
 
         //$test->options()->delete();
@@ -56,8 +55,8 @@ class QuestionController extends Controller
 
     }
 
-    public function difficultyQuestions($Difficulty){
-        $Questions = Question::with('options')->where('difficulty', $Difficulty)->get();
+    public function difficultyQuestions($Difficulty,$id){
+        $Questions = Question::with('options')->where('difficulty', $Difficulty)->where('test_id',$id)->get();
         
         return response()->json($Questions);
     }
@@ -67,5 +66,7 @@ class QuestionController extends Controller
         
         return response()->json($Questions);
     }
+
+    
 
 }

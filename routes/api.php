@@ -22,7 +22,7 @@ use App\Models\Question;
 // Preguntas
 Route::get('question', [QuestionController::class, 'index']);
 Route::post('question', [QuestionController::class, 'store']);
-Route::get('question/{level}', [QuestionController::class, 'difficultyQuestions']);
+Route::get('question/{level}/{id}', [QuestionController::class, 'difficultyQuestions']);
 
 
 //Optiones
@@ -51,12 +51,6 @@ Route::post('student/update/{id}', [StudentController::class, 'update']);
 Route::delete('student/{id}', [StudentController::class, 'destroy']);
 
 
-
-// Funciones para Teachers
-
-
-
-
 //Funciones para Test
 Route::get('test', [TestController::class, 'index']);
 Route::put('tests/update/{id}', [TestController::class, 'update']);
@@ -65,7 +59,10 @@ Route::get('tests/{tests}', [TestController::class,'show']);
 Route::get('facilTest', [TestController::class, 'facil']);
 Route::get('normalTest', [TestController::class, 'normal']);
 Route::get('dificilTest', [TestController::class, 'dificil']);
-
+Route::post('test/finalizar/{user_id}/{id}/{passed}', [TestController::class, 'storeTest']);
+Route::post('test/sendActualQuestion/{user_id}/{id}/{question}/{is_correct}', [TestController::class, 'storeTestQuestion']);
+Route::delete('test/exist/{user_id}/{id}', [TestController::class, 'existUserTest']);
+Route::delete('test/existTestQuestion/{user_id}', [TestController::class, 'existUserTestQuestion']);
 
 
 Route::group(['middleware' => 'auth:sanctum'], function() {

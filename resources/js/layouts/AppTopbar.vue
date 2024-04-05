@@ -97,7 +97,6 @@ a{
 }
 
 .navbar{
-    height: 70px;
     width: 100%;
 }
 
@@ -106,7 +105,8 @@ a{
 }
 
 .container{
-    margin: 0px;
+    display: flex;
+    justify-content: space-between;
     padding-left: 28px;
     width: 100%;
 }

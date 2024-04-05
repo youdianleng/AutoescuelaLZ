@@ -24,7 +24,7 @@
                                 </tr>
                                 <tr v-for="student in students" class="col-12 d-flex justify-content-around">
                                     <td class="col-2">{{ student.name }}  {{ student.surname }}</td>
-                                    <td class="col-2"><img :src="`${students.original_data}`"></td>
+                                    <td class="col-2"><img :src="`${student.original_image}`"></td> 
                                     <td class="col-2">{{ student.password }}</td>
                                     <td class="col-2" v-if="student.license_id === 1">Coche</td>
                                     <td class="col-2" v-else="student.license_id === 2">Moto</td>

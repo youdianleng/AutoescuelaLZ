@@ -24,7 +24,7 @@ class Student extends Model implements HasMedia
 
     public function teachers()
     {
-        return $this->belongsToMany(Teacher::class, 'students_teachers');
+        return $this->belongsTo(Teacher::class, 'students_teachers');
     }
 
     public function licenses()

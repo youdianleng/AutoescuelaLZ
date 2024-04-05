@@ -65,7 +65,7 @@ h4{
 }
 
 .padding60{
-    padding: 60px;
+    padding: 40px;
 }
 
 .card{

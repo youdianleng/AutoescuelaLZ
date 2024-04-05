@@ -5,7 +5,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Test;
 use App\Models\Question; 
-
+use App\Models\students_tests;
+use App\Models\student_test_question;
 
 class TestController extends Controller
 {
@@ -51,5 +52,61 @@ class TestController extends Controller
     public function dificil() {
         $tests = Test::where('level', "dificil")->get();
         return response()->json($tests);
+    }
+
+    public function storeTest($user_id, $id, $passed){
+
+
+        $saveTest = students_tests::create(
+            [
+                'student_id' => $user_id,
+                'test_id' => $id,
+                'is_correct' => $passed
+            ]
+        );
+
+
+
+        return response()->json(['success' => true, 'data' => $saveTest]);
+    }
+
+    public function storeTestQuestion($user_id, $id, $question, $is_correct){
+
+
+        $saveTest = student_test_question::create(
+            [
+                'student_id' => $user_id,
+                'test_id' => $id,
+                'question_id' => $question,
+                'is_correct' => $is_correct
+            ]
+        );
+
+
+
+        return response()->json(['success' => true, 'data' => $saveTest]);
+    }
+
+
+    public function existUserTest($user_id, $id){
+
+        $existUser = students_tests::where('student_id', $user_id)->where('test_id',$id)->first();
+        if($existUser){
+            $existUser->delete();
+        }
+
+        return response()->json(['success' => true, 'data' => "Deleted"]);
+
+    }
+
+    public function existUserTestQuestion($user_id){
+
+        $existUserQuestion = student_test_question::where("student_id",$user_id);
+        if($existUserQuestion){
+            $existUserQuestion->delete();
+        }
+
+        return response()->json(['success' => true, 'data' => "Deleted"]);
+
     }
 }

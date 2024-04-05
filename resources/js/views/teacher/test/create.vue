@@ -57,9 +57,10 @@
                             placeholder="Tipo Carnet" checkmark :highlightOnSelect="false"
                             class="w-full md:w-14rem" required/>
 
-                            <select name="test">
+                            <select v-model="Questiones.test">
                                 <option v-for="tes in test">{{ tes.id }}</option>
                             </select>
+                            {{ Questiones.test}}
                         </div>
                     </div>
                 </div>
@@ -119,8 +120,8 @@ const { value: difficulty } = useField('difficulty', null, { initialValue: '' })
 const { value: is_correct } = useField('is_correct', null, { initialValue: '' });
 const { value: carnet } = useField('carnet', null, { initialValue: '' });
 const { value: respuestas } = useField('respuesta', null, { initialValue: [{},{},{}] });
-const { value: test } = useField('test', null, { initialValue: '' });
-
+const { value: test_id } = useField('test_id', null, { initialValue: '' });
+const test = ref();
 
 const Questiones = reactive({
     carnet,
@@ -129,7 +130,7 @@ const Questiones = reactive({
     respuestas,
     carnet,
     is_correct,
-    test
+    test_id
 })
 
 

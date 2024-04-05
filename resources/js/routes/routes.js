@@ -115,7 +115,7 @@ export default [
             },
             {
                 name: 'Test',
-                path: 'Test/:level',
+                path: 'Test/:level/:id',
                 component: () => import('../views/test/index.vue'),
 
             },
