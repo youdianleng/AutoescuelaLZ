@@ -15,4 +15,8 @@ class student_test_question extends Model
         "question_id",
         "is_correct"
     ];
+
+    public function test_question(){
+        return $this->belongsTo(Student::class, 'student_test_questions');
+    }
 }

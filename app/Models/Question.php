@@ -23,4 +23,8 @@ class Question extends Model
     public function options() {
         return $this->hasMany(Option::class);
     }
+
+    public function student_test_questions(){
+        return $this->hasMany(student_test_question::class, 'test_id');
+    }
 }

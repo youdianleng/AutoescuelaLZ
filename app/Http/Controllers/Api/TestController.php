@@ -109,4 +109,12 @@ class TestController extends Controller
         return response()->json(['success' => true, 'data' => "Deleted"]);
 
     }
+
+
+    public function answerTestQuestions($id_test) {
+        $tests = Question::where('test_id', $id_test)->get();
+        return response()->json(['success' => true, 'data' => $tests]);
+    }
+
+    
 }

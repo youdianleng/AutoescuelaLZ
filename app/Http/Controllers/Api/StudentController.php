@@ -9,6 +9,8 @@ use App\Models\Teacher;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Http\Resources\StudentResource;
+use App\Models\student_test_question;
+
 class StudentController extends Controller
 {
     public function index()
@@ -121,13 +123,15 @@ class StudentController extends Controller
     public function findStudent($id, Request $request)
     {
         
-        $student = Student::find($id);
+        $student = Student::find($id)->with("student_test")->get();
         if (!$student) {
             return response()->json(['success' => false, 'message' => 'Estudiante no encontrado'], 404);
         }
 
         return response()->json(['success' => true, 'data' => $student]);
     }
+
+
 
     //Destroy the specific student with the same id we sended
     public function destroy($id, Request $request)
@@ -143,6 +147,12 @@ class StudentController extends Controller
         return response()->json(['success' => true, 'data' => "Deleted"]);
     }
 
+    // Get these test the student make half or part of them
+    public function getPartTestCompleteStudent($user_id, $test_id){
+        $incompleteTest = student_test_question::where('student_id',$user_id)->where('test_id',$test_id)->get();
+
+        return response()->json(['success' => true, 'data' => $incompleteTest]);
+    }
 
     
 }

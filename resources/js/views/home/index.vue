@@ -149,36 +149,12 @@
 
         </section>
 
-
-        <!-- Create form for send message -->
-        <section class="col-12 mt-5">
-            <div class="d-flex justify-content-center position-relative">
-                <img src="/images/assets/images.png" class="col-8">
-                <div class="formlulario">
-                    <h2 class="text-white">Contactar con Nosotros</h2>
-                    <form class="row col-7 mt-3">
-                        <input  class=" mt-5" placeholder="Nombre">
-                        <input  class="mt-5" placeholder="Apelildo">
-                        <input  class="mt-5" placeholder="Email"> 
-                        <textarea  class="mt-5" style="resize: none; height: 200px;"></textarea>
-                        <button  class="col-5 mt-5 btn btn-dark">Envia</button>
-                    </form>
-                </div>
-            </div>
-        </section>
-
-
     </div>
 </template>
 
 
 <style>
 
-.formlulario{
-    position: absolute;
-    top: 3%;
-    left: 50%;
-}
 
 .estudianteDestacada{
     padding: 40px;

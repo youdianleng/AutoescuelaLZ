@@ -32,6 +32,15 @@ class Student extends Model implements HasMedia
         return $this->belongsToMany(License::class, 'students_licenses');
     }
 
+    public function student_test_question(){
+        return $this->hasMany(student_test_question::class, 'student_id');
+    }
+
+    public function student_test(){
+        return $this->hasMany(students_tests::class, 'student_id');
+    }
+
+
     public function registerMediaCollections(): void
     {
         $this->addMediaCollection('images/students')

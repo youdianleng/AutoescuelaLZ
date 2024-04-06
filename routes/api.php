@@ -49,12 +49,16 @@ Route::post('student/create', [StudentController::class, 'store']);
 Route::get('student/{id}', [StudentController::class, 'findStudent']);
 Route::post('student/update/{id}', [StudentController::class, 'update']);
 Route::delete('student/{id}', [StudentController::class, 'destroy']);
+Route::get('student/test/{user_id}/{test_id}',[StudentController::class, 'getPartTestCompleteStudent']);
 
 
 //Funciones para Test
 Route::get('test', [TestController::class, 'index']);
+Route::get('test/{id}', [TestController::class, 'answerTestQuestions']);
+
 Route::put('tests/update/{id}', [TestController::class, 'update']);
 Route::delete('tests/{id}', [TestController::class, 'destroy']);
+
 Route::get('tests/{tests}', [TestController::class,'show']);
 Route::get('facilTest', [TestController::class, 'facil']);
 Route::get('normalTest', [TestController::class, 'normal']);

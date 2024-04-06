@@ -50,50 +50,15 @@
                         <h3></h3>
                    </div>
                    <div class="col-12 d-flex justify-content-end">
-                        <div class="card p-fluid col-6">
-                            <DataTable v-model:editingRows="editingRows" :value="products" editMode="row" dataKey="id" @row-edit-save="onRowEditSave"
-                                :pt="{
-                                    table: { style: 'min-width: 50rem' },
-                                    column: {
-                                        bodycell: ({ state }) => ({
-                                            style:  state['d_editing']&&'padding-top: 0.6rem; padding-bottom: 0.6rem'
-                                        })
-                                    }
-                                }"
-                            >
-                                <Column field="code" header="Code" style="width: 20%">
-                                    <template #editor="{ data, field }">
-                                        <InputText v-model="data[field]" />
-                                    </template>
-                                </Column>
-                                <Column field="name" header="Name" style="width: 20%">
-                                    <template #editor="{ data, field }">
-                                        <InputText v-model="data[field]" />
-                                    </template>
-                                </Column>
-                                <Column field="inventoryStatus" header="Status" style="width: 20%">
-                                    <template #editor="{ data, field }">
-                                        <Dropdown v-model="data[field]" :options="statuses" optionLabel="label" optionValue="value" placeholder="Select a Status">
-                                            <template #option="slotProps">
-                                                <Tag :value="slotProps.option.value" :severity="getStatusLabel(slotProps.option.value)" />
-                                            </template>
-                                        </Dropdown>
-                                    </template>
-                                    <template #body="slotProps">
-                                        <Tag :value="slotProps.data.inventoryStatus" :severity="getStatusLabel(slotProps.data.inventoryStatus)" />
-                                    </template>
-                                </Column>
-                                <Column field="price" header="Price" style="width: 20%">
-                                    <template #body="{ data, field }">
-                                        {{ formatCurrency(data[field]) }}
-                                    </template>
-                                    <template #editor="{ data, field }">
-                                        <InputNumber v-model="data[field]" mode="currency" currency="USD" locale="en-US" />
-                                    </template>
-                                </Column>
-                                <Column :rowEditor="true" style="width: 10%; min-width: 8rem" bodyStyle="text-align:center"></Column>
-                            </DataTable>
-                        </div>
+                    <div class="card col-6">
+                        
+                        <DataTable :value="testRealized" tableStyle="min-width: 50rem">
+                            <Column field="id" header="id"></Column>
+                            <Column field="student_id" header="student_id"></Column>
+                            <Column field="test_id" header="test_id"></Column>
+                            <Column field="is_correct" header="Level"></Column>
+                        </DataTable>
+                    </div>
                         <div ref="main" style="width: 50%; height: 400px"></div>
                    </div>
                    
@@ -116,8 +81,11 @@ import { useStore } from 'vuex';
 import * as echarts from "echarts"; 
 // import useUsers from "../../composables/users";
 // const {users, getUsers, deleteUser} = useUsers()
-// Get all the student we have in bbdd
 
+
+const testRealized = ref();
+
+// Get all the student we have in bbdd
 const students = ref();
 const store = useStore();
 const user = computed(() => store.state.auth.user)
@@ -126,9 +94,11 @@ const role = computed(() => store.state.auth.role)
 onMounted(() => {
 
     // getUsers();
-    axios.get('/api/student')
+    axios.get('/api/student/' + user.value['user_id'])
         .then(response => {
             students.value = response.data;
+            testRealized.value = response.data.data[0]['student_test'];
+            getTestQuantityAndCheck(response.data.data[0]['student_test'][0]['test_id']);
 
         })
         .catch(function (error) {
@@ -136,7 +106,36 @@ onMounted(() => {
         });
 
         init();
+
 })
+
+const testQuestionQuantity = ref([]);
+const incompleteTestQuestionQuantiry = ref([]);
+
+/** 
+ *  Get the quantity of the question have in every test that the student
+ *  maked and calculate the perventage of cert and error questions
+ * */ 
+const getTestQuantityAndCheck = ($idTest) =>{
+    axios.get('/api/test/' + $idTest)
+        .then(response => {
+            console.log(response.data.data);
+            getStudentTestQuestionQuantity($idTest);
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+}
+
+const getStudentTestQuestionQuantity = ($idTest) =>{
+    axios.get('/api/student/test' + '/' + user.value['user_id'] + '/' + $idTest)
+        .then(response => {
+            console.log(response.data.data);
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+}
 
 
 
@@ -144,7 +143,6 @@ onMounted(() => {
 // Create the circle graphic
 const main = ref(); 
 function init() {
-    console.log(main);
     var myChart = echarts.init(main.value);
   var datas = [
     [
