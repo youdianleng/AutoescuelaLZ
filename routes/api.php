@@ -50,6 +50,7 @@ Route::get('student/{id}', [StudentController::class, 'findStudent']);
 Route::post('student/update/{id}', [StudentController::class, 'update']);
 Route::delete('student/{id}', [StudentController::class, 'destroy']);
 Route::get('student/test/{user_id}/{test_id}',[StudentController::class, 'getPartTestCompleteStudent']);
+Route::get('student/testQuestion/{user_id}/{idTest}',[StudentController::class, 'getStudentTestQuestion']);
 
 
 //Funciones para Test
@@ -66,7 +67,7 @@ Route::get('dificilTest', [TestController::class, 'dificil']);
 Route::post('test/finalizar/{user_id}/{id}/{passed}', [TestController::class, 'storeTest']);
 Route::post('test/sendActualQuestion/{user_id}/{id}/{question}/{is_correct}', [TestController::class, 'storeTestQuestion']);
 Route::delete('test/exist/{user_id}/{id}', [TestController::class, 'existUserTest']);
-Route::delete('test/existTestQuestion/{user_id}', [TestController::class, 'existUserTestQuestion']);
+Route::delete('test/existTestQuestion/{user_id}/{test_id}', [TestController::class, 'existUserTestQuestion']);
 
 
 Route::group(['middleware' => 'auth:sanctum'], function() {

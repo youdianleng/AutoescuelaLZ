@@ -149,7 +149,7 @@ class StudentController extends Controller
 
     // Get these test the student make half or part of them
     public function getPartTestCompleteStudent($user_id, $test_id){
-        $incompleteTest = student_test_question::where('student_id',$user_id)->where('test_id',$test_id)->get();
+        $incompleteTest = student_test_question::where('student_id',$user_id)->where('test_id',$test_id)->with('question_option')->with('question_question')->get();
 
         return response()->json(['success' => true, 'data' => $incompleteTest]);
     }

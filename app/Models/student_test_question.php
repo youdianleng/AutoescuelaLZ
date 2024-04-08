@@ -19,4 +19,13 @@ class student_test_question extends Model
     public function test_question(){
         return $this->belongsTo(Student::class, 'student_test_questions');
     }
+    
+    public function question_option(){
+        return $this->belongsTo(Option::class, 'question_id');
+    }
+
+    public function question_question(){
+        return $this->belongsTo(Question::class, 'question_id');
+    }
+
 }

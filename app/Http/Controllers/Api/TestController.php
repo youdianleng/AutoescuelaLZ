@@ -99,9 +99,9 @@ class TestController extends Controller
 
     }
 
-    public function existUserTestQuestion($user_id){
+    public function existUserTestQuestion($user_id, $test_id){
 
-        $existUserQuestion = student_test_question::where("student_id",$user_id);
+        $existUserQuestion = student_test_question::where("student_id",$user_id)->where('test_id',$test_id);
         if($existUserQuestion){
             $existUserQuestion->delete();
         }
@@ -112,9 +112,10 @@ class TestController extends Controller
 
 
     public function answerTestQuestions($id_test) {
-        $tests = Question::where('test_id', $id_test)->get();
+        $tests = Question::where('test_id', $id_test)->with('options')->get();
+        
         return response()->json(['success' => true, 'data' => $tests]);
     }
 
-    
+
 }

@@ -68,6 +68,7 @@
                 <button class="btn btn-success">Crear pregunta</button>
             </form>
         </div>
+        {{"Is_correct" + Questiones.is_correct }}
     </div>
 
 </template>

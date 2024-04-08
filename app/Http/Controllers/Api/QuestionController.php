@@ -32,6 +32,7 @@ class QuestionController extends Controller
         $difficultyName = $request->input('difficulty.name');
         $carnetName = $request->input('carnet.name');
         $test_id = $request->input('test');
+        
         // Crear la pregunta utilizando los datos del request
         $test = Question::create([
             'question' => $request->input('question'),

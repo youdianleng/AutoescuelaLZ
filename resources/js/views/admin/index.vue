@@ -46,22 +46,43 @@
 
             <div v-if="role === 'student'" class="col-12 row justify-content-center">
                 <div class="card col-11 d-flex">
-                   <div>
-                        <h3></h3>
+                   <div style="padding: 0.5rem;">
+                        <h3>Test Realizados:</h3>
                    </div>
                    <div class="col-12 d-flex justify-content-end">
                     <div class="card col-6">
-                        
-                        <DataTable :value="testRealized" tableStyle="min-width: 50rem">
-                            <Column field="id" header="id"></Column>
+                        <DataTable :value="testRealized" tableStyle="min-width: 40rem">
                             <Column field="student_id" header="student_id"></Column>
                             <Column field="test_id" header="test_id"></Column>
                             <Column field="is_correct" header="Level"></Column>
+                            <Column :exportable="false" style="min-width: 8rem" header="Ver">
+                            <template #body="slotProps">
+                                <Button  outlined rounded class="mr-2" @click="getTestQuantityAndCheck(slotProps.data.test_id)" >Ver Porcentaje</Button> 
+                            </template>
+                            </Column>
                         </DataTable>
                     </div>
                         <div ref="main" style="width: 50%; height: 400px"></div>
                    </div>
                    
+                </div>
+            </div>
+        </div>
+        <div v-if="role === 'student'" class="col-12 row justify-content-center">
+            <div class="card col-11 d-flex">
+                <div style="padding: 0.5rem;">
+                    <h3>Test Fallados</h3>
+                </div>
+                <div class="d-flex">
+                    <div class="card col-12" style="margin: 0px;">
+                        <DataTable :value="incompleteTestQuestionQuantiry" tableStyle="min-width: 50rem">
+                            {{ incompleteTestQuestionQuantiry }}
+                            <Column field="question_question.question" header="Pregunta"></Column>
+                            <Column field="question_option" header="Respuesta Correcta"></Column>
+                            <Column field="is_correct" header="Certado"></Column>
+                        </DataTable>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -71,9 +92,6 @@
 <script setup>
 // Import all the library 
 import { ref, onMounted, reactive, createElementBlock, computed } from "vue";
-import { useForm, useField } from "vee-validate";
-import { useRoute } from "vue-router";
-import * as yup from 'yup';
 import { es } from 'yup-locales';
 import { setLocale } from 'yup';
 import axios from 'axios';
@@ -82,8 +100,8 @@ import * as echarts from "echarts";
 // import useUsers from "../../composables/users";
 // const {users, getUsers, deleteUser} = useUsers()
 
-
-const testRealized = ref();
+// Show the Information in DataTable
+const testRealized = ref([]);
 
 // Get all the student we have in bbdd
 const students = ref();
@@ -98,6 +116,7 @@ onMounted(() => {
         .then(response => {
             students.value = response.data;
             testRealized.value = response.data.data[0]['student_test'];
+            console.log(testRealized.value);
             getTestQuantityAndCheck(response.data.data[0]['student_test'][0]['test_id']);
 
         })
@@ -112,6 +131,15 @@ onMounted(() => {
 const testQuestionQuantity = ref([]);
 const incompleteTestQuestionQuantiry = ref([]);
 
+// Concatenar los valores de 2 ref
+if (testQuestionQuantity != null){
+const combinedArray = ref(testQuestionQuantity.value.concat(incompleteTestQuestionQuantiry.value));
+}
+
+
+let valueMaked = 0;
+let valueNoMaked = 0;
+
 /** 
  *  Get the quantity of the question have in every test that the student
  *  maked and calculate the perventage of cert and error questions
@@ -119,7 +147,7 @@ const incompleteTestQuestionQuantiry = ref([]);
 const getTestQuantityAndCheck = ($idTest) =>{
     axios.get('/api/test/' + $idTest)
         .then(response => {
-            console.log(response.data.data);
+            testQuestionQuantity.value = response.data.data;
             getStudentTestQuestionQuantity($idTest);
         })
         .catch(function (error) {
@@ -130,7 +158,12 @@ const getTestQuantityAndCheck = ($idTest) =>{
 const getStudentTestQuestionQuantity = ($idTest) =>{
     axios.get('/api/student/test' + '/' + user.value['user_id'] + '/' + $idTest)
         .then(response => {
-            console.log(response.data.data);
+            incompleteTestQuestionQuantiry.value = response.data.data;
+            valueMaked = incompleteTestQuestionQuantiry.value.length / testQuestionQuantity.value.length * 100;
+            valueNoMaked = 100 - valueMaked;
+
+            init();
+
         })
         .catch(function (error) {
             console.log(error);
@@ -142,12 +175,18 @@ const getStudentTestQuestionQuantity = ($idTest) =>{
 
 // Create the circle graphic
 const main = ref(); 
+let myChart;
+
 function init() {
-    var myChart = echarts.init(main.value);
+    if(myChart){
+        myChart.dispose();
+        console.log(myChart);
+    }
+    myChart = echarts.init(main.value);
   var datas = [
     [
-      { name: "Test1", value: 85 },
-      { name: "Falta", value: 15},
+      { name: "Realizado", value: Math.floor(valueMaked) },
+      { name: "Falta", value: Math.floor(valueNoMaked)},
     ],
   ];
   var option = {
@@ -158,13 +197,13 @@ function init() {
         height: "33.33%",
         left: "center",
         top: "center",
-        width: 300,
+        width: 400,
         label: {
           alignTo: "edge",
           formatter: "{name|{b}}\n{time|{c} %}",
           minMargin: 5,
-          edgeDistance: 50,
-          lineHeight: 15,
+          edgeDistance: 0,
+          lineHeight: 40,
           rich: {
             time: {
               fontSize: 10,

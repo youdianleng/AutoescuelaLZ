@@ -86,6 +86,7 @@ onMounted(() => {
             questions.value = response.data;
 
             questionId.value = questions.value[contador];
+            searchExist();
         })
         .catch(function (error) {
             console.log(error);
@@ -123,7 +124,7 @@ const showNextQuestion = () =>{
         //Comprueba si existe un siguiente pregunta o no
         if(questions.value[contador] == null){
             console.log("Ya no hay preguntas");
-            searchExist();
+            
         }else{
             questionId.value = questions.value[contador];
 
@@ -148,7 +149,7 @@ const searchExist = () =>{
 }
 
 const searchExistTestQuestion = () =>{
-    axios.delete('/api/test/existTestQuestion/' + user.value['user_id'])
+    axios.delete('/api/test/existTestQuestion/' + user.value['user_id'] + "/" + route.params.id)
     .then(response => {
     })
     .catch(function (error) {
