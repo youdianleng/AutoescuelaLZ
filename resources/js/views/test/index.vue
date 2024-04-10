@@ -5,8 +5,8 @@
                 <h2>TEST Nº1</h2>
                 <div class="row">
                     <h2>1. {{ questionId.question }}</h2>
-                    <div class="col-2">
-                        <img src="/testImages/question1.jpg" alt="" height="200px" width="200px">
+                    <div v-if="questionId['media'] && questionId['media'].length > 0" class="col-2">
+                        <img :src="`${questionId['media'][0]['original_url'] }`" alt="" height="200px" width="200px">
                     </div>
                     <div v-if="questionId['options']" class="col-10">
                         <div  class="d-flex">
@@ -33,8 +33,6 @@
 
                     </router-link>
                 </div>
-                {{ user.user_id  }}
-                {{ questionId.id }}
             </div>
         </div>
     </div>
@@ -124,7 +122,7 @@ const showNextQuestion = () =>{
         //Comprueba si existe un siguiente pregunta o no
         if(questions.value[contador] == null){
             console.log("Ya no hay preguntas");
-            
+            searchExist();
         }else{
             questionId.value = questions.value[contador];
 
@@ -161,18 +159,16 @@ const searchExistTestQuestion = () =>{
 
 const finalizar = () =>{
 
-    console.log(questions)
-
     let pass = 0;
-    let passed = 1;
+    let passed = 0;
     for(let count in respuestasValidar){
-        if(respuestasValidar[count] == 0){
+        if(respuestasValidar[count] == 1){
             pass = pass + 1;
         }
     }
 
     if(pass >= 3){
-        passed = 0;
+        passed = 1;
     }
 
     axios.post('/api/test/finalizar/' + user.value['user_id'] + "/" + route.params.id + "/" + passed)

@@ -117,5 +117,11 @@ class TestController extends Controller
         return response()->json(['success' => true, 'data' => $tests]);
     }
 
+    public function selectStudentMadeTest($student_id){
+        $tests = students_tests::where('student_id', $student_id)->with('test_level')->get();
+        
+        return response()->json(['success' => true, 'data' => $tests]);
+    }
+
 
 }

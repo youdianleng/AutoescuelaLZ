@@ -2,19 +2,19 @@
     <div class="grid col-12">
         <div class="col-12 mt-5 row justify-content-center">
             <div class="card col-11 d-flex">
-                <div class="col-12 d-flex justify-content-center">
-                    <div class="col-4 d-flex justify-content-center">
-                        <img src="/images/perfil.png"> 
+                <div v-if="students" class="col-12 d-flex justify-content-center">
+                    <div  class="col-4 d-flex justify-content-center">
+                        <img :src="`${students.data[0].media[0].original_url}`">
+                        {{ console.log(students) }}
                     </div>
                     
-                    <div class="col-8">
-                        <h2 class="mb-5" v-if="role === 'teacher'">Profesor de {{ user.license_id }}</h2>
-                        <h2 class="mb-5" v-if="role === 'student'">Alumno de {{ user.license_id }}</h2>
+                    <div  class="col-8">
+                        {{ console.log(students.data) }}
                         <h3>{{ user.name }} {{ user.surname }}</h3>
                         <h3>{{ user.address }}</h3> 
                         <h3>{{ user.email }}</h3>
                         <h3>{{ user.license_id }}</h3>
-                        <h3 v-if="role === 'student'">Profesor: {{ user.teacher_id}} </h3>
+                        <h3 v-if="role === 'student'">Profesor: {{ students.data[0].teachers[0].name}} </h3>
                     </div>
                 </div>
                
@@ -71,15 +71,18 @@
         <div v-if="role === 'student'" class="col-12 row justify-content-center">
             <div class="card col-11 d-flex">
                 <div style="padding: 0.5rem;">
-                    <h3>Test Fallados</h3>
+                    <h3>Preguntas Fallados</h3>
                 </div>
                 <div class="d-flex">
                     <div class="card col-12" style="margin: 0px;">
-                        <DataTable :value="incompleteTestQuestionQuantiry" tableStyle="min-width: 50rem">
-                            {{ incompleteTestQuestionQuantiry }}
+                        <DataTable v-if="incompleteTestQuestionQuantiry" :value="incompleteTestQuestionQuantiry" tableStyle="min-width: 50rem">
                             <Column field="question_question.question" header="Pregunta"></Column>
-                            <Column field="question_option" header="Respuesta Correcta"></Column>
-                            <Column field="is_correct" header="Certado"></Column>
+                            <Column field="question_option.option_text" header="Tu Opcion"></Column>
+                            <Column field="option.is_correct" header="Certado">
+                            <template #body="rowData">
+                                {{ rowData.data.is_correct === 1 ? 'Sí' : 'NO' }}
+                            </template>
+                        </Column>
                         </DataTable>
                     </div>
 

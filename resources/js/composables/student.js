@@ -10,6 +10,7 @@ export default function useStudent() {
     const strError = ref();
     // Create an array with all the value send by form
     const createStudent = async(student) =>{
+        
         strSuccess.value = {};
         strError.value = {};
         let serializedPost = new FormData()

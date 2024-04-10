@@ -123,7 +123,7 @@ class StudentController extends Controller
     public function findStudent($id, Request $request)
     {
         
-        $student = Student::find($id)->with("student_test")->get();
+        $student = Student::find($id)->with("student_test")->with('teachers')->with('media')->get();
         if (!$student) {
             return response()->json(['success' => false, 'message' => 'Estudiante no encontrado'], 404);
         }

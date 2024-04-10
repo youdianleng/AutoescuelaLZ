@@ -15,5 +15,8 @@ class students_tests extends Model
         "is_correct"
     ];
 
+    public function test_level(){
+        return $this->belongsTo(Test::class,"student_id");
+    }
 
 }

@@ -70,6 +70,9 @@ Route::delete('test/exist/{user_id}/{id}', [TestController::class, 'existUserTes
 Route::delete('test/existTestQuestion/{user_id}/{test_id}', [TestController::class, 'existUserTestQuestion']);
 
 
+// SelectLevel
+Route::get('selectLevel/student/{id}',[TestController::class, 'selectStudentMadeTest']);
+
 Route::group(['middleware' => 'auth:sanctum'], function() {
     Route::apiResource('users', UserController::class);
     Route::apiResource('posts', PostController::class);

@@ -56,19 +56,18 @@
                             name="carnet"
                             placeholder="Tipo Carnet" checkmark :highlightOnSelect="false"
                             class="w-full md:w-14rem" required/>
-
-                            <select v-model="Questiones.test">
-                                <option v-for="tes in test">{{ tes.id }}</option>
-                            </select>
-                            {{ Questiones.test}}
+                            <Dropdown v-model="Questiones.test_id" :options="test" optionLabel="id" placeholder="Seleccione un test" class="w-full md:w-14rem" />
                         </div>
                     </div>
                 </div>
-
+                <div class="mb-3">
+                    <DropZone v-model="Questiones.thumbnail" name="thumbnail"/>
+                </div>
+                {{ Questiones }}
                 <button class="btn btn-success">Crear pregunta</button>
             </form>
         </div>
-        {{"Is_correct" + Questiones.is_correct }}
+
     </div>
 
 </template>
@@ -81,7 +80,7 @@ import * as yup from 'yup';
 import { es } from 'yup-locales';
 import { setLocale } from 'yup';
 import axios from 'axios';
-
+import DropZone from "@/components/DropZone.vue";
 
 
 // Selects
@@ -122,6 +121,7 @@ const { value: is_correct } = useField('is_correct', null, { initialValue: '' })
 const { value: carnet } = useField('carnet', null, { initialValue: '' });
 const { value: respuestas } = useField('respuesta', null, { initialValue: [{},{},{}] });
 const { value: test_id } = useField('test_id', null, { initialValue: '' });
+const { value: thumbnail } = useField('thumbnail',null, { initialValue: '' });
 const test = ref();
 
 const Questiones = reactive({
@@ -131,7 +131,8 @@ const Questiones = reactive({
     respuestas,
     carnet,
     is_correct,
-    test_id
+    test_id,
+    thumbnail: ''
 })
 
 
@@ -147,11 +148,9 @@ onMounted(() => {
         .catch(function (error) {
             console.log(error);
         });
-})
 
 
-onMounted(() => {
-    axios.get('/api/test')
+        axios.get('/api/test')
         .then(response => {
             test.value = response.data;
         })
@@ -160,13 +159,31 @@ onMounted(() => {
         });
 })
 
+
 function createQuestion() {
-
-
     validate().then(form => {
+        console.log(Questiones);
+        let serializedPost = new FormData()
+        
+        serializedPost.append('carnet', JSON.stringify(Questiones.carnet));
+        serializedPost.append('question', Questiones.question);
+        serializedPost.append('difficulty', JSON.stringify(Questiones.difficulty));
+        serializedPost.append('is_correct', Questiones.is_correct);
+        serializedPost.append('test_id', JSON.stringify(Questiones.test_id));
+        serializedPost.append('thumbnail', Questiones.thumbnail);
+
+        // Serializar el array de respuestas
+        Questiones.respuestas.forEach((respuesta, index) => {
+            serializedPost.append(`respuestas[${index}]`, JSON.stringify(respuesta));
+        });
+
         if (form.valid) {
             console.log("Validate");
-            axios.post('/api/question', Questiones)
+            axios.post('/api/question', serializedPost, {
+                headers: {
+                 "content-type": "multipart/form-data"
+                }
+              })
                 .then(response => {
                     strError.value = ""
                     strSuccess.value = response.data.success

@@ -21,28 +21,43 @@ class QuestionController extends Controller
 
     public function store(Request $request)
     {   
+
+        $carnetData = json_decode($request['carnet']);
+        $difficultyData = json_decode($request['difficulty']);
+        $testData = json_decode($request['test_id']);
         $request->validate([
             'question'  => 'required',
-            'difficulty.name' => 'required', // Validar que 'difficulty.name' esté presente en la solicitud
-            'carnet.name' => 'required',
-            'test' => 'required'
-        ]);
-    
-        // Obtener el nombre de la dificultad del request
-        $difficultyName = $request->input('difficulty.name');
-        $carnetName = $request->input('carnet.name');
-        $test_id = $request->input('test');
-        
-        // Crear la pregunta utilizando los datos del request
-        $test = Question::create([
-            'question' => $request->input('question'),
-            'difficulty' => $difficultyName, // Asignar el nombre de la dificultad
-            'carnet' => $carnetName,
-            'test_id' => $test_id,
+            'difficulty' => 'required', // Validar que 'difficulty.name' esté presente en la solicitud
+            'carnet' => 'required',
+            'test_id' => 'required'
         ]);
 
+       
+        // Crear la pregunta utilizando los datos del request
+        $test = Question::create([
+            'question' => $request['question'],
+            'difficulty' => $difficultyData->name, // Asignar el nombre de la dificultad
+            'carnet' => $carnetData->name,
+            'test_id' => $testData->id,
+            'thumbnail',
+        ]);
+
+        $decodedRespuestas = [];
+        foreach ($request['respuestas'] as $respuesta) {
+            $decodedRespuesta = json_decode($respuesta, true); // El segundo argumento true convierte el objeto stdClass en un array asociativo
+            if ($decodedRespuesta !== null) { // Verificar si la decodificación fue exitosa
+                $decodedRespuestas[] = $decodedRespuesta;
+            }
+        }
+
         //$test->options()->delete();
-        $test->options()->createMany($request->respuestas);
+        $test->options()->createMany($decodedRespuestas);
+
+        if ($request->hasFile('thumbnail')) {
+            $test->addMediaFromRequest('thumbnail')->preservingOriginal()->toMediaCollection('images-exercises');
+        }else{
+        }
+
         return response()->json(['success' => true, 'data' => $test]);
 
 
@@ -57,7 +72,7 @@ class QuestionController extends Controller
     }
 
     public function difficultyQuestions($Difficulty,$id){
-        $Questions = Question::with('options')->where('difficulty', $Difficulty)->where('test_id',$id)->get();
+        $Questions = Question::with('options')->where('difficulty', $Difficulty)->where('test_id',$id)->with('media')->get();
         
         return response()->json($Questions);
     }
