@@ -30,7 +30,7 @@
                                     <td class="col-2" v-else="student.license_id === 2">Moto</td>
                                     <td class="col-2">{{ student.teacher_id }}</td>
                                     <td class="col-2 d-flex justify-content-around">
-                                        <router-link :to="{ name: 'EditStudent', params: { id: student.id } }">
+                                        <router-link :to="{ name: 'teacher.EditStudent', params: { id: student.id } }">
                                             <button type="submit" class="editButton btn btn-primary">Editar</button>
                                         </router-link>
                                         <button @click.prevent="deleteSubmit(student.id)" class="editButton btn btn-primary">Eliminar</button>
@@ -117,7 +117,7 @@ import Dialog from "primevue/dialog";
 import useStudent from "@/composables/student";
 import useOnMount from "@/composables/common";
 const { getStudents, students, getTeachers, getLicense, teachers, licenses } = useOnMount();
-const { createStudent, deleteStudent} = useStudent();
+const { createStudent, deleteStudent, usuarioReview} = useStudent();
 // 
 
 onMounted(() => {
@@ -132,6 +132,8 @@ function submitStudent(){
     validate().then(form => {
         if (form.valid) createStudent(student);
     })
+
+    console.log(usuarioReview);
 }
 
 function deleteSubmit(id){

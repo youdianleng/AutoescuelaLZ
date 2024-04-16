@@ -39,6 +39,11 @@ export default [
                 component: () => import('../views/home/index.vue'),
             },
             {
+                path: 'contacto',
+                name: 'contacto',
+                component: () => import('../views/contacto/index.vue'),
+            },
+            {
                 path: 'login',
                 name: 'auth.login',
                 component: () => import('../views/login/Login.vue'),
@@ -80,14 +85,7 @@ export default [
                 component: () => import('../views/task/create.vue'),
                 meta: { breadCrumb: 'teacher'}
             },
-            {
-                name: 'CreateTest',
-                path: 'createTest',
-                component: () => import('../views/teacher/test/create.vue'),
-                meta: { breadCrumb: 'createTest'},
-                beforeEnter: requireLogin,
-
-            },
+            
             {
                 name: 'EditExample',
                 path: 'EditExample',
@@ -112,6 +110,17 @@ export default [
                 name: 'facilTests',
                 path: 'facilTests/:id',
                 component: () => import('../views/teacher/test/facilTest.vue'),
+            },
+            
+            {
+                name: 'normalTests',
+                path: 'normalTest/:id',
+                component: () => import('../views/teacher/test/normalTest.vue'),
+            },
+            {
+                name: 'dificilTests',
+                path: 'dificilTest/:id',
+                component: () => import('../views/teacher/test/dificilTest.vue'),
             },
             {
                 name: 'Test',
@@ -156,16 +165,21 @@ export default [
                 //meta: { breadCrumb: 'Test' }
             },
             {
-                name: 'CreateStudent',
+                name: 'teacher.CreateStudent',
                 path: 'createStudent',
                 component: () => import('../views/teacher/createStudent.vue'),
-                meta: { breadCrumb: 'CreateStudent'},
             },
             {
-                name: 'EditStudent',
+                name: 'teacher.EditStudent',
                 path: 'editStudent/:id',
                 component: () => import('../views/teacher/editStudent.vue'),
-                meta: { breadCrumb: 'EditStudent'}
+            },{
+                name: 'teacher.CreateTest',
+                path: 'createTest',
+                component: () => import('../views/teacher/test/create.vue'),
+                meta: { breadCrumb: 'createTest'},
+                beforeEnter: requireLogin,
+
             },
             
         ]

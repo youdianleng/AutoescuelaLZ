@@ -51,6 +51,8 @@ Route::post('student/update/{id}', [StudentController::class, 'update']);
 Route::delete('student/{id}', [StudentController::class, 'destroy']);
 Route::get('student/test/{user_id}/{test_id}',[StudentController::class, 'getPartTestCompleteStudent']);
 Route::get('student/testQuestion/{user_id}/{idTest}',[StudentController::class, 'getStudentTestQuestion']);
+Route::post('student/review/{user_id}', [StudentController::class, 'submitReview']);
+Route::get('student/review/find/{user_id}', [StudentController::class, 'findReview']);
 
 
 //Funciones para Test
@@ -64,7 +66,7 @@ Route::get('tests/{tests}', [TestController::class,'show']);
 Route::get('facilTest', [TestController::class, 'facil']);
 Route::get('normalTest', [TestController::class, 'normal']);
 Route::get('dificilTest', [TestController::class, 'dificil']);
-Route::post('test/finalizar/{user_id}/{id}/{passed}', [TestController::class, 'storeTest']);
+Route::post('test/finalizar/{user_id}/{id}/{passed}/{level}', [TestController::class, 'storeTest']);
 Route::post('test/sendActualQuestion/{user_id}/{id}/{question}/{is_correct}', [TestController::class, 'storeTestQuestion']);
 Route::delete('test/exist/{user_id}/{id}', [TestController::class, 'existUserTest']);
 Route::delete('test/existTestQuestion/{user_id}/{test_id}', [TestController::class, 'existUserTestQuestion']);

@@ -1,59 +1,165 @@
 <template>
     <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
         <div class="container">
+            <div class="col-ms-12 d-lg-none">
+                <Button class="border-0" icon="pi pi-bars" @click="visible = true" />
+            </div>
+            <div class="esconderTopBar col-12 d-flex align-items-center">
+                <router-link to="/" >
+                    <img src="/images/logo.svg" alt="logo AutoEscuelaLZ" height="100px" width="200px" />
+                    <span></span>
+                </router-link>
 
-            <router-link to="/" >
-                <img src="/images/logo.svg" alt="logo AutoEscuelaLZ" height="100px" width="200px" />
-                <span></span>
-            </router-link>
+                <router-link to="/info">
+                    <button class="p-link layout-topbar-button layout-topbar-button-c" id="Information">
+                        Información
+                    </button>
+                </router-link>
 
-            <router-link to="/info">
-                <button class="p-link layout-topbar-button layout-topbar-button-c" id="Information">
-                    Información
-                </button>
-            </router-link>
+                <router-link to="/teacher/createStudent">
+                    <button v-if="role === 'teacher'" class="p-link layout-topbar-button layout-topbar-button-c">
+                        Estudiantes
+                    </button>
+                </router-link>
+                
+                <router-link to="/teacher/CreateTest">
+                    <button v-if="role === 'teacher'" class="p-link layout-topbar-button layout-topbar-button-c">
+                    Preguntas test
+                    </button>
+                </router-link>
+                <router-link v-if="role === 'student'" :to="{ name: 'SelectLevel', params: { id: user.user_id } }">
+                    <button   class="p-link layout-topbar-button layout-topbar-button-c">
+                    Test
+                    </button>
+                </router-link>
+                
+                <router-link to="/contacto">
+                    <button class="p-link layout-topbar-button layout-topbar-button-c" id="Information">
+                        Contacto
+                    </button>
+                </router-link>
 
-            <router-link to="/teacher/createStudent">
-                <button v-if="role === 'teacher'" class="p-link layout-topbar-button layout-topbar-button-c">
-                    Estudiantes
-                </button>
-            </router-link>
-            
-            <router-link to="CreateTest">
-                <button v-if="role === 'teacher'" class="p-link layout-topbar-button layout-topbar-button-c">
-                Preguntas test
-                </button>
-            </router-link>
-            <router-link v-if="role === 'student'" :to="{ name: 'SelectLevel', params: { id: user.user_id } }">
-                <button   class="p-link layout-topbar-button layout-topbar-button-c">
-                Test
-                </button>
-            </router-link>
-        
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mt-2 mt-lg-0 me-auto mb-2 mb-lg-0">
-                    <LocaleSwitcher />
-                </ul>
-                <ul class="navbar-nav mt-2 mt-lg-0 ms-auto">
-                    <template v-if="!user?.name">
-                        <li class="nav-item">
-                            <router-link class="nav-link" to="/login">{{ $t('login') }}</router-link>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mt-2 mt-lg-0 me-auto mb-2 mb-lg-0">
+                        <LocaleSwitcher />
+                    </ul>
+                    <ul class="navbar-nav mt-2 mt-lg-0 ms-auto">
+                        <template v-if="!user?.name">
+                            <li class="nav-item">
+                                <router-link class="nav-link" to="/login">{{ $t('login') }}</router-link>
+                            </li>
+                        </template>
+                        <li v-if="user?.name" class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Hola, {{ user.name }}
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><router-link class="dropdown-item" to="/profile">Perfil</router-link></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="javascript:void(0)" @click="logout">Logout</a></li>
+                            </ul>
                         </li>
-                    </template>
-                    <li v-if="user?.name" class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Hola, {{ user.name }}
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end">
-                            <li><router-link class="dropdown-item" to="/profile">Perfil</router-link></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="javascript:void(0)" @click="logout">Logout</a></li>
-                        </ul>
-                    </li>
-                </ul>
+                    </ul>
+                </div>
             </div>
         </div>
     </nav>
+
+
+
+
+    <div class="d-flex justify-content-center sideBar">
+        <Sidebar v-model:visible="visible">
+            <template #container="{ closeCallback }">
+                <div class="flex flex-column h-full">
+                    <div class="flex align-items-center justify-content-between px-4 pt-3 flex-shrink-0">
+                        <span class="inline-flex align-items-center gap-2">
+                            <img src="/images/logo.svg" alt="logo AutoEscuelaLZ" height="80px" width="100px" />
+                            <span class="font-semibold text-2xl text-primary">AL SCHOOL</span>
+                        </span>
+                        <span>
+                            <Button type="button" @click="closeCallback" icon="pi pi-times" rounded outlined class="h-2rem w-2rem"></Button>
+                        </span>
+                    </div>
+                    <div class="overflow-y-auto">
+                        <ul class="list-none p-3 m-0">
+                            <li>
+                                <router-link to="/">
+                                    <a class="flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors p-ripple">
+                                        <i class="pi pi-home mr-2"></i>
+                                        <span class="font-medium">Home</span>
+                                    </a>
+                                </router-link>
+                            </li>
+                            <li>
+                                <router-link to="/info">
+                                    <a class="flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors p-ripple">
+                                        <i class="pi pi-info-circle mr-2"></i>
+                                        <span class="font-medium">Información Autoescuela</span>
+                                    </a>
+                                </router-link>
+                            </li>
+                            <li  v-if="role === 'student'">
+                                <router-link :to="{ name: 'SelectLevel', params: { id: user.user_id } }">
+                                    <a class="flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors p-ripple">
+                                        <i class="pi pi-book mr-2"></i>
+                                        <span class="font-medium">Realizar Test</span>
+                                    </a>
+                                </router-link>
+                            </li>
+                            <li v-if="role === 'teacher'">
+                                <router-link to="/teacher/createStudent">
+                                    <a class="flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors p-ripple">
+                                        <i class="pi pi-check-circle mr-2"></i>
+                                        <span class="font-medium">Añadir Estudiante</span>
+                                    </a>
+                                </router-link>
+                            </li>
+                            <li v-if="role === 'teacher'">
+                                <router-link to="/teacher/createTest">
+                                    <a class="flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors p-ripple">
+                                        <i class="pi pi-bookmark mr-2"></i>
+                                        <span class="font-medium">Crear Preguntas</span>
+                                    </a>
+                                </router-link>
+                                
+                            </li>
+                            <li v-if="role == 'teacher' || role == 'student'">
+                                <router-link to="/profile">
+                                    <a class="flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors p-ripple">
+                                        <i class="pi pi-user mr-2"></i>
+                                        <span class="font-medium">Perfile</span>
+                                    </a>
+                                </router-link>
+                            </li>
+                            <li>
+                                <router-link to="/contacto">
+                                    <a class="flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors p-ripple">
+                                        
+                                        <i class="pi pi-sign-out mr-2"></i>
+                                        <span class="font-medium">Contacto</span>                      
+                                    </a>
+                                </router-link>
+                            </li>
+                            <li v-if="role === 'teacher' || role === 'student'">
+                                <a class="flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors p-ripple" href="javascript:void(0)" @click="logout">
+                                    <i class="pi pi-sign-out mr-2"></i>
+                                    <span class="font-medium">Cerrar Session</span>                      
+                                </a>
+                            </li>
+                            <li v-if="role === null">
+                                <a class="flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors p-ripple" href="javascript:void(0)" @click="logout">
+                                    <i class="pi pi-sign-out mr-2"></i>
+                                    <span class="font-medium">Login</span>                      
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </template>
+        </Sidebar>
+        
+    </div>
 </template>
 
 <script setup>
@@ -62,12 +168,14 @@ import { useLayout } from '../composables/layout';
 import { useStore } from 'vuex';
 import useAuth from "@/composables/auth";
 import LocaleSwitcher from "../components/LocaleSwitcher.vue";
-
+import 'primeicons/primeicons.css';
 const { onMenuToggle } = useLayout();
 const store = useStore();
 const user = computed(() => store.state.auth.user)
 const role = computed(() => store.state.auth.role)
 const { processing, logout } = useAuth();
+
+const visible = ref(false);
 
 const topbarMenuActive = ref(false);
 
@@ -110,4 +218,28 @@ a{
     padding-left: 28px;
     width: 100%;
 }
+
+$screen-md: 970px;
+
+// Media query para pantallas medianas y más pequeñas
+@media only screen and (max-width: $screen-md) {
+    .esconderTopBar {
+        display: none !important;
+    }
+
+    .sideBar{
+        display: block!important;;
+    }
+    
+}
+
+.sideBar{
+    display: none!important;;
+}
+
+.text-2xl {
+        font-size: 1.2rem !important;
+    }
+
+
 </style>

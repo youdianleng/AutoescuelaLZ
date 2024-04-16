@@ -67,8 +67,33 @@ export default function useStudent() {
         });
     }
 
+
+
+    const submitReview = async($id, $reviewData) =>{
+        axios.post('/api/student/review/' + $id, $reviewData)
+        .then(response => {
+            strError.value = ""
+            strSuccess.value = response.data.success
+            swal({
+                icon: "success",
+                title: "Comentario añadido"
+            })
+            location.reload(); 
+        })
+        .catch(function (error) {
+            strSuccess.value = ""
+            strError.value = error.response.data.message
+            swal({
+                icon: "error",
+                title: "No ha añadir tu comentario"
+            })
+        });
+    }
+
+
     return{
         createStudent,
-        deleteStudent
+        deleteStudent,
+        submitReview,
     }
 }

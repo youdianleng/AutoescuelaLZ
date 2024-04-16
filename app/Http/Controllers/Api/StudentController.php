@@ -9,7 +9,9 @@ use App\Models\Teacher;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Http\Resources\StudentResource;
+use App\Models\student_review;
 use App\Models\student_test_question;
+use GuzzleHttp\Promise\Create;
 
 class StudentController extends Controller
 {
@@ -154,5 +156,27 @@ class StudentController extends Controller
         return response()->json(['success' => true, 'data' => $incompleteTest]);
     }
 
+    public function submitReview($user_id, Request $request ){
+
+        $request->validate([
+            'comentario' => 'required',
+        ]);
+
+        $submitReview = student_review::Create([
+            'student_id' => $user_id,
+            'review' => $request["comentario"],
+            
+            ]
+        );
+
+        return response()->json(['success' => true, 'data' => $submitReview]);
+    }
+
+    public function findReview($user_id){
+
+        $findReview = student_review::where('student_id',$user_id)->get();
+
+        return response()->json(['success' => true, 'data' => $findReview]);
+    }
     
 }

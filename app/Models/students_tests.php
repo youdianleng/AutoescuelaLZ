@@ -12,7 +12,8 @@ class students_tests extends Model
     protected $fillable = [
         "student_id",
         "test_id",
-        "is_correct"
+        "is_correct",
+        "level"
     ];
 
     public function test_level(){

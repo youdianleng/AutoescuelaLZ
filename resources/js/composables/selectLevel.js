@@ -15,7 +15,7 @@ export default function useSelectLevel() {
         // Call the funtion with all the content we saved (Sending as $request)
         axios.get('/api/selectLevel/student/' + student)
             .then(response => {
-                StudentMadeTest.value = response.data
+                StudentMadeTest.value = response.data.data
             })
             .catch(function (error) {
                 strSuccess.value = ""
@@ -24,7 +24,7 @@ export default function useSelectLevel() {
                 }
                 swal({
                     icon: "error",
-                    title: "Correo ya registrado"
+                    title: "No ha encontrado ninguna registro"
                 })
 
             });

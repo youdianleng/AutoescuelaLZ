@@ -6,7 +6,7 @@
                 <div class="row">
                     <h2>1. {{ questionId.question }}</h2>
                     <div v-if="questionId['media'] && questionId['media'].length > 0" class="col-2">
-                        <img :src="`${questionId['media'][0]['original_url'] }`" alt="" height="200px" width="200px">
+                        <img :src="`${questionId['media'][0]['original_url'] }`" alt="" height="100px" width="100px">
                     </div>
                     <div v-if="questionId['options']" class="col-10">
                         <div  class="d-flex">
@@ -66,14 +66,6 @@ const { value: respuesta } = useField('respuesta', null, { initialValue: '' });
 const respuestas = reactive({
     respuesta
 })
-
-// // asigment of the required validation fields
-// const schema = yup.object({
-//     respuesta: yup.string().required().max(5).label('respuesta'),
-// })
-
-// // Define the validate using form fields
-// const { validate, errors } = useForm({ validationSchema: schema })
 
 onMounted(() => {
     // getQuestions();
@@ -171,7 +163,7 @@ const finalizar = () =>{
         passed = 1;
     }
 
-    axios.post('/api/test/finalizar/' + user.value['user_id'] + "/" + route.params.id + "/" + passed)
+    axios.post('/api/test/finalizar/' + user.value['user_id'] + "/" + route.params.id + "/" + passed + "/" + questionId.value['difficulty'])
         .then(response => {
             
             console.log(response);
@@ -197,10 +189,30 @@ const singleTestQuestionComplete = ($is_correct) =>{
 </script>
 <style>
 
+.p-radiobutton{
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 100px;
+    padding-right: 100px;
+}
+
 .p-radiobutton .p-radiobutton-box {
     background-color:transparent;
     border: 0cap;
+    
+}
 
+.btn{
+    margin-top: 100px;
+    padding: 10px;
+}
+
+.router-link-active{
+    padding: 35px;
+}
+
+.col-12{
+    padding: 0px;
 }
 
 </style>

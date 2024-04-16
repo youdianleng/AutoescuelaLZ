@@ -46,22 +46,23 @@ class TestController extends Controller
         return response()->json($tests);
     }
     public function normal() {
-        $tests = Test::where('level', "normal")->get();
+        $tests = Test::where('level', "Normal")->get();
         return response()->json($tests);
     }
     public function dificil() {
-        $tests = Test::where('level', "dificil")->get();
+        $tests = Test::where('level', "Dificil")->get();
         return response()->json($tests);
     }
 
-    public function storeTest($user_id, $id, $passed){
+    public function storeTest($user_id, $id, $passed, $level){
 
 
         $saveTest = students_tests::create(
             [
                 'student_id' => $user_id,
                 'test_id' => $id,
-                'is_correct' => $passed
+                'is_correct' => $passed,
+                'level' => $level
             ]
         );
 
@@ -78,7 +79,7 @@ class TestController extends Controller
                 'student_id' => $user_id,
                 'test_id' => $id,
                 'question_id' => $question,
-                'is_correct' => $is_correct
+                'is_correct' => $is_correct,
             ]
         );
 
@@ -118,7 +119,7 @@ class TestController extends Controller
     }
 
     public function selectStudentMadeTest($student_id){
-        $tests = students_tests::where('student_id', $student_id)->with('test_level')->get();
+        $tests = students_tests::where('student_id', $student_id)->where('is_correct',1)->get();
         
         return response()->json(['success' => true, 'data' => $tests]);
     }
