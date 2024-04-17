@@ -1,7 +1,8 @@
 <template>
     <div class="grid col-12 justify-content-center">
         <div class=" col-11">
-            <div class="card col-12 d-flex justify-content-center">
+
+            <div class="card col-12 d-flex">
                 <Breadcrumb :home="home" :model="items">
                     <template #item="{ item, props }">
                         <router-link v-if="item.route" v-slot="{ href, navigate }" :to="item.route" custom>
@@ -15,8 +16,6 @@
                         </a>
                     </template>
                 </Breadcrumb>
-            </div>
-            <div class="card col-12 d-flex">
                 <div v-if="students" class="col-12 d-flex justify-content-center">
                     <div  class="col-3 d-flex justify-content-center">
                         <img :src="`${students.data[0].media[0].original_url}`" width="150">
@@ -168,6 +167,7 @@ onMounted(() => {
     axios.get('/api/student/' + user.value['user_id'])
         .then(response => {
             students.value = response.data;
+
             testRealized.value = response.data.data[0]['student_test'];
             getTestQuantityAndCheck(response.data.data[0]['student_test'][0]['test_id']);
             
@@ -175,6 +175,7 @@ onMounted(() => {
         .catch(function (error) {
             console.log(error);
         });
+
 
         // Busca todos los reviews que hay de este usaurio
         axios.get('/api/student/review/find/' + user.value['user_id'])
@@ -318,5 +319,9 @@ function commitReview(){
 <style scoped>
 h3{
     margin: 0px;
+}
+
+.p-breadcrumb{
+    border: none;
 }
 </style>

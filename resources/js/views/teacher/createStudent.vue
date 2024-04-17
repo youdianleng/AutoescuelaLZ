@@ -24,7 +24,7 @@
                                 </tr>
                                 <tr v-for="student in students" class="col-12 d-flex justify-content-around">
                                     <td class="col-2">{{ student.name }}  {{ student.surname }}</td>
-                                    <td class="col-2"><img :src="`${student.original_image}`"></td> 
+                                    <td class="col-2">{{ student.email }}</td> 
                                     <td class="col-2">{{ student.password }}</td>
                                     <td class="col-2" v-if="student.license_id === 1">Coche</td>
                                     <td class="col-2" v-else="student.license_id === 2">Moto</td>
@@ -79,18 +79,6 @@
                                         <div class="col-4 imgBox justify-content-end ms-5">
                                             <div class="mb-3">
                                                 <DropZone v-model="student.thumbnail" name="thumbnail"/>
-                                                <!-- <div class="text-danger mt-1">
-                                                    <div v-for="message in validationErrors?.thumbnail">
-                                                        {{ message }}
-                                                    </div>
-                                                </div>
-                                                <div class="mt-3 text-center">
-                                                    <button :disabled="isLoading" class="btn btn btn-primary me-2 w-100">
-                                                        <div v-show="isLoading" class=""></div>
-                                                        <span v-if="isLoading">Processing...</span>
-                                                        <span v-else>Guardar</span>
-                                                    </button>
-                                                </div> -->
                                             </div>
                                         </div>
                                     </form>
@@ -121,14 +109,16 @@ const { createStudent, deleteStudent, usuarioReview} = useStudent();
 // 
 
 onMounted(() => {
+    // function that gonna search all the student, Teacher and License in our database
    getStudents();
    getTeachers();
    getLicense();
    
 })
 
+// Submit the student with form data
 function submitStudent(){
-    
+    // If form is identified that all the camp is writted, keep
     validate().then(form => {
         if (form.valid) createStudent(student);
     })
@@ -136,6 +126,8 @@ function submitStudent(){
     console.log(usuarioReview);
 }
 
+
+// Delete the student using hes id to identify.
 function deleteSubmit(id){
     deleteStudent(id);
 }
@@ -174,7 +166,6 @@ const student = reactive({
 })
 
 
-// Diseño Prime Vues
 //Loading 
 const loading = ref(false);
 

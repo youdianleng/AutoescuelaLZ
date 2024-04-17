@@ -13,7 +13,6 @@
                                         {{ errors.name }}
                                         {{ name }}
                                         <input class="mt-4" name="surname" v-model="student.surname" placeholder="Apellido">
-                                        <input class="mt-4" name="image" v-model="student.image" placeholder="Imagen">
                                         <input type="mail" name="email" v-model="student.email" class="mt-4" placeholder="Email" required>
                                         {{ errors.email }}
                                         <input class="mt-4" name="password" v-model="student.password" placeholder="Contraseña" required>
@@ -27,7 +26,7 @@
                                         </select>
                                         {{ errors.teacher_id }}
                                         <div class="col-12 d-flex justify-content-end">
-                                            <form @submit.prevent="saveTask" class="col-4">
+                                            <form @submit.prevent="saveTaskSubmit" class="col-4">
                                                 <button type="submit" class="col-12 mt-3 btn btn-dark">Editar</button>
                                             </form>
                                         </div>
@@ -35,16 +34,11 @@
                                     </form>
                                 
                                 </div>
-                            
                             </div>
-                           
                         </div>
-                        
-
                     </div>
                 </div>
             </div>
-            
         </div>
     </div>
 </template>
@@ -56,22 +50,26 @@ import { useRoute } from "vue-router";
 import * as yup from 'yup';
 import { es } from 'yup-locales';
 import { setLocale } from 'yup';
-
-
-const schema =  yup.object({
-    name: yup.string().required().label('Nombre'),
-})
-
-
-const { validate, errors } = useForm({ validationSchema: schema })
-const route = useRoute()
-
+import useEdit from "@/composables/editStudent";
+import useOnMount from "@/composables/common";
+const { getTeachers,getLicense, teachers, licenses, students } = useOnMount();
+const { saveTask,getSpecificStudentsEdit } = useEdit();
 
 setLocale(es);
 
 
+// Require the name had to have something writted
+const schema =  yup.object({
+    name: yup.string().required().label('Nombre'),
+})
 
+// Validate the form (schema) is there all the tag have pass the validation
+const { validate, errors } = useForm({ validationSchema: schema })
 
+// set to use the route params
+const route = useRoute()
+
+// Set the variable of these Field
 const { value: name } = useField('name', null, { initialValue: '' });
 const { value: surname } = useField('surname', null, { initialValue: '' });
 const { value: image } = useField('image', null, { initialValue: '' });
@@ -81,92 +79,41 @@ const { value: license_id } = useField('license_id', null, { initialValue: '' })
 const { value: teacher_id } = useField('teacher_id', null, { initialValue: '' });
 
 
+onMounted(() => {
+    getLicense();
+    getTeachers();
 
+    // get the student and asign the content to the form input
+    axios.get('/api/student/' + route.params.id)
+        .then(response => {
+            student.name = response.data.data[0]['name'];
+            student.surname = response.data.data[0]['surname'];
+            student.image = response.data.data[0]['image'];
+            student.email = response.data.data[0]['email'];
+            student.password = response.data.data[0]['password'];
+            student.license_id = response.data.data[0]['license_id'];
+            student.teacher_id = response.data.data[0]['teacher_id'];
+        })
+        .catch(function(error) {
+            console.log(error);
+        });
+})
+
+// Set the reactive value (content can be change, depend of value in the input box)
 const student = reactive({
     name,
     surname,
-    image,
     email,
     password,
     license_id,
     teacher_id
 })
 
-const strSuccess = ref();
-const strError = ref();
-const licenses = ref();
-const teachers = ref();
-const swal = inject('$swal');
 
-
-onMounted(() => {
-    axios.get('/api/student/' + route.params.id)
-    .then(response => {
-        student.name = response.data.data.name;
-        student.surname = response.data.data.surname;
-        student.image = response.data.data.image;
-        student.email = response.data.data.email;
-        student.password = response.data.data.password;
-        student.license_id = response.data.data.license_id;
-        student.teacher_id = response.data.data.teacher_id;
-    })
-    .catch(function(error) {
-        console.log(error);
-    });
-})
-
-onMounted(() => {
-// getLicencia();
-axios.get('/api/license')
-    .then(response => {
-        licenses.value = response.data;
-
-    })
-    .catch(function (error) {
-        console.log(error);
-    });
-})
-
-onMounted(() => {
-// getTeacher();
-axios.get('/api/teacher')
-    .then(response => {
-        teachers.value = response.data;
-
-    })
-    .catch(function (error) {
-        console.log(error);
-    });
-})
-
-
-
-
-
-function saveTask() {
+// Enviar para guardar los datos cambiados en bbdd
+function saveTaskSubmit() {
     validate().then(form => {
-        console.log('validate');
-        if (form.valid) {
-            axios.post('/api/student/update/'+route.params.id, student)
-                .then(response => {
-                    strError.value = ""
-                    strSuccess.value = response.data.success
-                    swal({
-                        icon: "success",
-                        title: "Datos Cambiados"
-                    })
-                    location.reload(); 
-                })
-                .catch(function (error) {
-                    strSuccess.value = ""
-                    strError.value = error.response.data.message
-                    swal({
-                        icon: "error",
-                        title: "Datos Incorrectos"
-                    })
-                    location.reload(); 
-                });
-        }
+        if (form.valid) saveTask(route.params.id, student);
     })
 
 }

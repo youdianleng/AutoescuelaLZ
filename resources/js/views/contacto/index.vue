@@ -76,6 +76,7 @@
     const home = ref({ icon: 'pi pi-home' });
     const items = ref([{ indicador: 'Home' }, { indicador: 'Informacion' }, { indicador: 'Contacto' }]);
 
+    // This part of code dosen't do anything  just use for input table can supply content
     const value = ref(null);
     const value1 = ref(null);
     const value2 = ref(null);

@@ -14,8 +14,6 @@
 
 
         <div class="card-body">
-
-            {{ Questiones }}
             <div class="d-flex justify-content-between pb-2 mb-2">
                 <h5 class="card-title">Añadir pregunta test</h5>
             </div>
@@ -33,7 +31,6 @@
                 <div class="form-group mb-2">
                     <label>Pregunta</label>
                     <textarea name="question" v-model="Questiones.question" class="col-12" ></textarea>
-                    {{ question }}
                 </div>
                 <div v-for="respuesta in respuestas" class="form-group mb-2  col-12">
                     <label for="first_option">Respuesta 1</label>
@@ -63,7 +60,6 @@
                 <div class="mb-3">
                     <DropZone v-model="Questiones.thumbnail" name="thumbnail"/>
                 </div>
-                {{ Questiones }}
                 <button class="btn btn-success">Crear pregunta</button>
             </form>
         </div>
@@ -73,48 +69,45 @@
 </template>
 
 <script setup>
+//Importar all the library
 import { ref, onMounted, reactive, computed } from "vue";
 import { useForm, useField } from "vee-validate"; 
 import { useRoute } from "vue-router";
 import * as yup from 'yup';
 import { es } from 'yup-locales';
 import { setLocale } from 'yup';
+import useQuestion from "@/composables/question";
+const { createQuestionSend,getQuestions,getTest,test,questions } = useQuestion();
 import axios from 'axios';
 import DropZone from "@/components/DropZone.vue";
+setLocale(es);
 
 
-// Selects
-const selectedOption = ref();
-const options = ref([
-    { name: 'Option 1', code: '1', value: 'first_option' },
-    { name: 'Option 2', code: '2', value: 'second_option' },
-    { name: 'Option 3', code: '3', value: 'third_option' },
-]);
-
-const selectedLevel = ref();
+// Define the default 
 const levels = ref([
     { name: 'Baja', code: 'low', value: 'low' },
     { name: 'Media', code: 'medium', value: 'medium' },
     { name: 'Alta', code: 'high', value: 'high' },
 ]);
 
-const selectedType = ref();
 const type = ref([
     { name: 'coche', code: '1', value: '1'},
     { name: 'moto', code: '2', value: '2'},
 ])
 
+// use for check the value of the define input not null
 const schema = yup.object({
     question: yup.string().required().label("Pregunta")
 })
 
-
+// use for active the validation
 const { validate, errors } = useForm({ validationSchema: schema })
+
+// use for get the params in the url
 const route = useRoute()
 
 
-setLocale(es);
-
+// These file is defined to get value that return from the form
 const { value: question } = useField('question', null, { initialValue: '' });
 const { value: difficulty } = useField('difficulty', null, { initialValue: '' });
 const { value: is_correct } = useField('is_correct', null, { initialValue: '' });
@@ -122,8 +115,8 @@ const { value: carnet } = useField('carnet', null, { initialValue: '' });
 const { value: respuestas } = useField('respuesta', null, { initialValue: [{},{},{}] });
 const { value: test_id } = useField('test_id', null, { initialValue: '' });
 const { value: thumbnail } = useField('thumbnail',null, { initialValue: '' });
-const test = ref();
 
+// variable to store the value writted in those input of the form
 const Questiones = reactive({
     carnet,
     question,
@@ -135,64 +128,18 @@ const Questiones = reactive({
     thumbnail: ''
 })
 
-
-const strSuccess = ref();
-const strError = ref();
-const questions = ref();
-
+// When the page is loaded call the functions
 onMounted(() => {
-    axios.get('/api/question')
-        .then(response => {
-            questions.value = response.data;
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
+        //get all the questions we have in bbdd
+        getQuestions();
 
-
-        axios.get('/api/test')
-        .then(response => {
-            test.value = response.data;
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
+        getTest();
 })
 
-
+// Use for create the new question for test
 function createQuestion() {
     validate().then(form => {
-        console.log(Questiones);
-        let serializedPost = new FormData()
-        
-        serializedPost.append('carnet', JSON.stringify(Questiones.carnet));
-        serializedPost.append('question', Questiones.question);
-        serializedPost.append('difficulty', JSON.stringify(Questiones.difficulty));
-        serializedPost.append('is_correct', Questiones.is_correct);
-        serializedPost.append('test_id', JSON.stringify(Questiones.test_id));
-        serializedPost.append('thumbnail', Questiones.thumbnail);
-
-        // Serializar el array de respuestas
-        Questiones.respuestas.forEach((respuesta, index) => {
-            serializedPost.append(`respuestas[${index}]`, JSON.stringify(respuesta));
-        });
-
-        if (form.valid) {
-            console.log("Validate");
-            axios.post('/api/question', serializedPost, {
-                headers: {
-                 "content-type": "multipart/form-data"
-                }
-              })
-                .then(response => {
-                    strError.value = ""
-                    strSuccess.value = response.data.success
-                })
-                .catch(function (error) {
-                    strSuccess.value = ""
-                    strError.value = error.response.data.message
-                });
-        }
+        if (form.valid) createQuestionSend(Questiones,form);
     })
 
     

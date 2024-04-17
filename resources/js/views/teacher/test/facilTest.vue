@@ -4,7 +4,7 @@
             <h2>Test Facil</h2>
 
             <div class="row">
-                <div v-for="(tes, index) in test" :key="tes.id" class="col-md-2">
+                <div v-for="(tes, index) in test" :key="tes.id" class="col-md-3">
                     <div vclass="card">
                         <img src="/images/assets/images.png" class="card-img-top" alt="...">
                         <div class="card-body">
@@ -32,7 +32,7 @@ const route = useRoute()
 
 
 onMounted(() => {
-
+    
     getFacilTest();
     console.log(test);
 

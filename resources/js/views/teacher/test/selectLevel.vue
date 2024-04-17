@@ -34,6 +34,7 @@
 </template>
 
 <script setup>
+// import the library
 import { ref, onMounted, reactive } from "vue";
 import { useForm, useField } from "vee-validate"; 
 import { useRoute } from "vue-router";
@@ -49,7 +50,7 @@ const route = useRoute()
 
 
 onMounted(() => {
-
+    //call the function when the page is loaded
     getSpecificStudents(route.params.id);
     createFindMadedTest(route.params.id);
 })

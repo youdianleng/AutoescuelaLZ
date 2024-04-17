@@ -6,6 +6,7 @@ export default function useOnMount() {
     const licenses = ref();
     const teachers = ref();
 
+    // Get all the user 
     const getStudents = async() =>{
          // getUsers();
         axios.get('/api/student')
@@ -19,7 +20,6 @@ export default function useOnMount() {
 
 
     const getSpecificStudents = async(id) =>{
-        // getUsers();
        axios.get('/api/student/' + id )
        .then(response => {
            students.value = response.data.data;
@@ -31,7 +31,6 @@ export default function useOnMount() {
    }
 
     const getTeachers = async() =>{
-        // getUsers();
         axios.get('/api/teacher')
         .then(response => {
             teachers.value = response.data;

@@ -228,7 +228,11 @@
 
 <script setup>
 import { ref, onMounted } from "vue";
+
+    // Where we store all the review we want to show
     const products = ref();
+
+    // This part of code use for show amount of review in responsive mode
     const responsiveOptions = ref([
     {
         breakpoint: '1400px',
@@ -492,7 +496,7 @@ textarea {
         background-color:#D61819;
     }
 
-@media only screen and (max-width: 1150px) {
+@media only screen and (max-width: 1200px) {
     .cajaInformacionSegundario{
         visibility: hidden;
         padding: 10px;

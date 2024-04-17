@@ -47,8 +47,8 @@
                     <div class="col-12 card bg-body-tertiary rounded">
                         <Image src="/images/infoAutoescuela/practicaCoche.png" class="imgCarnet" alt="Image" width="100%" id="mueveImagen" />
                         <div class="texto col-12">
-                            <h2 class="fw-bold">Licencia Coche</h2>
-                            <p>Una licencia de conducir de automóvil es una licencia que requiere mucho tiempo para practicar, generalmente toma entre 2 y 4 meses, 
+                            <h2 class="fw-bold h2texto">Licencia Coche</h2>
+                            <p class="ptexto">Una licencia de conducir de automóvil es una licencia que requiere mucho tiempo para practicar, generalmente toma entre 2 y 4 meses, 
                                 generalmente puedes aprender suficientes conocimientos teóricos para participar en el primer al segundo mes, después de uno o dos meses de comenzar. 
                                 , podemos realizar el examen práctico y tras aprobarlo podremos obtener el permiso de conducir.</p>
                         </div>
@@ -58,8 +58,8 @@
                     <div class="col-12 card bg-body-tertiary rounded">
                         <Image src="/images/infoAutoescuela/practicaMoto.png" class="imgCarnet d-flex justify-content-end" alt="Image" width="100%" id="mueveImagen"/>
                         <div class="texto col-12">
-                            <h2 class="fw-bold">Licencia Moto</h2>
-                            <p>Si desea obtener una licencia de conducir de vehículos motorizados, 
+                            <h2 class="fw-bold h2texto">Licencia Moto</h2>
+                            <p class="ptexto">Si desea obtener una licencia de conducir de vehículos motorizados, 
                                 los estudiantes deben familiarizarse primero con las reglas y señales de conducción, 
                                 luego realizar primero un examen teórico y luego tomar 20 lecciones prácticas como estándar para dominar la conducción.
                                  son capaces de conducir solos. Puede solicitar la prueba y confirmar si debe emitir una licencia de conducir de vehículos motorizados según los resultados de la prueba.</p>
@@ -160,7 +160,7 @@
     .texto{
         position: absolute;
         z-index: 0;
-        padding: 60px;
+        padding: 50px;
     }
 
     .carnets{
@@ -184,7 +184,9 @@
     .mdTextoPadding30 p{
         margin: 0px;
     }
-    @media only screen and (max-width: 1150px) {
+
+    
+    @media only screen and (max-width: 1050px) {
         .imgVia{
             padding: 0px;
         }
@@ -216,14 +218,47 @@
 
         .texto{
             padding: 15px;
+            
+        }
+
+        .texto h2{
+            font-size: 20px;
+            
         }
 
         .texto p{
-            font-size: 12px;
+            font-size: 15px;
         }
 
         .topMoto{
             margin-top: 20px;
+        }
+
+        
+    }
+
+    @media only screen and (max-width: 1400px) {
+        .h2texto{
+            font-size: 20px;
+        }
+
+        .ptexto{
+            font-size: 11px;
+        }
+
+        .texto{
+            padding: 30px;
+        }
+    }
+
+    @media only screen and (max-width: 500px) {
+        .texto h2{
+            font-size: 12px;
+            
+        }
+
+        .texto p{
+            font-size: 8px;
         }
     }
 
