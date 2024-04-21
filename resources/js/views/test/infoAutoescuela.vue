@@ -10,7 +10,7 @@
         <h1 class="SobreNosotroText d-flex align-items-end text-white pb-5">Sobre Nosotros</h1>
 
          <div class="col-lg-12 imgVia d-lg-flex justify-content-lg-around"> 
-            <div class="col-lg-6 col-md-12 d d-flex align-items-center">
+            <div class="col-lg-6 col-md-12 d d-flex align-items-center imgCoche">
                 <Image src="/images/infoAutoescuela/coche.jpg" alt="Image" width="100%" />
 
             </div>
@@ -35,7 +35,7 @@
                             <img src="/images/assets/LZ.png" style="height: 30px;">
                             <h3 class="d-flex justify-content-center ms-2">Autoescuela Perfecta</h3>
                         </div>
-                        <h1 class="fw-bold">LICENCIA DE CONDUCIR PROPORCIONADA</h1>
+                        <h1 class="fw-bold d-flex justify-content-center">LICENCIA DE CONDUCIR PROPORCIONADA</h1>
                         
                     </div>
                 </div>
@@ -251,7 +251,7 @@
         }
     }
 
-    @media only screen and (max-width: 500px) {
+    @media only screen and (max-width: 576px) {
         .texto h2{
             font-size: 12px;
             
@@ -259,6 +259,16 @@
 
         .texto p{
             font-size: 8px;
+        }
+
+        .informacionCarnet h1{
+            font-size: 12px;
+            margin-top: 30px;
+        }
+
+        .imgCoche{
+            padding: 50px;
+            padding-bottom: 10px;
         }
     }
 

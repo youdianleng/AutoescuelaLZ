@@ -22,25 +22,29 @@ class Student extends Model implements HasMedia
         'address'
     ];
 
+    // get the teacher of student
     public function teachers()
     {
         return $this->belongsToMany(Teacher::class, 'students_teachers');
     }
 
+    // Get the license of student
     public function licenses()
     {
         return $this->belongsToMany(License::class, 'students_licenses');
     }
 
+    // Get the question that student make in test
     public function student_test_question(){
         return $this->hasMany(student_test_question::class, 'student_id');
     }
 
+    // Get the test that the student did 
     public function student_test(){
         return $this->hasMany(students_tests::class, 'student_id');
     }
 
-
+    // Decide the side where we want to place the image
     public function registerMediaCollections(): void
     {
         $this->addMediaCollection('images/students')
@@ -48,6 +52,7 @@ class Student extends Model implements HasMedia
             ->useFallbackPath(public_path('/images/placeholder.jpg'));
     }
 
+    // Resize the Meida width and height
     public function registerMediaConversions(Media $media = null): void
     {
         if (env('RESIZE_IMAGE') === true) {
@@ -56,6 +61,11 @@ class Student extends Model implements HasMedia
                 ->width(env('IMAGE_WIDTH', 300))
                 ->height(env('IMAGE_HEIGHT', 300));
         }
+    }
+
+    // Get all the review have when the id of student existe in the table student_review
+    public function review_student(){
+        return $this->hasMany(student_review::class,"student_id");
     }
 
 }

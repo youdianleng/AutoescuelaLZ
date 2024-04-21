@@ -1,7 +1,7 @@
 <template>
     <div class="card col-12">
         <div class="padding30 col-12 ">
-            <h1>TEST</h1>
+            <h1>NIVELES DE TEST SELECCIONABLES</h1>
             <div class=" col-12">
                 <div class="col-12 card padding30">
                     <h3>{{ students.name }}</h3>
@@ -12,17 +12,17 @@
                 </div>
                 <div class="col-12 card padding30 mt-5">
                     <h2>Selecciona el nivel de Test</h2>
-                    <div class="d-flex col-12 justify-content-between mt-5">
-                        <router-link class="card col-3 padding60 text-center facil" :to="{ name: 'facilTests', params: { id: route.params.user_id } }">
+                    <div class="d-md-flex col-12 justify-content-between mt-5">
+                        <router-link class="testsLevel card col-md-3 col-xs-12 padding60 text-center facil" :to="{ name: 'facilTests', params: { id: route.params.user_id } }">
                                 <h4>Facil</h4>
                         </router-link>
                         
-                        <router-link class="card col-3 padding60 text-center normal" :to="{ name: 'normalTests', params: { id: route.params.user_id } }">
+                        <router-link class="testsLevel card col-md-3 col-xs-12 padding60 text-center normal" :to="{ name: 'normalTests', params: { id: route.params.user_id } }">
                                 <h4>Normal</h4>
                         </router-link>
 
                         
-                        <router-link class="card col-3 padding60 text-center dificil" :to="{ name: 'dificilTests', params: { id: route.params.user_id } }">
+                        <router-link class="testsLevel card col-md-3 col-xs-12 padding60 text-center dificil" :to="{ name: 'dificilTests', params: { id: route.params.user_id } }">
                              <h4>Dificil</h4>
                         </router-link>
                         
@@ -87,4 +87,13 @@ h4{
 .dificil{
     background-color: lightcoral;
 }
+
+@media only screen and (max-width: 576px) {
+
+    .testsLevel{
+        margin-top: 30px;
+    }
+}
+
+
 </style>

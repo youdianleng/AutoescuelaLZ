@@ -16,6 +16,7 @@ class students_tests extends Model
         "level"
     ];
 
+    //Get the level of the test
     public function test_level(){
         return $this->belongsTo(Test::class,"student_id");
     }

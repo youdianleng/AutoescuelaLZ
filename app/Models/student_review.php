@@ -13,4 +13,6 @@ class student_review extends Model
         'student_id',
         'review'
     ];
+
+    
 }

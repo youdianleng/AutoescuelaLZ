@@ -1,18 +1,19 @@
 <template>
-    <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+    
+    <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm" id="navbar">
         <div class="container">
             <div class="col-ms-12 d-lg-none">
                 <Button class="border-0" icon="pi pi-bars" @click="visible = true" />
             </div>
             <div class="esconderTopBar col-12 d-flex align-items-center">
                 <router-link to="/" >
-                    <img src="/images/logo.svg" alt="logo AutoEscuelaLZ" height="100px" width="200px" />
+                    <img src="/images/logo.svg" alt="logo AutoEscuelaLZ" height="100px" width="130px" />
                     <span></span>
                 </router-link>
 
                 <router-link to="/info">
                     <button class="p-link layout-topbar-button layout-topbar-button-c" id="Information">
-                        Información
+                        {{ $t(`Informacion`)}}
                     </button>
                 </router-link>
 
@@ -35,36 +36,24 @@
                 
                 <router-link to="/contacto">
                     <button class="p-link layout-topbar-button layout-topbar-button-c" id="Information">
-                        Contacto
+                        {{ $t(`Contacto`) }}
                     </button>
                 </router-link>
-
+                <router-link to="/profile" v-if="role == 'teacher' || role == 'student'">
+                    <button class="p-link layout-topbar-button layout-topbar-button-c" id="Information">
+                        {{ $t(`Perfile`) }}
+                    </button>
+                </router-link>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mt-2 mt-lg-0 me-auto mb-2 mb-lg-0">
                         <LocaleSwitcher />
                     </ul>
-                    <ul class="navbar-nav mt-2 mt-lg-0 ms-auto">
-                        <template v-if="!user?.name">
-                            <li class="nav-item">
-                                <router-link class="nav-link" to="/login">{{ $t('login') }}</router-link>
-                            </li>
-                        </template>
-                        <li v-if="user?.name" class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Hola, {{ user.name }}
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu-end">
-                                <li><router-link class="dropdown-item" to="/profile">Perfil</router-link></li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="javascript:void(0)" @click="logout">Logout</a></li>
-                            </ul>
-                        </li>
-                    </ul>
+                    
                 </div>
             </div>
         </div>
     </nav>
-
+    
 
 
 
@@ -128,7 +117,7 @@
                                 <router-link to="/profile">
                                     <a class="flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors p-ripple">
                                         <i class="pi pi-user mr-2"></i>
-                                        <span class="font-medium">Perfile</span>
+                                        <span class="font-medium">{{ $t(`Perfile`) }}</span>
                                     </a>
                                 </router-link>
                             </li>
@@ -136,7 +125,7 @@
                                 <router-link to="/contacto">
                                     <a class="flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors p-ripple">
                                         
-                                        <i class="pi pi-sign-out mr-2"></i>
+                                        <i class="pi pi-whatsapp mr-2"></i>
                                         <span class="font-medium">Contacto</span>                      
                                     </a>
                                 </router-link>
@@ -159,6 +148,28 @@
             </template>
         </Sidebar>
         
+    </div>
+
+
+    <div class="navbar1 d-flex align-items-center" id="navbar1">
+            <div class="container ">
+                <ul class="navbar-nav mt-2 mt-lg-0 ms-auto">
+                    <template v-if="!user?.name">
+                        <li class="nav-item">
+                            <router-link class="nav-link text-white" to="/login">{{ $t('login') }}</router-link>
+                        </li>
+                    </template>
+                    <div class="d-flex">
+                        <li v-if="user?.name" class="text-white d-flex align-items-center">
+                            <p class="me-3"> Hola, {{ user.name }}</p>
+                                
+                        </li>
+                        <li v-if="user?.name" class="text-white d-flex">
+                            <p class="text-white logout" href="javascript:void(0)" @click="logout">{{ $t('logout') }}</p>   
+                        </li>
+                    </div>
+                </ul>
+            </div>
     </div>
 </template>
 
@@ -187,6 +198,22 @@ const topbarMenuClasses = computed(() => {
     return {
         'layout-topbar-menu-mobile-active': topbarMenuActive.value
     };
+});
+
+window.addEventListener('scroll', function() {
+    let alturaScroll = window.scrollY; 
+
+    let alturaDeseada = 80; 
+    
+    let navbar = document.getElementById("navbar");
+    let navbar1 = document.getElementById("navbar1");
+    if (alturaScroll >= alturaDeseada) {
+        navbar.classList.add('scroll-efecto'); 
+        navbar1.classList.add('scroll-efecto'); 
+    } else {
+        navbar.classList.remove('scroll-efecto'); 
+        navbar1.classList.remove('scroll-efecto'); 
+    }
 });
 </script>
 
@@ -241,5 +268,34 @@ $screen-md: 970px;
         font-size: 1.2rem !important;
     }
 
+nav{
+    position:absolute;
+    z-index: 9998;
+    height: 80px;
+    
+}
+
+.navbar1{
+    position:relative;
+    width: 100%;
+    height: 80px;
+    background-color: #D52323;
+    z-index: 9999;
+    clip-path: polygon(60% 100%, 40% 0%, 100% 0%, 100% 100%);
+    color: black;
+}
+
+.scroll-efecto {
+    position: fixed!important;
+}
+
+.logout{
+    cursor: pointer;
+}
+
+.layout-topbar-button:hover{
+    color: #F3BD00;
+    transition-duration: 0.5s;
+}
 
 </style>

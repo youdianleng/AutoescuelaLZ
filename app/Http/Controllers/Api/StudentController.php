@@ -125,7 +125,7 @@ class StudentController extends Controller
     public function findStudent($id, Request $request)
     {
         
-        $student = Student::find($id)->with("student_test")->with('teachers')->with('media')->get();
+        $student = Student::where('id',$id)->with("student_test")->with('teachers')->with('media')->get();
         if (!$student) {
             return response()->json(['success' => false, 'message' => 'Estudiante no encontrado'], 404);
         }
@@ -178,5 +178,13 @@ class StudentController extends Controller
 
         return response()->json(['success' => true, 'data' => $findReview]);
     }
+
+    // Get all the reviews
+    public function getReview(){
+        $findReview = Student::with('review_student')->with('media')->get();
+
+        return $findReview;
+    }
+
     
 }

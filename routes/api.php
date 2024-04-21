@@ -46,14 +46,18 @@ Route::get('student', [StudentController::class, 'index']);
 Route::get('license', [StudentController::class, 'license']);
 Route::get('teacher', [StudentController::class, 'teacher']);
 Route::post('student/create', [StudentController::class, 'store']);
+
+
 Route::get('student/{id}', [StudentController::class, 'findStudent']);
+
+
 Route::post('student/update/{id}', [StudentController::class, 'update']);
 Route::delete('student/{id}', [StudentController::class, 'destroy']);
 Route::get('student/test/{user_id}/{test_id}',[StudentController::class, 'getPartTestCompleteStudent']);
 Route::get('student/testQuestion/{user_id}/{idTest}',[StudentController::class, 'getStudentTestQuestion']);
 Route::post('student/review/{user_id}', [StudentController::class, 'submitReview']);
 Route::get('student/review/find/{user_id}', [StudentController::class, 'findReview']);
-
+Route::get('review', [StudentController::class, 'getReview']);
 
 //Funciones para Test
 Route::get('test', [TestController::class, 'index']);
@@ -70,6 +74,8 @@ Route::post('test/finalizar/{user_id}/{id}/{passed}/{level}', [TestController::c
 Route::post('test/sendActualQuestion/{user_id}/{id}/{question}/{is_correct}', [TestController::class, 'storeTestQuestion']);
 Route::delete('test/exist/{user_id}/{id}', [TestController::class, 'existUserTest']);
 Route::delete('test/existTestQuestion/{user_id}/{test_id}', [TestController::class, 'existUserTestQuestion']);
+
+
 
 
 // SelectLevel

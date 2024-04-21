@@ -25,11 +25,11 @@
             </div>
         </h1>
         <div class="col-12 ">
-            <div class="formularioContacto d-lg-flex justify-content-between">
-                <div class="col-lg-6 col-sm-12 hiddenIframe">
+            <div class="formularioContacto d-xl-flex justify-content-between">
+                <div class="col-xl-6 col-md-12 hiddenIframe">
                     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d374.02801692303234!2d2.017889463037388!3d41.412652984353755!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12a49a8fe6b59a81%3A0xc4fddcd7c13f414e!2sCarrer%20Major%2C%2060%2C%2008750%20Molins%20de%20Rei%2C%20Barcelona!5e0!3m2!1sca!2ses!4v1710255652217!5m2!1sca!2ses" class="col-12" height="100%" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
-                <div class="col-lg-6 col-sm-12 tablaContactar">
+                <div class="col-xl-6 col-md-12 tablaContactar">
                     <p>Contactar con nosotros</p>
                     <h2 class="fw-bold">Si tiene alguna consulta, contáctenos</h2>
                     <p>Si tiene alguna pregunta sobre nuestro cronograma de cursos, nuestros métodos educativos u otras preguntas, 
@@ -186,6 +186,31 @@
       }
     }
 
+    @media only screen and (max-width: 760px) {
+        .formularioContacto{
+            padding: 10px;
+        }
+        .botonFormulario{
+            width: 100%;
+            margin-bottom: 20px;
+        }
 
+        .shadow{
+            height: 211px;
+        }
+        
+        .SobreNosotroText{
+            height: 211px;
+            margin-bottom: 20px;
+        }
+
+        .SobreNosotroText p{
+            font-size: 30px;
+        }
+
+        .p-breadcrumb{
+            font-size: 15px;
+        }
+    }
 
 </style>

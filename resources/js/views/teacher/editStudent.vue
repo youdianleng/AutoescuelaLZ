@@ -11,7 +11,6 @@
                                     <form @submit.prevent="createStudent" class="col-12 row">
                                         <input placeholder="Nombre" v-model="student.name" name="name" required>
                                         {{ errors.name }}
-                                        {{ name }}
                                         <input class="mt-4" name="surname" v-model="student.surname" placeholder="Apellido">
                                         <input type="mail" name="email" v-model="student.email" class="mt-4" placeholder="Email" required>
                                         {{ errors.email }}

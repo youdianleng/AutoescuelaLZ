@@ -14,6 +14,7 @@ class Teacher extends Model
         "surname",
     ];
 
+    // Get the Student where is asign to this teacher
     public function student()
     {
         return $this->hasMany(Student::class, 'students_teachers');

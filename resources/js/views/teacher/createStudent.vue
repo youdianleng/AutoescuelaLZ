@@ -28,7 +28,10 @@
                                     <td class="col-2">{{ student.password }}</td>
                                     <td class="col-2" v-if="student.license_id === 1">Coche</td>
                                     <td class="col-2" v-else="student.license_id === 2">Moto</td>
-                                    <td class="col-2">{{ student.teacher_id }}</td>
+                                    <td class="col-2" v-for="teacher in teachers">
+                                        <td v-if="student.teacher_id == teacher.id">{{ teacher.name }}</td>
+                                    </td>
+                                    
                                     <td class="col-2 d-flex justify-content-around">
                                         <router-link :to="{ name: 'teacher.EditStudent', params: { id: student.id } }">
                                             <button type="submit" class="editButton btn btn-primary">Editar</button>

@@ -16,9 +16,9 @@
                         </a>
                     </template>
                 </Breadcrumb>
-                <div v-if="students" class="col-12 d-flex justify-content-center">
+                <div v-if="students" class="col-12 d-flex justify-content-center" >
                     <div  class="col-3 d-flex justify-content-center">
-                        <img :src="`${students.data[0].media[0].original_url}`" width="150">
+                        <img :src="`${students.data[0].media[0].original_url}`" class="col-6">
                     </div>
                     
                     <div  class="col-5">
@@ -162,7 +162,7 @@ const role = computed(() => store.state.auth.role)
 let reviewCount = 0;
 
 onMounted(() => {
-
+    console.log(user.value['user_id']);
     // getUsers();
     axios.get('/api/student/' + user.value['user_id'])
         .then(response => {
@@ -241,17 +241,25 @@ const getStudentTestQuestionQuantity = ($idTest) =>{
 const main = ref(); 
 let myChart;
 
+// Start the graphic circle with the data
 function init() {
     if(myChart){
+        // if the graphic circle is already running, shut it down 
         myChart.dispose();
     }
+
+    // create a new graphic circle
     myChart = echarts.init(main.value);
+
+    // data that is gonna be show in the graphic circle
   var datas = [
     [
       { name: "Realizado", value: Math.floor(valueMaked) },
       { name: "Falta", value: Math.floor(valueNoMaked)},
     ],
   ];
+
+  // option to configure how is the graphic circle look like
   var option = {
     series: datas.map(function (data) {
       return {
@@ -280,17 +288,22 @@ function init() {
     }),
   };
 
+  // put the option for graphic
   myChart.setOption(option);
 }
 
+// Icon that use for show the home 
 const home = ref({
     icon: 'pi pi-home',
     route: '/'
 });
+
+// route for breadcrumb
 const items = ref([
     { label: 'Perfile', route: '/Profile' }
 ]);
 
+// require label
 const schema = yup.object({
     comentario: yup.string().required().label('Comentario'),
 })
@@ -305,8 +318,9 @@ const reviews = reactive({
 })
 
 function commitReview(){
-
+    // When the student want send the Review check the validation first 
     validate().then(form => {
+        // if form have all the value we want send it to bbdd
         if (form.valid) submitReview(user.value['user_id'],reviews);
     })
    

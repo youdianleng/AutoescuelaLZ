@@ -15,6 +15,7 @@ class Option extends Model
         "question_id",
     ];
 
+    // Get the question where this option is placed
     public function question() {
         return $this->belongsTo(Question::class);
     }
