@@ -88,6 +88,27 @@ class TestController extends Controller
         return response()->json(['success' => true, 'data' => $saveTest]);
     }
 
+    public function EditTestQuestionExist($user_id, $id, $question, $is_correct){
+
+        $replaceData = student_test_question::where("student_id",$user_id)->where("test_id",$id)->where("question_id",$question)->first();
+        
+        $replaceData->update(
+            [
+                'student_id' => $user_id,
+                'test_id' => $id,
+                'question_id' => $question,
+                'is_correct' => $is_correct,
+            ]
+        );
+
+
+
+
+
+        return response()->json(['success' => true, 'data' => $replaceData]);
+    }
+
+
 
     public function existUserTest($user_id, $id){
 

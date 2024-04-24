@@ -26,12 +26,12 @@
                     <button @click.prevent="showNextQuestion" class="btn btn-success bg-blue-700">Siguiente</button>
                 </div>
                 <div class="row mt-5">
-                    <router-link to="" v-for=" Question,index  in questions" class="card mr-2 bg-teal-300"
+                    <button @click.prevent="enviarButton(index) " v-for=" Question,index  in questions" class="card mr-2 bg-teal-300"
                         style="width: 5px; height: 5px; align-items: center; justify-content: center;">
                         
                         {{ index+1 }}
 
-                    </router-link>
+                </button>
                 </div>
             </div>
         </div>
@@ -50,7 +50,7 @@ import { setLocale } from 'yup';
 import axios from 'axios';
 import { useStore } from 'vuex';
 import useTest from "@/composables/test";
-const { searchExistTestQuestion,finalizarValue,singleTestQuestionCompleteSave } = useTest();
+const { searchExistTestQuestion,finalizarValue,singleTestQuestionCompleteSave,singleTestQuestionCompleteEdit } = useTest();
 
 const store = useStore();
 const user = computed(() => store.state.auth.user)
@@ -115,16 +115,34 @@ const showNextQuestion = () =>{
             // if the student have choice the correct answer 
             if(respuestas.respuesta == questionId.value['options'][i].id && questionId.value['options'][i].is_correct == 1){
                 // push in the respuetaValidar array 1 as correct
-                respuestasValidar.push(1);
 
+                if(respuestasValidar[contador-1] !== undefined){
+                    console.log("hola");
+                    respuestasValidar[contador-1] = 1;
+                    singleTestQuestionCompleteEdit(user.value['user_id'],route.params.id,questionId.value['id'],1);
+                }else{
+                    respuestasValidar.push(1);
+                    singleTestQuestionCompleteSave(user.value['user_id'],route.params.id,questionId.value['id'],1);
+                }
+
+                console.log(respuestasValidar);
                 // insert into the bdd the answer of this question
-                singleTestQuestionCompleteSave(user.value['user_id'],route.params.id,questionId.value['id'],1);
+                
                 break;
             }else{
                 // push in the respuestaValidar array 0 as incorrect
-                respuestasValidar.push(0);
+                if(respuestasValidar[contador-1] !== undefined){
+                    console.log("hola");
+                    respuestasValidar[contador-1] = 0;
+                    singleTestQuestionCompleteEdit(user.value['user_id'],route.params.id,questionId.value['id'],0);
+                }else{
+                    respuestasValidar.push(0);
+                    singleTestQuestionCompleteSave(user.value['user_id'],route.params.id,questionId.value['id'],0);
+                }
+
+                console.log(respuestasValidar);
                 // insert into the bdd the answer of this question
-                singleTestQuestionCompleteSave(user.value['user_id'],route.params.id,questionId.value['id'],0);
+                
                 break;
             }
         }
@@ -146,6 +164,11 @@ const showNextQuestion = () =>{
 
     
     
+}
+
+const enviarButton = (testId) =>{
+    questionId.value = questions.value[testId];
+    contador = testId;
 }
 
 // Search in bbdd, did the user already have one test with this id.

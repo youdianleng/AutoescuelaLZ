@@ -51,4 +51,8 @@ onMounted(() => {
     padding: 0px;
 }
 
+.card-text{
+    font-size: 30px;
+}
+
 </style>

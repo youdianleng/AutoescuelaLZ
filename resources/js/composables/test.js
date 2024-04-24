@@ -48,6 +48,18 @@ export default function useTest() {
         });
     }
 
+    // This is use for when student is doing a test and choice the wrong answer in a question, and when they use question button to reanswer the question
+    // this is for replace the value they puted before
+    const singleTestQuestionCompleteEdit = async($user_id,$id,$questionId,$correct) => {
+        axios.put('/api/test/sendActualQuestionEdit/' + $user_id + "/" + $id + "/" + $questionId + "/" + $correct)
+        .then(response => {
+            console.log("Updated");
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+    }
+
 
 
     return{
@@ -55,6 +67,7 @@ export default function useTest() {
         getFacilTest,
         searchExistTestQuestion,
         finalizarValue,
-        singleTestQuestionCompleteSave
+        singleTestQuestionCompleteSave,
+        singleTestQuestionCompleteEdit
     }
 }
