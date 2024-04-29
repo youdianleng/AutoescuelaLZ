@@ -128,6 +128,12 @@ export default [
                 component: () => import('../views/test/index.vue'),
 
             },
+            {
+                name: 'Final',
+                path: 'Final/:user/:test_id/:accept/:respuesta',
+                component: () => import('../views/teacher/test/final.vue'),
+
+            },
         ]
     },
 

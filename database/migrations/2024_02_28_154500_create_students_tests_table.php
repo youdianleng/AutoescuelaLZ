@@ -18,7 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger("is_correct");
             $table->string("level");
 
-            $table->foreign("student_id")->references("id")->on("users")->onDelete("cascade");
+            $table->foreign("student_id")->references("user_id")->on("users")->onDelete("cascade");
             $table->foreign("test_id")->references("id")->on("tests")->onDelete("cascade");
             $table->timestamps();
         });

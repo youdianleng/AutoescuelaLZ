@@ -15,7 +15,7 @@ return new class extends Migration
             $table->unsignedBigInteger('student_id');
             $table->unsignedBigInteger('license_id');
             $table->boolean('active');
-            $table->foreign('student_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('student_id')->references('user_id')->on('users')->onDelete('cascade');
             $table->foreign('license_id')->references('id')->on('licenses')->onDelete('cascade');
         });
     }

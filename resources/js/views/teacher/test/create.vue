@@ -14,6 +14,7 @@
 
 
         <div class="card-body">
+            {{ Questiones }}
             <div class="d-flex justify-content-between pb-2 mb-2">
                 <h5 class="card-title">Añadir pregunta test</h5>
             </div>

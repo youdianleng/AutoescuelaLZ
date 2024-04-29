@@ -142,7 +142,7 @@
                                     <InputText type="text" v-model="value" class="col-xl-10" placeholder="Profe Asignado" />
                                 </div>
                                 <div class="col-xl-12 d-flex justify-content-center inputBox"> 
-                                    <Textarea  rows="7" cols="48" placeholder="Introduce el Nivel de Test, Numero de Pregunta y Detalle de Error" />
+                                    <Textarea  rows="7" cols="42" placeholder="Introduce el Nivel de Test, Numero de Pregunta y Detalle de Error" />
                                 </div>
                                 <div class="col-xl-12 d-flex justify-content-center inputBox pt-5"> 
                                     <router-link class="buttonRealizarPregunta card col-xl-8 col-xs-12 text-center facil" :to="{ name: 'facilTests', params: { id: route.params.user_id } }">

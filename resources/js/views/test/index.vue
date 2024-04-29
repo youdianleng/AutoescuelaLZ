@@ -1,39 +1,55 @@
 <template>
-    <div class="grid">
-        <div v-if="questionId" class="col-12">
-            <div class="card">
-                <h2>TEST Nº1</h2>
-                <div class="row">
-                    <h2>1. {{ questionId.question }}</h2>
-                    <div v-if="questionId['media'] && questionId['media'].length > 0" class="col-2">
-                        <img :src="`${questionId['media'][0]['original_url'] }`" alt="" height="100px" width="100px">
-                    </div>
-                    <div v-if="questionId['options']" class="col-10">
-                        <div  class="d-flex">
-                            <RadioButton v-model="respuestas.respuesta"  :value=" questionId['options'][0]['id'] " class="form-control col-1"/>
-                            <p class="ms-3">a. {{ questionId['options'][0]['option_text'] }}</p>
+    <div class="col-12">
+        <div v-if="questionId" class="card col-12">
+            <div class=" col-12">
+                    <h1 class="d-flex justify-content-center fw-bold mt-5">TEST Nº {{ route.params.id }}</h1>
+                <div class="d-flex mt-5">
+                    <div class="col-xl-4">
+                        <div v-if="questionId['media'] && questionId['media'].length > 0" class="col-11 border d-flex justify-content-center ms-3">
+                            <img :src="`${questionId['media'][0]['original_url'] }`" alt="" height="350px" width="300px">
                         </div>
-                        <div class="d-flex mt-3">
-                            <RadioButton v-model="respuestas.respuesta"  :value=" questionId['options'][1]['id'] " class="form-control col-1"/>
-                            <p class="ms-3">b. {{ questionId['options'][1]['option_text'] }}</p>
-                        </div>
-                       
-                        <div class="d-flex mt-3">
-                            <RadioButton v-model="respuestas.respuesta"  :value=" questionId['options'][2]['id'] " class="form-control col-1"/>
-                            <p class="ms-3">c. {{ questionId['options'][2]['option_text'] }} </p>
+                        <div v-if="questionId['media'] && questionId['media'].length <= 0" class="col-11 border d-flex justify-content-center ms-3">
+                            <div width="100px" height="400px" class="CajaImagen d-flex justify-content-center">{{ contador+1 }}</div>
                         </div>
                     </div>
-                    <button @click.prevent="showNextQuestion" class="btn btn-success bg-blue-700">Siguiente</button>
+
+                    <div class="col-xl-8">
+                        {{ respuestas.respuesta }}
+                        <h2 class="fw-semibold">Prueba Numero {{ contador+1 }}:  {{ questionId.question }}</h2>
+                        <div v-if="questionId['options']" class="col-10">
+                            <div  class="d-flex">
+                                <RadioButton v-model="respuestas.respuesta"  :value=" questionId['options'][0]['id'] " class="form-control col-1 switchColor1" @click.prevent="changeColorButton"/>
+                                <p class="ms-3">a. {{ questionId['options'][0]['option_text'] }}</p>
+                            </div>
+                            <div class="d-flex mt-3">
+                                <RadioButton v-model="respuestas.respuesta"  :value=" questionId['options'][1]['id'] " class="form-control col-1 switchColor1" @click.prevent="changeColorButton "/>
+                                <p class="ms-3">b. {{ questionId['options'][1]['option_text'] }}</p>
+                            </div>
+                        
+                            <div class="d-flex mt-3">
+                                <RadioButton v-model="respuestas.respuesta"  :value=" questionId['options'][2]['id'] " class="form-control col-1 switchColor1" @click.prevent="changeColorButton "/>
+                                <p class="ms-3">c. {{ questionId['options'][2]['option_text'] }} </p>
+                            </div>
+                        </div>
+                        <button v-if="contador != 0" @click.prevent="previousQuestion" class="btn btn-success bg-black col-1"><</button>
+                        <button @click.prevent="compruebaDatos" class="btn btn-success bg-black col-4 ms-2">Siguiente ></button>
+                    </div>
                 </div>
-                <div class="row mt-5">
-                    <button @click.prevent="enviarButton(index) " v-for=" Question,index  in questions" class="card mr-2 bg-teal-300"
-                        style="width: 5px; height: 5px; align-items: center; justify-content: center;">
+                <div class="row col-12 bg-line ps-3 mt-5 border-top border-bottom pb-5">
+                    <button @click.prevent="enviarButton(index) " v-for=" Question,index  in questions" class="card mr-2 mt-4 ms-2 cardButton"
+                        style="width: 10px; height: 10px; align-items: center; justify-content: center;">
                         
                         {{ index+1 }}
-
-                </button>
+                    </button>
+                </div>
+                <div  class="col-12 card d-flex">
+                    <div class="col-12 d-flex mt-2 ms-3 mb-2">
+                        <p class="fw-bold">Precauciones: <span class="fw-normal">Si ve algún error o problema que no tiene sentido, utilice el formulario en la página de TEST para enviarnos sus comentarios.</span></p>
+                        
+                    </div>
                 </div>
             </div>
+            
         </div>
     </div>
 </template>
@@ -75,6 +91,7 @@ const respuestas = reactive({
 })
 
 
+
 // When the page is mounted
 onMounted(() => {
     // call the function to check the student is already did this test or half of test
@@ -100,9 +117,16 @@ onMounted(() => {
 // This array use for check the student pass the test or not
 let respuestasValidar = [];
 
+const compruebaDatos = () =>{
+    if(respuestasValidar.length < questions.value.length){
+        showNextQuestion();
+    }else{
+
+    }
+}
+
 // Function use for jump to the next question
 const showNextQuestion = () =>{
-
     // If the checkbox is not checked is gonna appear this alert
     if(respuestas.respuesta == ""){
         alert("Debes elegir por menos 1 option");
@@ -112,10 +136,12 @@ const showNextQuestion = () =>{
 
         // do an for with the option of this question
         for(let i in questionId.value['options']){
+            
             // if the student have choice the correct answer 
             if(respuestas.respuesta == questionId.value['options'][i].id && questionId.value['options'][i].is_correct == 1){
                 // push in the respuetaValidar array 1 as correct
-
+                console.log(questionId.value['options'][i].id);
+                console.log(questionId.value['options'][i].is_correct);
                 if(respuestasValidar[contador-1] !== undefined){
                     console.log("hola");
                     respuestasValidar[contador-1] = 1;
@@ -125,7 +151,6 @@ const showNextQuestion = () =>{
                     singleTestQuestionCompleteSave(user.value['user_id'],route.params.id,questionId.value['id'],1);
                 }
 
-                console.log(respuestasValidar);
                 // insert into the bdd the answer of this question
                 
                 break;
@@ -140,7 +165,6 @@ const showNextQuestion = () =>{
                     singleTestQuestionCompleteSave(user.value['user_id'],route.params.id,questionId.value['id'],0);
                 }
 
-                console.log(respuestasValidar);
                 // insert into the bdd the answer of this question
                 
                 break;
@@ -171,6 +195,12 @@ const enviarButton = (testId) =>{
     contador = testId;
 }
 
+const previousQuestion = () =>{
+    
+    questionId.value = questions.value[contador-1];
+    contador = contador - 1;
+}
+
 // Search in bbdd, did the user already have one test with this id.
 const searchExist = () =>{
     // if existe delete it
@@ -194,30 +224,87 @@ const finalizar = () =>{
     let pass = 0;
 
     // This is use for boolean, if student have more than 3 answer = correct this will be set at 1
-    let passed = 0;
+    let passed = 1;
 
     // make a loop with respuetasValidar array
     for(let count in respuestasValidar){
+        console.log(respuestasValidar[count]);
+        
         // if there are 1 in the position of array
-        if(respuestasValidar[count] == 1){
+        if(respuestasValidar[count] == 0){
             // add 1 to the pass
             pass = pass + 1;
         }
     }
-
+   
     // if pass is more or equal 3 set the passed to 1
     if(pass >= 3){
-        passed = 1;
+        passed = 0;
     }
-
+    console.log(passed);
+    
     // final step of test send the result of the test to bbdd
     finalizarValue(user.value['user_id'],route.params.id,passed,questionId.value['difficulty']);
+    if(respuestasValidar.length > 1){
+        let respuestasUno = respuestasValidar.filter(function(respuesta) {
+            return respuesta === 0;
+        });
+        let cantidadDeZeros = respuestasUno.length;
+
+        let arrayCodificado = btoa(JSON.stringify(respuestasValidar));
+        window.location.href = '/Final/'+ user.value['user_id'] + '/' + route.params.id + '/' + cantidadDeZeros + '/' + arrayCodificado;
+    }
+    
 }
+
+// This part of code is use for change the color between buttons
+const changeColorButton = (event) => {
+    const radio = event.target; // Obtener el radio button clicado
+    const radios = document.querySelectorAll('.switchColor1');
+
+    // Remover la clase 'switchColor2' de todos los radios
+
+    radios.forEach(radio => {
+        radio.classList.remove('switchColor2');
+    });
+
+    // Agregar la clase 'switchColor2' al radio clicado
+    radio.parentNode.classList.add('switchColor2');
+};
 
 
 
 </script>
 <style>
+
+.switchColor2{
+    background-color: black;
+}
+
+
+.switchColor1{
+
+}
+
+.container{
+    margin: 0px;
+}
+
+.cardButton{
+    padding: 40px;
+    background-color: black;
+    color: white;
+    border: 1px solid blue;
+}
+
+.padding20{
+    padding: 20px;
+}
+.bg-line{
+    background-color:#f5f5f5;
+    margin-left: 0px;
+    margin-right: 0px;
+}
 
 .p-radiobutton{
     padding-top: 20px;
@@ -237,12 +324,13 @@ const finalizar = () =>{
     padding: 10px;
 }
 
-.router-link-active{
-    padding: 35px;
-}
 
 .col-12{
     padding: 0px;
 }
 
+.CajaImagen{
+    padding: 60px;
+    font-size: 50px;
+}
 </style>
