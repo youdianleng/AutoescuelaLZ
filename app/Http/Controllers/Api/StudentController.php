@@ -50,26 +50,34 @@ class StudentController extends Controller
             'license_id' => 'required',
             'thumbnail',
         ]);
-        // Comprobar si el email de estudiante esta creado o no
+        // Check the email of student is already created or not
         $comprobarExistencia = Student::where('email', $request["email"])->get();
         
-        //Verifica si el email se encuentra o no
+        // If its created
         if(!$comprobarExistencia->isEmpty()){
             $student = Student::where('name', $request["name"])->get();
             return $student;
         }{
+            // If its not created 
+            // save the $request data to $task
             $task = $request->all();
+            // Get the teacher id from the $task
             $teacher_id = $task["teacher_id"];
-            $tarea = Student::create($task);
 
+            //Create the student with the $task data
+            $tarea = Student::create($task);
+            
+            // if in $request contain thumbnail
             if ($request->hasFile('thumbnail')) {
+                // call the function to send the image to the mediaCollection
                 $tarea->addMediaFromRequest('thumbnail')->preservingOriginal()->toMediaCollection('images-exercises');
             }else{
             }
 
+            // calling the function created in student model that is goona attach this studen_id with teacher_id
             $tarea->teachers()->attach($teacher_id);
 
-            //Crear user 
+            //Create the student as User
             $userStudent = User::create([
                 'user_id' => $tarea['id'],
                 'name' => $request["name"],
@@ -79,22 +87,25 @@ class StudentController extends Controller
                 'teacher_id' => $teacher_id
                 ]
             );
-            //Asignar role para este usuario
+
+            //Assign the role to student
             $userStudent->assignRole(["student"]);
 
 
-            //Crear el imagen
+            // return the data 
             return new StudentResource($tarea);
         }
         
         
     }
 
+    // This function is used to update the student data
     public function update($id, Request $request)
     {
-
+        // we get the id of the student
         $student = Student::find($id);
 
+        // Check the content with the style we want
         $request->validate([
             'name' => 'required|max:10',
             'surname' => 'required',
@@ -106,30 +117,39 @@ class StudentController extends Controller
             'license_id' => 'required',
         ]);
 
-
+        // save que data to a variable
         $dataToUpdate = $request->all();
-        
+
+        // Call the update function to update this student
         $student->update($dataToUpdate);
+
+        // Get teacher ID from the $dataToUpdate
         $teacher_id = $dataToUpdate["teacher_id"];
+
+        //This function sync() is goona delete the student from the teacher_student table and create this one as new
         $student->teachers()->sync($teacher_id);
         
+        // Check the thumnial we use it to change the image of student
         if($request->hasFile('thumbnail')) {
             $student->media()->delete();
             $student->addMediaFromRequest('thumbnail')->preservingOriginal()->toMediaCollection('images-exercises');
         }
 
+        // return the data
         return response()->json(['success' => true, 'data' => $student]);
     }
 
     //Find the student with the specific ID
     public function findStudent($id, Request $request)
     {
-        
+        // We send the id of the student to find the student
         $student = Student::where('id',$id)->with("student_test")->with('teachers')->with('media')->get();
         if (!$student) {
+            // if the student dosent exist in out database
             return response()->json(['success' => false, 'message' => 'Estudiante no encontrado'], 404);
         }
 
+        // return the data
         return response()->json(['success' => true, 'data' => $student]);
     }
 
@@ -138,42 +158,52 @@ class StudentController extends Controller
     //Destroy the specific student with the same id we sended
     public function destroy($id, Request $request)
     {
-
+        // find the student with the id
         $student = Student::find($id);
+
+        // Delete him
         $student->delete();
 
+        // Delete the student from the teacher_student table too
         $student->teachers()->sync([]);
 
 
-
+        // Return the data
         return response()->json(['success' => true, 'data' => "Deleted"]);
     }
 
-    // Get these test the student make half or part of them
+    // Get those test the student make half or part of them
     public function getPartTestCompleteStudent($user_id, $test_id){
+        // send the student_id and the test hes doing 
         $incompleteTest = student_test_question::where('student_id',$user_id)->where('test_id',$test_id)->with('question_option')->with('question_question')->get();
 
+        // return the data
         return response()->json(['success' => true, 'data' => $incompleteTest]);
     }
 
+    // Send the Review of the student to show in our home page
     public function submitReview($user_id, Request $request ){
 
+        // Check is there comentario label exist
         $request->validate([
             'comentario' => 'required',
         ]);
 
+        // Create the review with saving the student_id and the review
         $submitReview = student_review::Create([
             'student_id' => $user_id,
             'review' => $request["comentario"],
             
             ]
         );
-
+        
+        // return data
         return response()->json(['success' => true, 'data' => $submitReview]);
     }
 
+    // Find the review of the student
     public function findReview($user_id){
-
+        
         $findReview = student_review::where('student_id',$user_id)->get();
 
         return response()->json(['success' => true, 'data' => $findReview]);

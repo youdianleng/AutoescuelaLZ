@@ -112,14 +112,5 @@ function validar(){
 
 <style scope>
 
-.setMiddle{
-    padding-top: 5%;
-    padding-bottom: 5%;
-}
-
-.setMiddle img{
-    width: 300px!important;
-    height: 500px;
-}
-
+@import '/resources/css/final.css';
 </style>

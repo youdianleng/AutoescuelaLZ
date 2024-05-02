@@ -73,34 +73,6 @@ export default [
                 component: () => import('../views/test/infoAutoescuela.vue'),
             },
             {
-                name: 'Profile',
-                path: 'profile',
-                component: () => import('../views/admin/index.vue'),
-                meta: { breadCrumb: 'Profile' },
-                beforeEnter: requireLogin,
-            },
-            {
-                name: 'crearTask',
-                path: 'createTasks',
-                component: () => import('../views/task/create.vue'),
-                meta: { breadCrumb: 'teacher'}
-            },
-            
-            {
-                name: 'EditExample',
-                path: 'EditExample',
-                component: () => import('../views/admin/exercises/Create.vue'),
-                meta: { breadCrumb: 'createTest'},
-                beforeEnter: requireLogin,
-
-            },
-            {
-                name: 'EditExamples',
-                path: 'createCategoryExample',
-                component: () => import('../views/admin/categories/Create.vue'),
-                meta: { breadCrumb: 'createTest'},
-            },
-            {
                 name: 'SelectLevel',
                 path: 'selectLevel/:id',
                 component: () => import('../views/teacher/test/selectLevel.vue'),
@@ -132,7 +104,7 @@ export default [
                 name: 'Final',
                 path: 'Final/:user/:test_id/:accept/:respuesta',
                 component: () => import('../views/teacher/test/final.vue'),
-
+                beforeEnter: requireLogin
             },
         ]
     },
@@ -151,6 +123,12 @@ export default [
                 path: '',
                 component: () => import('../views/teacher/create.vue'),
                 //meta: { breadCrumb: 'Student' }
+            },
+            {
+                name: 'student.Profile',
+                path: 'profile',
+                component: () => import('../views/admin/index.vue'),
+                beforeEnter: requireLogin,
             },
             
         ]
@@ -187,7 +165,13 @@ export default [
                 beforeEnter: requireLogin,
 
             },
-            
+            {
+                name: 'teacher.Profile',
+                path: 'profile',
+                component: () => import('../views/admin/index.vue'),
+                meta: { breadCrumb: 'Profile' },
+                beforeEnter: requireLogin,
+            },
         ]
     },
 

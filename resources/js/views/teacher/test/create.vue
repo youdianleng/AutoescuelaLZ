@@ -133,7 +133,6 @@ const Questiones = reactive({
 onMounted(() => {
         //get all the questions we have in bbdd
         getQuestions();
-
         getTest();
 })
 

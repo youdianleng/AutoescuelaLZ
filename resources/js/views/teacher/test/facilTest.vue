@@ -43,16 +43,5 @@ onMounted(() => {
 </script>
 
 <style>
-.padding30{
-    padding: 30px!important;
-}
-
-.card{
-    padding: 0px;
-}
-
-.card-text{
-    font-size: 30px;
-}
-
+@import '/resources/css/facilTest.css';
 </style>

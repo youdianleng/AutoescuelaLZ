@@ -19,15 +19,6 @@ use App\Http\Controllers\Api\TestController;
 use App\Http\Controllers\Api\QuestionController;
 use App\Models\Question;
 
-// Preguntas
-Route::get('question', [QuestionController::class, 'index']);
-Route::post('question', [QuestionController::class, 'store']);
-Route::get('question/{level}/{id}', [QuestionController::class, 'difficultyQuestions']);
-
-
-//Optiones
-Route::post('option', [OptionController::class, 'store']);
-
 
 //Example 
 Route::get('tasks', [TaskController::class, 'index']);
@@ -39,7 +30,14 @@ Route::post('reset-password', [ResetPasswordController::class, 'reset'])->name('
 
 
 
+// Preguntas
+Route::get('question', [QuestionController::class, 'index']);
+Route::post('question', [QuestionController::class, 'store']);
+Route::get('question/{level}/{id}', [QuestionController::class, 'difficultyQuestions']);
 
+
+//Optiones
+Route::post('option', [OptionController::class, 'store']);
 
 // Funciones para Students
 Route::get('student', [StudentController::class, 'index']);
@@ -81,6 +79,9 @@ Route::delete('test/existTestQuestion/{user_id}/{test_id}', [TestController::cla
 
 // SelectLevel
 Route::get('selectLevel/student/{id}',[TestController::class, 'selectStudentMadeTest']);
+
+
+
 
 Route::group(['middleware' => 'auth:sanctum'], function() {
     Route::apiResource('users', UserController::class);

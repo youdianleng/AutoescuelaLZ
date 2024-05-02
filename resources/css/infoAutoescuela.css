@@ -1,0 +1,237 @@
+.carousel-inner{
+    height: 300px;
+}
+img{
+    overflow: hidden;
+}
+
+.informacionCarnet{
+    padding: 30px;
+}
+
+.sobreNosotros{
+    padding: 30px;
+}
+h4{
+    margin: 0px;
+}
+h3{
+    margin: 0px;
+    margin-top: 25px!important;
+}
+
+.col-12{
+    padding: 0px;
+}
+
+.imgVia{
+    padding-top: 100px;
+    padding-left: 200px;
+    padding-right: 200px;
+    padding-bottom: 100px;
+    position: relative;
+}
+
+.imgTopVia{
+    position: absolute;
+    height:  350px;
+    overflow: hidden;
+    z-index: 0;
+}
+
+.shadow{
+    position: absolute;
+    width: 100%;
+    height: 350px;
+    background-color: black;
+    z-index: 5;
+    opacity: 0.5;
+}
+
+.SobreNosotroText{
+    position: relative;
+    width: 100%;
+    height: 350px;
+    margin: 0px;
+    padding-left: 20%;
+    z-index: 6;
+    font-size: 60px;
+    font-weight: 800;
+}
+
+.infoSobre{
+    font-size: 13px;
+}
+
+.card{
+    margin-bottom: 0px;
+    position: relative;
+    overflow: hidden;
+}
+
+.card .imgCarnet{
+    position: relative;
+    z-index: 1;
+}
+
+.card:hover .imgCarnet{
+    translate: 100% 0px;
+    transition: 5s;
+}
+
+.card .imgCarnet{
+    translate: 0% 0px;
+    transition: 5s;
+}
+
+.texto{
+    position: absolute;
+    z-index: 0;
+    padding: 50px;
+}
+
+.carnets{
+    padding-bottom: 50px;
+}
+
+.padding30px{
+    padding: 30px;
+}
+
+.mdTextoPadding30{
+    padding-top: 30px;
+    padding-bottom: 40px;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+.mdTextoPadding30 h1{
+    margin: 0px;
+}
+.mdTextoPadding30 p{
+    margin: 0px;
+}
+
+.cajaPlanPaga{
+    padding-top: 80px;
+    padding-bottom: 80px;
+}
+
+.bg-grey{
+    background-color: var(--surface-ground);
+    border: none;
+}
+
+.text-justify{
+    text-align: justify;
+}
+
+.buttonRealizarPregunta{
+padding: 10px;
+border-radius: 25px;
+background-color: black;
+color: white;
+cursor: pointer;
+}
+
+.pagamento{
+    height: 485px;
+}
+
+.descripcionPlan{
+    height: 150px;
+}
+    
+    @media only screen and (max-width: 1050px) {
+        .imgVia{
+            padding: 0px;
+        }
+
+        .imgTopVia{
+            height: 150px;
+        }
+        .shadow{
+            height: 150px;
+        }
+        .SobreNosotroText {
+            height: 150px;
+            font-size: 20px;
+        }
+        h1{
+            font-size: medium;
+            font-weight: bold;
+            margin-top: 0px;
+        }
+
+        h2{
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .card{
+            border-radius: 0px;
+        }
+
+        .texto{
+            padding: 15px;
+            
+        }
+
+        .texto h2{
+            font-size: 20px;
+            
+        }
+
+        .texto p{
+            font-size: 15px;
+        }
+
+        .topMoto{
+            margin-top: 20px;
+        }
+
+        
+    }
+
+    @media only screen and (max-width: 1400px) {
+        .h2texto{
+            font-size: 20px;
+        }
+
+        .ptexto{
+            font-size: 11px;
+        }
+
+        .texto{
+            padding: 30px;
+        }
+    }
+
+    @media only screen and (max-width: 576px) {
+        .texto h2{
+            font-size: 12px;
+            
+        }
+
+        .texto p{
+            font-size: 8px;
+        }
+
+        .informacionCarnet h1{
+            font-size: 12px;
+            margin-top: 30px;
+        }
+
+        .imgCoche{
+            padding: 50px;
+            padding-bottom: 10px;
+        }
+
+        .pagamento{
+            height: 100%;
+        }
+
+        .textoPlan{
+            margin: 0px!important;
+        }
+    }

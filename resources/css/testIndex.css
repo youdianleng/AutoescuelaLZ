@@ -1,0 +1,66 @@
+.cardButton2{
+    padding: 40px;
+    background-color: grey;
+    color: white;
+    border: 1px solid blue;
+}
+
+.switchColor2{
+    background-color: #FFDDDD;
+}
+
+
+.switchColor1{
+
+}
+
+.container{
+    margin: 0px;
+}
+
+.cardButton{
+    padding: 40px;
+    background-color: black;
+    color: white;
+    border: 1px solid blue;
+}
+
+.padding20{
+    padding: 20px;
+}
+.bg-line{
+    background-color: #f5f5f5;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+.p-radiobutton{
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 100px;
+    padding-right: 100px;
+    border-radius: 0px;
+    border: 2px solid black;
+}
+
+.p-radiobutton .p-radiobutton-box {
+    background-color:transparent;
+    border: 0cap;
+
+    
+}
+
+.btn{
+    margin-top: 100px;
+    padding: 10px;
+}
+
+
+.col-12{
+    padding: 0px;
+}
+
+.CajaImagen{
+    padding: 60px;
+    font-size: 50px;
+}

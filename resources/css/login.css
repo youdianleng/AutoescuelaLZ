@@ -1,0 +1,132 @@
+
+.btn-primary{
+    background-color: #273C7A;
+    color: white;
+}
+
+
+.loginBox{
+    margin-top: 150px;
+    margin-bottom: 150px;
+    padding: 0px;
+}
+
+.container{
+    max-width: 100%;
+    background-image: url("/images/Drive.jpg");
+    margin-left: 0px;
+    margin-right: 0px;
+    background-size: cover;
+}
+
+.boxShadowBox{
+    box-shadow: 10px 10px 5px 1px white;
+    border: 1px black solid;
+    border-radius: 5px;
+    padding: 0px;
+}
+
+.noPadding{
+    padding: 0px;
+    opacity: 0.8;
+}
+
+.imgDriveHiddenPart{
+    position: relative;
+    overflow: hidden;
+    background-image: url("/images/semana_santa.png");
+    background-size: cover;
+}
+
+#email{
+    border-top: 0px;
+    border-left: 0px;
+    border-right: 0px;
+    border-radius: 0px;
+    border-color: black ;
+    padding: 0px;
+}
+
+#email:focus{
+    outline: none!important;
+    box-shadow: none;
+}
+
+#password{
+    border-top: 0px;
+    border-left: 0px;
+    border-right: 0px;
+    border-radius: 0px;
+    border-color: black ;
+    padding: 0px;
+}
+
+#password:focus{
+    outline: none!important;
+    box-shadow: none;
+}
+
+.forgotPassword{
+    color: grey;
+}
+
+.forgotPassword:hover{
+    color: blue;
+    transition: 1s;
+}
+
+.nubePrincipal{
+    position: absolute;
+    width: 100%;
+    height: 30px;
+    background-color: white;
+}
+
+.nube1{
+    position: relative;
+    width: 60%;
+    height: 50px;
+    background-color: white;
+    border-radius: 50%;
+}
+
+.nube2{
+    position: relative;
+    width: 40%;
+    height: 40px;
+    background-color: white;
+    border-radius: 50%;
+}
+
+.nieves{
+    position: relative;
+    display: flex;
+    height: 100%;
+}
+
+.nieves span{
+    position: relative;
+    width: 5%!important;
+    height: 20px!important;
+    background-color: white;
+    margin:2%;
+    padding-bottom: 10%;
+    border-radius: 50%;
+    filter: blur(1px);
+    animation: nevendo 5s linear infinite;
+    animation-duration:
+        calc(35s / var(--i));
+
+}
+
+@keyframes nevendo {
+    0% {
+        transform: translateX(0) translateY(0);
+    }
+    70% {
+        transform: translateX(0) translateY(300px) scale(1);
+    }
+    100% {
+        transform: translateX(0) translateY(300px) scale(0);
+    }
+}

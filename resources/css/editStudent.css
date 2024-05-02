@@ -1,0 +1,79 @@
+
+.menuSelect{
+    padding: 30px;
+    background-color: white;
+    border-radius: 12px;
+    border: 1px solid var(--surface-border);
+}
+
+.row > *{
+    padding: 0px;
+}
+
+.botoneCreacion{
+    border: 1px black solid;
+}
+
+.botoneCreacionAlumno:hover{
+    border: 1px #D5D8DC solid;
+}
+
+.botoneCreacionPregunta:hover{
+    border: 1px #D5D8DC solid;
+}
+
+
+
+.borderCreacion{
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.botoneCreacionAlumno{
+    padding: 20px;
+    margin-top: 30px;
+    border-radius: 10px;
+    border: 1px black solid;
+}
+
+.botoneCreacionPregunta{
+    padding: 20px;
+    margin-top: 30px;
+    border-radius: 10px;
+    border: 1px black solid;
+}
+
+
+/* Formulario de estudiante */
+.formularioCrearStudent{
+    padding: 20px;
+}
+
+.formularioCrearStudent form{
+    padding: 20px;
+}
+
+.contenidoStudent input{
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px black solid;
+}
+
+.contenidoStudent select{
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px black solid;
+}
+
+.textoDeRecuerdo{
+    padding-left: 20px;
+    padding-top: 30px;
+    text-align: justify;
+}
+
+.contenidoStudent button{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 35px;
+    padding-right: 35px;
+}

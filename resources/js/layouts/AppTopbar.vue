@@ -39,7 +39,12 @@
                         {{ $t(`Contacto`) }}
                     </button>
                 </router-link>
-                <router-link to="/profile" v-if="role == 'teacher' || role == 'student'">
+                <router-link to="/student/profile" v-if=" role == 'student'">
+                    <button class="p-link layout-topbar-button layout-topbar-button-c" id="Information">
+                        {{ $t(`Perfile`) }}
+                    </button>
+                </router-link>
+                <router-link to="/teacher/profile" v-if=" role == 'teacher'">
                     <button class="p-link layout-topbar-button layout-topbar-button-c" id="Information">
                         {{ $t(`Perfile`) }}
                     </button>

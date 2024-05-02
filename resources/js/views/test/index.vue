@@ -14,21 +14,20 @@
                     </div>
 
                     <div class="col-xl-8">
-                        {{ respuestas.respuesta }}
                         <h2 class="fw-semibold">Prueba Numero {{ contador+1 }}:  {{ questionId.question }}</h2>
                         <div v-if="questionId['options']" class="col-10">
                             <div  class="d-flex">
-                                <RadioButton v-model="respuestas.respuesta"  :value=" questionId['options'][0]['id'] " class="form-control col-1 switchColor1" @click.prevent="changeColorButton"/>
-                                <p class="ms-3">a. {{ questionId['options'][0]['option_text'] }}</p>
+                                <RadioButton v-model="respuestas.respuesta"  :value=" questionId['options'][0]['id'] " class="form-control col-1 switchColor1" @click="changeColorButton(0)" />
+                                <p class="ms-3 d-flex align-items-center fs-5">A.   {{ questionId['options'][0]['option_text'] }}</p>
                             </div>
                             <div class="d-flex mt-3">
-                                <RadioButton v-model="respuestas.respuesta"  :value=" questionId['options'][1]['id'] " class="form-control col-1 switchColor1" @click.prevent="changeColorButton "/>
-                                <p class="ms-3">b. {{ questionId['options'][1]['option_text'] }}</p>
+                                <RadioButton v-model="respuestas.respuesta"  :value=" questionId['options'][1]['id'] " class="form-control col-1 switchColor1" @click="changeColorButton(1)"/>
+                                <p class="ms-3 d-flex align-items-center fs-5">B.   {{ questionId['options'][1]['option_text'] }}</p>
                             </div>
                         
                             <div class="d-flex mt-3">
-                                <RadioButton v-model="respuestas.respuesta"  :value=" questionId['options'][2]['id'] " class="form-control col-1 switchColor1" @click.prevent="changeColorButton "/>
-                                <p class="ms-3">c. {{ questionId['options'][2]['option_text'] }} </p>
+                                <RadioButton v-model="respuestas.respuesta"  :value=" questionId['options'][2]['id'] " class="form-control col-1 switchColor1" @click="changeColorButton(2)" />
+                                <p class="ms-3 d-flex align-items-center fs-5">C.   {{ questionId['options'][2]['option_text'] }} </p>
                             </div>
                         </div>
                         <button v-if="contador != 0" @click.prevent="previousQuestion" class="btn btn-success bg-black col-1"><</button>
@@ -66,6 +65,7 @@ import { setLocale } from 'yup';
 import axios from 'axios';
 import { useStore } from 'vuex';
 import useTest from "@/composables/test";
+
 const { searchExistTestQuestion,finalizarValue,singleTestQuestionCompleteSave,singleTestQuestionCompleteEdit } = useTest();
 
 const store = useStore();
@@ -89,7 +89,6 @@ const { value: respuesta } = useField('respuesta', null, { initialValue: '' });
 const respuestas = reactive({
     respuesta
 })
-
 
 
 // When the page is mounted
@@ -120,6 +119,13 @@ let respuestasValidar = [];
 const compruebaDatos = () =>{
     if(respuestasValidar.length < questions.value.length){
         showNextQuestion();
+
+        const radios = document.querySelectorAll('.switchColor1');
+        // Remover la clase 'switchColor2' de todos los radios
+
+        radios.forEach(radio => {
+            radio.parentNode.classList.remove('switchColor2');
+        });
     }else{
 
     }
@@ -143,12 +149,12 @@ const showNextQuestion = () =>{
                 console.log(questionId.value['options'][i].id);
                 console.log(questionId.value['options'][i].is_correct);
                 if(respuestasValidar[contador-1] !== undefined){
-                    console.log("hola");
                     respuestasValidar[contador-1] = 1;
                     singleTestQuestionCompleteEdit(user.value['user_id'],route.params.id,questionId.value['id'],1);
                 }else{
                     respuestasValidar.push(1);
                     singleTestQuestionCompleteSave(user.value['user_id'],route.params.id,questionId.value['id'],1);
+                    changeResultArray();
                 }
 
                 // insert into the bdd the answer of this question
@@ -157,12 +163,12 @@ const showNextQuestion = () =>{
             }else{
                 // push in the respuestaValidar array 0 as incorrect
                 if(respuestasValidar[contador-1] !== undefined){
-                    console.log("hola");
                     respuestasValidar[contador-1] = 0;
                     singleTestQuestionCompleteEdit(user.value['user_id'],route.params.id,questionId.value['id'],0);
                 }else{
                     respuestasValidar.push(0);
                     singleTestQuestionCompleteSave(user.value['user_id'],route.params.id,questionId.value['id'],0);
+                    changeResultArray();
                 }
 
                 // insert into the bdd the answer of this question
@@ -170,8 +176,6 @@ const showNextQuestion = () =>{
                 break;
             }
         }
-        
-
 
         // Check is there any quesiton more or not
         if(questions.value[contador] == null){
@@ -182,17 +186,17 @@ const showNextQuestion = () =>{
             questionId.value = questions.value[contador];
 
         }
-        
     }
-
-
-    
-    
 }
 
 const enviarButton = (testId) =>{
-    questionId.value = questions.value[testId];
-    contador = testId;
+    if(respuestasValidar.length < testId){
+        alert("Realizar los preguntas anteriores");
+    }else{
+        questionId.value = questions.value[testId];
+        contador = testId;
+    }
+   
 }
 
 const previousQuestion = () =>{
@@ -228,7 +232,6 @@ const finalizar = () =>{
 
     // make a loop with respuetasValidar array
     for(let count in respuestasValidar){
-        console.log(respuestasValidar[count]);
         
         // if there are 1 in the position of array
         if(respuestasValidar[count] == 0){
@@ -241,7 +244,6 @@ const finalizar = () =>{
     if(pass >= 3){
         passed = 0;
     }
-    console.log(passed);
     
     // final step of test send the result of the test to bbdd
     finalizarValue(user.value['user_id'],route.params.id,passed,questionId.value['difficulty']);
@@ -257,80 +259,29 @@ const finalizar = () =>{
     
 }
 
-// This part of code is use for change the color between buttons
 const changeColorButton = (event) => {
-    const radio = event.target; // Obtener el radio button clicado
     const radios = document.querySelectorAll('.switchColor1');
-
     // Remover la clase 'switchColor2' de todos los radios
 
     radios.forEach(radio => {
-        radio.classList.remove('switchColor2');
+        radio.parentNode.classList.remove('switchColor2');
     });
-
     // Agregar la clase 'switchColor2' al radio clicado
-    radio.parentNode.classList.add('switchColor2');
+    radios[event].parentNode.classList.add('switchColor2');
 };
 
 
+const changeResultArray = () =>{
+    if(respuestasValidar[contador-1] != undefined){
+        // Obtener el botón con la clase 'buttonCard'
+        const button = document.querySelector('.cardButton');
+
+        // Reemplazar la clase 'buttonCard' con 'buttonCard1'
+        button.classList.replace('cardButton', 'cardButton2');
+    }
+}
 
 </script>
 <style>
-
-.switchColor2{
-    background-color: black;
-}
-
-
-.switchColor1{
-
-}
-
-.container{
-    margin: 0px;
-}
-
-.cardButton{
-    padding: 40px;
-    background-color: black;
-    color: white;
-    border: 1px solid blue;
-}
-
-.padding20{
-    padding: 20px;
-}
-.bg-line{
-    background-color:#f5f5f5;
-    margin-left: 0px;
-    margin-right: 0px;
-}
-
-.p-radiobutton{
-    padding-top: 20px;
-    padding-bottom: 20px;
-    padding-left: 100px;
-    padding-right: 100px;
-}
-
-.p-radiobutton .p-radiobutton-box {
-    background-color:transparent;
-    border: 0cap;
-    
-}
-
-.btn{
-    margin-top: 100px;
-    padding: 10px;
-}
-
-
-.col-12{
-    padding: 0px;
-}
-
-.CajaImagen{
-    padding: 60px;
-    font-size: 50px;
-}
+@import '/resources/css/testIndex.css';
 </style>
