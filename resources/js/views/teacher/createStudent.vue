@@ -47,7 +47,7 @@
             </div>
         </div>
     </div>
-    <Dialog v-model:visible="visible" modal header="Edit Profile" :style="{ width: '90%' }">
+    <Dialog v-model:visible="visible" modal header="Crear Estudiante" :style="{ width: '90%' }">
         <div  class="col-12 d-flex justify-content-center">
             <div class="row col-11">
                 <div class="card col-12 ">
@@ -55,7 +55,6 @@
                         <div class="contenidoStudent">
                             <div class="d-flex col-12">
                                 <div class="col-12">
-                                    {{ student }}
                                     <h2 class="ps-2">Nuevas Estudiantes</h2>   
                                     <form @submit.prevent="submitStudent" class="col-12 d-flex">
                                         <div class="col-8 row">

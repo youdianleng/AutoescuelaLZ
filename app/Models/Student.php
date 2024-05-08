@@ -44,6 +44,11 @@ class Student extends Model implements HasMedia
         return $this->hasMany(students_tests::class, 'student_id');
     }
 
+    // Get this student in User Table
+    public function User(){
+        return $this->belongTo(User::class, 'user_id');
+    }
+
     // Decide the side where we want to place the image
     public function registerMediaCollections(): void
     {

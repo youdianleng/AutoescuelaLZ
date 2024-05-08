@@ -2,18 +2,18 @@
 
 namespace Tests\Unit;
 
-use PHPUnit\Framework\TestCase;
+use App\Models\Student;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Tests\TestCase;
 
-class ExampleTest extends TestCase
+class StudentControllerTest extends TestCase
 {
+    use DatabaseTransactions;
+
     /**
-     * A basic test example.
+     * Test para verificar la función findReview en StudentController.
      *
      * @return void
      */
-    
-    public function test_that_true_is_true()
-    {
-        $this->assertTrue(true);
-    }
+
 }

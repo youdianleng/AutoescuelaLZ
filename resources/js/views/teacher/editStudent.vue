@@ -9,26 +9,30 @@
                             <div class="d-flex">
                                 <div class="col-12 row">
                                     <form @submit.prevent="createStudent" class="col-12 row">
-                                        <input placeholder="Nombre" v-model="student.name" name="name" required>
-                                        {{ errors.name }}
-                                        <input class="mt-4" name="surname" v-model="student.surname" placeholder="Apellido">
-                                        <input type="mail" name="email" v-model="student.email" class="mt-4" placeholder="Email" required>
-                                        {{ errors.email }}
-                                        <input class="mt-4" name="password" v-model="student.password" placeholder="Contraseña" required>
-                                        {{ errors.password }}
-                                        <select class="mt-4" name="license_id" v-model="student.license_id" required>
-                                            <option v-for="license in licenses" :value="license.id">{{ license.type }}</option>
-                                        </select>
-                                        {{ errors.licencia_id }}
-                                        <select class="mt-4" name="teacher_id" v-model="student.teacher_id" required>
-                                            <option v-for="teacher in teachers" :value="teacher.id">{{ teacher.name }}</option>
-                                        </select>
-                                        {{ errors.teacher_id }}
-                                        <div class="col-12 d-flex justify-content-end">
-                                            <form @submit.prevent="saveTaskSubmit" class="col-4">
-                                                <button type="submit" class="col-12 mt-3 btn btn-dark">Editar</button>
-                                            </form>
-                                        </div>
+                                            <input placeholder="Nombre" v-model="student.name" name="name" required>
+                                            {{ errors.name }}
+                                            <input class="mt-4" name="surname" v-model="student.surname" placeholder="Apellido">
+                                            <input type="mail" name="email" v-model="student.email" class="mt-4" placeholder="Email" required>
+                                            {{ errors.email }}
+                                            <input class="mt-4" name="password" v-model="student.password" placeholder="Contraseña" required>
+                                            {{ errors.password }}
+                                            <select class="mt-4" name="license_id" v-model="student.license_id" required>
+                                                <option v-for="license in licenses" :value="license.id">{{ license.type }}</option>
+                                            </select>
+                                            {{ errors.licencia_id }}
+                                            <select class="mt-4" name="teacher_id" v-model="student.teacher_id" required>
+                                                <option v-for="teacher in teachers" :value="teacher.id">{{ teacher.name }}</option>
+                                            </select>
+                                            {{ errors.teacher_id }}
+                                            <div class="mb-3 mt-5">
+                                                <DropZone v-model="student.thumbnail" name="thumbnail"/>
+                                            </div>
+                                            <div class="col-12 d-flex justify-content-end">
+                                                <form @submit.prevent="saveTaskSubmit" class="col-4">
+                                                    <button type="submit" class="col-12 mt-3 btn btn-dark">Editar</button>
+                                                </form>
+                                            </div>
+
                                         
                                     </form>
                                 
@@ -51,6 +55,7 @@ import { es } from 'yup-locales';
 import { setLocale } from 'yup';
 import useEdit from "@/composables/editStudent";
 import useOnMount from "@/composables/common";
+import DropZone from "@/components/DropZone.vue";
 const { getTeachers,getLicense, teachers, licenses, students } = useOnMount();
 const { saveTask,getSpecificStudentsEdit } = useEdit();
 
@@ -76,7 +81,7 @@ const { value: email } = useField('email', null, { initialValue: '' });
 const { value: password } = useField('password', null, { initialValue: '' });
 const { value: license_id } = useField('license_id', null, { initialValue: '' });
 const { value: teacher_id } = useField('teacher_id', null, { initialValue: '' });
-
+const { value: thumbnail } = useField('thumbnail',null, { initialValue: '' });
 
 onMounted(() => {
     getLicense();
@@ -105,7 +110,8 @@ const student = reactive({
     email,
     password,
     license_id,
-    teacher_id
+    teacher_id,
+    thumbnail: ''
 })
 
 

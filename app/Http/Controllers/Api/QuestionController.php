@@ -18,7 +18,8 @@ class QuestionController extends Controller
     
     // Save question into the test
     public function store(Request $request)
-    {   
+    {      
+        $this->authorize("question-create");
         // Decode the data of request
         $carnetData = json_decode($request['carnet']);
         $difficultyData = json_decode($request['difficulty']);
@@ -68,6 +69,7 @@ class QuestionController extends Controller
 
     // Get the difficulty of the test
     public function difficultyQuestions($Difficulty,$id){
+
         // Get the difficulty of the test
         $Questions = Question::with('options')->where('difficulty', $Difficulty)->where('test_id',$id)->with('media')->get();
         

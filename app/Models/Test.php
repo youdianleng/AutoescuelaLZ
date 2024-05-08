@@ -13,7 +13,7 @@ class Test extends Model
     use HasFactory;
 
     protected $fillable = [
-        'errors',
+        'level',
     ];
 
     public function question()

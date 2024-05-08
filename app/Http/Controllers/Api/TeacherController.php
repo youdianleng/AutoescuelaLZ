@@ -19,6 +19,7 @@ class TeacherController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize("teacher_create");
         $request->validate([
             'name' => 'required',
             'surname' => 'required',
