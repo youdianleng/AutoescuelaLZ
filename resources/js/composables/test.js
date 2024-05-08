@@ -15,6 +15,28 @@ export default function useTest() {
         });
     }
 
+    const getNormalTest = async() =>{
+
+        axios.get('/api/normalTest')
+        .then(response => {
+            test.value = response.data;
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+    }
+
+    const getDificilTest = async() =>{
+
+        axios.get('/api/dificil')
+        .then(response => {
+            test.value = response.data;
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+    }
+
     // Search in bbdd is this student already did the test or not.
     const searchExistTestQuestion = async($user_id,$id) =>{
         axios.delete('/api/test/existTestQuestion/' + $user_id + "/" + $id)
@@ -65,6 +87,8 @@ export default function useTest() {
     return{
         test,
         getFacilTest,
+        getNormalTest,
+        getDificilTest,
         searchExistTestQuestion,
         finalizarValue,
         singleTestQuestionCompleteSave,

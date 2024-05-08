@@ -25,7 +25,7 @@
                                             </select>
                                             {{ errors.teacher_id }}
                                             <div class="mb-3 mt-5">
-                                                <DropZone v-model="student.thumbnail" name="thumbnail"/>
+                                                <DropZone v-model="student.thumbnail" name="thumbnail" width="50" height="50"/>
                                             </div>
                                             <div class="col-12 d-flex justify-content-end">
                                                 <form @submit.prevent="saveTaskSubmit" class="col-4">

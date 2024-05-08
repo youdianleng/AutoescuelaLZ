@@ -38,15 +38,6 @@ Route::get('teacher', [StudentController::class, 'teacher']);
 Route::get('review', [StudentController::class, 'getReview']);
 
 
-// Student
-Route::post('student/create', [StudentController::class, 'store']);
-Route::get('student/{id}', [StudentController::class, 'findStudent']);
-Route::post('student/update/{id}', [StudentController::class, 'update']);
-Route::delete('student/{id}', [StudentController::class, 'destroy']);
-Route::get('student/test/{user_id}/{test_id}',[StudentController::class, 'getPartTestCompleteStudent']);
-Route::get('student/testQuestion/{user_id}/{idTest}',[StudentController::class, 'getStudentTestQuestion']);
-Route::post('student/review/{user_id}', [StudentController::class, 'submitReview']);
-Route::get('student/review/find/{user_id}', [StudentController::class, 'findReview']);
 
 
 
@@ -108,6 +99,15 @@ Route::group(['middleware' => 'auth:sanctum'], function() {
     Route::put('tests/update/{id}', [TestController::class, 'update']);
     Route::delete('tests/{id}', [TestController::class, 'destroy']);
 
+    // Student
+    Route::post('student/create', [StudentController::class, 'store']);
+    Route::get('student/{id}', [StudentController::class, 'findStudent']);
+    Route::post('student/update/{id}', [StudentController::class, 'update']);
+    Route::delete('student/{id}', [StudentController::class, 'destroy']);
+    Route::get('student/test/{user_id}/{test_id}',[StudentController::class, 'getPartTestCompleteStudent']);
+    Route::get('student/testQuestion/{user_id}/{idTest}',[StudentController::class, 'getStudentTestQuestion']);
+    Route::post('student/review/{user_id}', [StudentController::class, 'submitReview']);
+    Route::get('student/review/find/{user_id}', [StudentController::class, 'findReview']);
 
     // Get test Data
     Route::get('tests/{tests}', [TestController::class,'show']);

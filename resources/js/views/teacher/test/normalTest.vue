@@ -1,31 +1,47 @@
 <template>
     <div class="col-12">
-        <div class="padding30 col-12 card">
-            <h2>Test Facil</h2>
+        <div class="padding30 card">
+            <h2 class="d-flex justify-content-center fw-bold">PRUEBAS FACILES</h2>
 
-            <div class="col-12 d-flex ">
-                <div class="col-2 card">
-                    <div class="col-12">
-                        <img src="/images/assets/images.png" class="col-12">
-                    </div>
-                    <div class="card-body">
-                        <p>Test 1</p>
-                        <button class="btn btn-primary d-flex justify-content-center col-12">Realizar</button>
+            <div class="row">
+                <div v-for="(tes, index) in test" :key="tes.id" class="col-md-3">
+                    <div vclass="card">
+                        <img src="/images/assets/images.png" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <p class="card-text fw-thin">Test {{ index+1 }}</p>
+                            <router-link :to="{ name: 'Test' , params: { level: tes.level, id: tes.id }}" class="btn btn-primary col-12">Realizar</router-link>
+                        </div>
                     </div>
                 </div>
-
             </div>
         </div>
-        
     </div>
 </template>
 
+
 <script setup>
+import { ref, onMounted, reactive } from "vue";
+import { useForm, useField } from "vee-validate"; 
+import { useRoute } from "vue-router";
+import * as yup from 'yup';
+import axios from 'axios';
+import useTest from "@/composables/test";
+const { test, getNormalTest } = useTest();
+const route = useRoute()
+
+
+
+onMounted(() => {
+    
+    getNormalTest();
+    console.log(test);
+
+});
+
+
+
 </script>
 
 <style>
-.padding30{
-    padding: 30px;
-}
-
+@import '/resources/css/facilTest.css';
 </style>

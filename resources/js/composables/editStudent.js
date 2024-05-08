@@ -43,7 +43,25 @@ export default function useEdit() {
          });
     }
 
+    const confirm2 = () => {
+        confirm.require({
+            message: 'Do you want to delete this record?',
+            header: 'Danger Zone',
+            icon: 'pi pi-info-circle',
+            rejectLabel: 'Cancel',
+            acceptLabel: 'Delete',
+            rejectClass: 'p-button-secondary p-button-outlined',
+            acceptClass: 'p-button-danger',
+            accept: () => {
+                toast.add({ severity: 'info', summary: 'Confirmed', detail: 'Record deleted', life: 3000 });
+            },
+            reject: () => {
+                toast.add({ severity: 'error', summary: 'Rejected', detail: 'You have rejected', life: 3000 });
+            }
+        });
+    };
+
     return{
-        saveTask,
+        saveTask
     }
 }

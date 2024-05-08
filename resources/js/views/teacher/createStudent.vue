@@ -92,6 +92,8 @@
             </div>         
         </div>
     </Dialog>
+    <Toast />
+    <ConfirmDialog></ConfirmDialog>
 
 </template>
   
@@ -100,6 +102,10 @@
 // Import all the library 
 import { ref, onMounted, reactive, inject } from "vue";
 import { useForm, useField } from "vee-validate";
+import { useConfirm } from "primevue/useconfirm";
+import { useToast } from "primevue/usetoast";
+const confirm = useConfirm();
+const toast = useToast();
 import { useRoute } from "vue-router";
 import * as yup from 'yup';
 import DropZone from "@/components/DropZone.vue";
@@ -107,8 +113,8 @@ import Dialog from "primevue/dialog";
 import useStudent from "@/composables/student";
 import useOnMount from "@/composables/common";
 const { getStudents, students, getTeachers, getLicense, teachers, licenses } = useOnMount();
-const { createStudent, deleteStudent, usuarioReview} = useStudent();
-// 
+const { createStudent, deleteStudent} = useStudent();
+
 
 onMounted(() => {
     // function that gonna search all the student, Teacher and License in our database
@@ -124,14 +130,28 @@ function submitStudent(){
     validate().then(form => {
         if (form.valid) createStudent(student);
     })
-
-    console.log(usuarioReview);
+    location.reload();
 }
 
 
 // Delete the student using hes id to identify.
 function deleteSubmit(id){
-    deleteStudent(id);
+    confirm.require({
+        message: 'Estas Seguro de Eliminar Estudiante?',
+        header: 'Eliminar Estudiante',
+        icon: 'pi pi-info-circle',
+        rejectLabel: 'Cancelar',
+        acceptLabel: 'Eliminar',
+        rejectClass: 'p-button-secondary p-button-outlined',
+        acceptClass: 'p-button-danger',
+        accept: () => {
+            toast.add({ severity: 'info', summary: 'Confirmed', detail: 'Estudiante Eliminada', life: 3000 });
+            deleteStudent(id);
+        },
+        reject: () => {
+            toast.add({ severity: 'error', summary: 'Rejected', detail: 'No has eliminado el Estudiante', life: 3000 });
+        }
+    });
 }
 
 // asigment of the required validation fields
