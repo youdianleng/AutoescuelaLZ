@@ -24,8 +24,8 @@
                                                 <option v-for="teacher in teachers" :value="teacher.id">{{ teacher.name }}</option>
                                             </select>
                                             {{ errors.teacher_id }}
-                                            <div class="mb-3 mt-5">
-                                                <DropZone v-model="student.thumbnail" name="thumbnail" width="50" height="50"/>
+                                            <div class="mb-3 mt-5 dropZoneimagen">
+                                                <DropZone v-model="student.thumbnail" name="thumbnail"/>
                                             </div>
                                             <div class="col-12 d-flex justify-content-end">
                                                 <form @submit.prevent="saveTaskSubmit" class="col-4">
@@ -97,6 +97,7 @@ onMounted(() => {
             student.password = response.data.data[0]['password'];
             student.license_id = response.data.data[0]['license_id'];
             student.teacher_id = response.data.data[0]['teacher_id'];
+            student.thumbnail = response.data.data[0].media[0].original_url;
         })
         .catch(function(error) {
             console.log(error);
@@ -111,7 +112,7 @@ const student = reactive({
     password,
     license_id,
     teacher_id,
-    thumbnail: ''
+    thumbnail
 })
 
 
