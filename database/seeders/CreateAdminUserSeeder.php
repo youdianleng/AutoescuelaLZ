@@ -35,17 +35,10 @@ class CreateAdminUserSeeder extends Seeder
             'question-delete',
             'option-create',
             'option-edit',
-            'option-delete',
-            'teacher_create'
+            'option-delete'
         ];
         $roleTeacher->syncPermissions($permissionsTeacher);
 
-        $permissionsStudent = [
-            'review_submit',
-            'test_consult',
-            'student-list'
-        ];
-        $roleStudent->syncPermissions($permissionsStudent);
 
         $teacher = User::create([
             'name' => 'Teacher',

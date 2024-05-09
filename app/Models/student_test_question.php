@@ -13,6 +13,7 @@ class student_test_question extends Model
         "student_id",
         "test_id",
         "question_id",
+        "option_Selected",
         "is_correct"
     ];
 
@@ -26,6 +27,10 @@ class student_test_question extends Model
 
     public function question_question(){
         return $this->belongsTo(Question::class, 'question_id');
+    }
+
+    public function option_question(){
+        return $this->hasOne(Option::class, 'id', 'option_Selected');
     }
 
 }

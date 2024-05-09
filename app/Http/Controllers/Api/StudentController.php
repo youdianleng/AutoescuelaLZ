@@ -198,7 +198,7 @@ class StudentController extends Controller
     public function getPartTestCompleteStudent($user_id, $test_id){
 
         // send the student_id and the test hes doing 
-        $incompleteTest = student_test_question::where('student_id',$user_id)->where('test_id',$test_id)->with('question_option')->with('question_question')->get();
+        $incompleteTest = student_test_question::where('student_id',$user_id)->where('test_id',$test_id)->with('question_option')->with('question_question')->with('option_question')->get();
 
         // return the data
         return response()->json(['success' => true, 'data' => $incompleteTest]);

@@ -142,33 +142,37 @@ const showNextQuestion = () =>{
 
         // do an for with the option of this question
         for(let i in questionId.value['options']){
-            
             // if the student have choice the correct answer 
             if(respuestas.respuesta == questionId.value['options'][i].id && questionId.value['options'][i].is_correct == 1){
                 // push in the respuetaValidar array 1 as correct
-                console.log(questionId.value['options'][i].id);
-                console.log(questionId.value['options'][i].is_correct);
+
                 if(respuestasValidar[contador-1] !== undefined){
                     respuestasValidar[contador-1] = 1;
-                    singleTestQuestionCompleteEdit(user.value['user_id'],route.params.id,questionId.value['id'],1);
+                    
+                    singleTestQuestionCompleteEdit(user.value['user_id'],route.params.id,questionId.value['id'],respuestas.respuesta,1);
+                    respuestas.respuesta = "";
                 }else{
                     respuestasValidar.push(1);
-                    singleTestQuestionCompleteSave(user.value['user_id'],route.params.id,questionId.value['id'],1);
+                    singleTestQuestionCompleteSave(user.value['user_id'],route.params.id,questionId.value['id'],respuestas.respuesta,1);
                     changeResultArray();
+                    respuestas.respuesta = "";
                 }
 
                 // insert into the bdd the answer of this question
                 
                 break;
-            }else{
+            }else if(respuestas.respuesta == questionId.value['options'][i].id && questionId.value['options'][i].is_correct == 0){
                 // push in the respuestaValidar array 0 as incorrect
                 if(respuestasValidar[contador-1] !== undefined){
                     respuestasValidar[contador-1] = 0;
-                    singleTestQuestionCompleteEdit(user.value['user_id'],route.params.id,questionId.value['id'],0);
+                   
+                    singleTestQuestionCompleteEdit(user.value['user_id'],route.params.id,questionId.value['id'],respuestas.respuesta,0);
+                    respuestas.respuesta = "";
                 }else{
                     respuestasValidar.push(0);
-                    singleTestQuestionCompleteSave(user.value['user_id'],route.params.id,questionId.value['id'],0);
+                    singleTestQuestionCompleteSave(user.value['user_id'],route.params.id,questionId.value['id'],respuestas.respuesta,0);
                     changeResultArray();
+                    respuestas.respuesta = "";
                 }
 
                 // insert into the bdd the answer of this question

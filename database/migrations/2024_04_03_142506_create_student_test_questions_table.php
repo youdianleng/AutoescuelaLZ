@@ -17,11 +17,10 @@ return new class extends Migration
             $table->unsignedBigInteger("test_id");
             $table->unsignedBigInteger('question_id');
             $table->unsignedBigInteger("is_correct");
-
+            $table->integer('option_Selected')->nullable();
             $table->foreign("student_id")->references("user_id")->on("users")->onDelete("cascade");
             $table->foreign("test_id")->references("id")->on("tests")->onDelete("cascade");
             $table->foreign("question_id")->references("id")->on("questions")->onDelete("cascade");
-
             $table->timestamps();
         });
     }

@@ -115,8 +115,8 @@ Route::group(['middleware' => 'auth:sanctum'], function() {
     Route::get('normalTest', [TestController::class, 'normal']);
     Route::get('dificilTest', [TestController::class, 'dificil']);
     Route::post('test/finalizar/{user_id}/{id}/{passed}/{level}', [TestController::class, 'storeTest']);
-    Route::post('test/sendActualQuestion/{user_id}/{id}/{question}/{is_correct}', [TestController::class, 'storeTestQuestion']);
-    Route::put('test/sendActualQuestionEdit/{user_id}/{id}/{question}/{is_correct}', [TestController::class, 'EditTestQuestionExist']);
+    Route::post('test/sendActualQuestion/{user_id}/{id}/{question}/{option}/{is_correct}', [TestController::class, 'storeTestQuestion']);
+    Route::put('test/sendActualQuestionEdit/{user_id}/{id}/{question}/{option}/{is_correct}', [TestController::class, 'EditTestQuestionExist']);
     Route::delete('test/exist/{user_id}/{id}', [TestController::class, 'existUserTest']);
     Route::delete('test/existTestQuestion/{user_id}/{test_id}', [TestController::class, 'existUserTestQuestion']);
 

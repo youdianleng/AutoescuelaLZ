@@ -72,7 +72,7 @@
                     <div class="card col-12" style="margin: 0px;">
                         <DataTable v-if="incompleteTestQuestionQuantiry" :value="incompleteTestQuestionQuantiry" tableStyle="min-width: 50rem">
                             <Column field="question_question.question" header="Pregunta"></Column>
-                            <Column field="question_option.option_text" header="Tu Opcion"></Column>
+                            <Column field="option_question.option_text" header="Tu Opcion"></Column>
                             <Column field="option.is_correct" header="Certado">
                             <template #body="rowData">
                                 {{ rowData.data.is_correct === 1 ? 'Sí' : 'NO' }}
@@ -223,6 +223,7 @@ const getStudentTestQuestionQuantity = ($idTest) =>{
     axios.get('/api/student/test' + '/' + user.value['user_id'] + '/' + $idTest)
         .then(response => {
             incompleteTestQuestionQuantiry.value = response.data.data;
+            console.log(response.data.data);
             valueMaked = incompleteTestQuestionQuantiry.value.length / testQuestionQuantity.value.length * 100;
             valueNoMaked = 100 - valueMaked;
 

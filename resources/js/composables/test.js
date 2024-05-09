@@ -60,8 +60,8 @@ export default function useTest() {
     }
 
     // This is gonna insert the test id with current question and answer 
-    const singleTestQuestionCompleteSave = async($user_id,$id,$questionId,$correct) => {
-        axios.post('/api/test/sendActualQuestion/' + $user_id + "/" + $id + "/" + $questionId + "/" + $correct)
+    const singleTestQuestionCompleteSave = async($user_id,$id,$questionId,$option,$correct) => {
+        axios.post('/api/test/sendActualQuestion/' + $user_id + "/" + $id + "/" + $questionId + "/" + $option + "/" + $correct)
         .then(response => {
             console.log("insetado");
         })
@@ -72,8 +72,8 @@ export default function useTest() {
 
     // This is use for when student is doing a test and choice the wrong answer in a question, and when they use question button to reanswer the question
     // this is for replace the value they puted before
-    const singleTestQuestionCompleteEdit = async($user_id,$id,$questionId,$correct) => {
-        axios.put('/api/test/sendActualQuestionEdit/' + $user_id + "/" + $id + "/" + $questionId + "/" + $correct)
+    const singleTestQuestionCompleteEdit = async($user_id,$id,$questionId,$option,$correct) => {
+        axios.put('/api/test/sendActualQuestionEdit/' + $user_id + "/" + $id + "/" + $questionId + "/" + $option + "/" + $correct)
         .then(response => {
             console.log("Updated");
         })

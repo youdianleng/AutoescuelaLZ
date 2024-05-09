@@ -70,7 +70,7 @@ class TestController extends Controller
     }
 
     // Store the question that the student is making to trace the percentage of test he did in this test
-    public function storeTestQuestion($user_id, $id, $question, $is_correct){
+    public function storeTestQuestion($user_id, $id, $question,$option, $is_correct){
 
         // Set the value to insert the data
         $saveTest = student_test_question::create(
@@ -78,6 +78,7 @@ class TestController extends Controller
                 'student_id' => $user_id,
                 'test_id' => $id,
                 'question_id' => $question,
+                'option_Selected' => $option,
                 'is_correct' => $is_correct,
             ]
         );
@@ -89,7 +90,7 @@ class TestController extends Controller
 
 
     // Check if student have change his idea while hes choosing an option of the question, replace the data to the new one
-    public function EditTestQuestionExist($user_id, $id, $question, $is_correct){
+    public function EditTestQuestionExist($user_id, $id, $question,$option, $is_correct){
 
         // find the test with student_id and test_id
         $replaceData = student_test_question::where("student_id",$user_id)->where("test_id",$id)->where("question_id",$question)->first();
@@ -100,6 +101,7 @@ class TestController extends Controller
                 'student_id' => $user_id,
                 'test_id' => $id,
                 'question_id' => $question,
+                'option_Selected' => $option,
                 'is_correct' => $is_correct,
             ]
         );
