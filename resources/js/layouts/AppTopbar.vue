@@ -199,23 +199,45 @@ const onTopBarMenuButton = () => {
     topbarMenuActive.value = !topbarMenuActive.value;
 };
 
+onMounted(() => {
+    // Cmabiar el titulo de pagina
+    document.title = "AutoescuelaLZ";
+
+        // Crear un elemento link para el ícono de la pestaña del navegador
+    const link = document.createElement('link');
+    link.rel = 'icon';
+    link.type = 'image/svg+xml';
+    link.href = '/images/logo.svg'; // Ruta a tu archivo SVG
+
+    // Añadir el enlace al head del documento
+    document.head.appendChild(link);
+    
+})
+
 const topbarMenuClasses = computed(() => {
     return {
         'layout-topbar-menu-mobile-active': topbarMenuActive.value
     };
 });
 
+// Funcion para que cambiar el style de barra de cabecera
 window.addEventListener('scroll', function() {
+    // Calcula el scroll Y de pantalla
     let alturaScroll = window.scrollY; 
 
+    // Definir el altura que queremos que se va cambiar style 
     let alturaDeseada = 80; 
     
+    // Indicar los id de barras
     let navbar = document.getElementById("navbar");
     let navbar1 = document.getElementById("navbar1");
+
+    // Cuando movemos mas de 80 pixel se cambia
     if (alturaScroll >= alturaDeseada) {
         navbar.classList.add('scroll-efecto'); 
         navbar1.classList.add('scroll-efecto'); 
     } else {
+        // Cuando el altura vuelve a ser menor que 80 se vuelve
         navbar.classList.remove('scroll-efecto'); 
         navbar1.classList.remove('scroll-efecto'); 
     }
