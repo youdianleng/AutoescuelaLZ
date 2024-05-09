@@ -78,5 +78,8 @@ Para iniciar el proyecto necesitaremos instalar XAMPP y BBDD phpMyAdmin para pod
 Necesitaremos realizar lo siguiente para poder iniciar y ejecutar nuestro proyecto.
 1. Instalar XAMPP:
    Puedes usar el Link para redireccionar hacia pagina oficial de XAMPP y Instalar el ultimo version  (8.1.2 o Mayor)
-   [XAMPP_LAST_VERSION](https://www.apachefriends.org/es/download.html)
-   1. 
+   [XAMPP_LAST_VERSION](https://www.apachefriends.org/es/download.html)  
+   1. Setup Panel  
+      <img src="/readmeSource/SetupXampp.png" alt="Setup" width="300" height="250">  
+   2. Instalacion de servidores
+      <img src="/readmeSource/Setup2Xampp.png" alt="Setup" width="300" height="250"> 
