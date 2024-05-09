@@ -67,3 +67,16 @@ npm run dev
 ```bash
 npm run build or yarn build
 ```
+
+
+## Proyecto Laravel Vue 3 AutoescuelaLZ
+### Descripción
+Este proyecto está basado en vue3 y utiliza la escuela de manejo como ejemplo. El objetivo es imitar un sitio web de escuela de manejo real. Usamos php, js, vue3 y algunos conocimientos de front-end para iniciar el proyecto. A continuación puede encontrar algunos documentos e información importantes que necesita saber para comprender mejor cómo se crea el proyecto. 
+Para iniciar el proyecto necesitaremos instalar XAMPP y BBDD phpMyAdmin para poder seguir y ejecutar el proyecto.
+
+### Instalación
+Necesitaremos realizar lo siguiente para poder iniciar y ejecutar nuestro proyecto.
+1. Instalar XAMPP:
+   Puedes usar el Link para redireccionar hacia pagina oficial de XAMPP y Instalar el ultimo version  (8.1.2 o Mayor)
+   [XAMPP_LAST_VERSION](https://www.apachefriends.org/es/download.html)
+   1. 
