@@ -100,7 +100,7 @@ watchEffect(() => {
     // Verificamos si 'respuesta.respuesta' ha cambiado
     if (respuestaValor !== '') {
     // Llamamos a 'recibirRespuesta' con el valor de 'respuesta.respuesta'
-    recibirRespuesta(respuestaValor);
+        recibirRespuesta(respuestaValor);
     }
 });
 
