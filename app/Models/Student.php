@@ -40,8 +40,8 @@ class Student extends Model implements HasMedia
     }
 
     // Get the test that the student did 
-    public function student_test(){
-        return $this->hasMany(students_tests::class, 'student_id');
+    public function test(){
+        return $this->hasMany(Test::class, 'students_tests');
     }
 
     // Get this student in User Table

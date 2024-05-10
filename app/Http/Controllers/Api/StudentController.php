@@ -186,7 +186,7 @@ class StudentController extends Controller
         $student->delete();
 
         // Delete the student from the teacher_student table too
-        $student->teachers()->sync([]);
+        $student->teachers()->detach();
 
 
         // Return the data
@@ -206,7 +206,6 @@ class StudentController extends Controller
 
     // Send the Review of the student to show in our home page
     public function submitReview($user_id, Request $request ){
-
 
         // Check is there comentario label exist
         $request->validate([

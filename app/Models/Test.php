@@ -21,6 +21,9 @@ class Test extends Model
         return $this->hasMany(Question::class, 'question_id');
     }
 
+    public function Student(){
+        return $this->belongsToMany(Student::class, 'students_tests');
+    }
 
     public function registerMediaCollections(): void
     {
