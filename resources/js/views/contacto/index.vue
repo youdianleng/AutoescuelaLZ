@@ -1,7 +1,7 @@
 <template>
     <div class="lg-container">
          <div class="col-12 imgTopVia">
-            <Image src="/images/contacto/contacto.jpg" alt="Image" width="100%" />
+            <Image src="/images/contacto/contacto.jpg" alt="Contactar con nosotros" width="100%" />
             
          </div>
          <div class="shadow">
@@ -27,7 +27,7 @@
         <div class="col-12 ">
             <div class="formularioContacto d-xl-flex justify-content-between">
                 <div class="col-xl-6 col-md-12 hiddenIframe">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d374.02801692303234!2d2.017889463037388!3d41.412652984353755!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12a49a8fe6b59a81%3A0xc4fddcd7c13f414e!2sCarrer%20Major%2C%2060%2C%2008750%20Molins%20de%20Rei%2C%20Barcelona!5e0!3m2!1sca!2ses!4v1710255652217!5m2!1sca!2ses" class="col-12" height="100%" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d374.02801692303234!2d2.017889463037388!3d41.412652984353755!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12a49a8fe6b59a81%3A0xc4fddcd7c13f414e!2sCarrer%20Major%2C%2060%2C%2008750%20Molins%20de%20Rei%2C%20Barcelona!5e0!3m2!1sca!2ses!4v1710255652217!5m2!1sca!2ses" class="col-12" height="100%" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" alt="Mapa, autoescuela ubicado en molins de rei"></iframe>
                 </div>
                 <div class="col-xl-6 col-md-12 tablaContactar">
                     <p>Contactar con nosotros</p>

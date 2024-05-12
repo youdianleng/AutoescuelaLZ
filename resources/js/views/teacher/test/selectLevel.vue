@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="imgTopVia">
-        <Image src="/images/test/test.jpg" alt="Image" width="100%" />
+        <Image src="/images/test/test.jpg" alt="Realizar Test" width="100%" />
         
         </div>
         <div class="shadow">
@@ -30,7 +30,7 @@
                             <div class="col-xl-2 card ">
                                 <div class="col-xl-12 d-flex justify-content-center">
                                     <svg width="60" height="60" xmlns="http://www.w3.org/2000/svg" >
-                                        <image xlink:href="/images/test/uno.svg" width="60" height="60" />
+                                        <image xlink:href="/images/test/uno.svg" width="60" height="60" alt="Numero 1 de Surgerencia" />
                                     </svg>
                                 </div>
                                 <p class="mt-3 text-justify">Comprender las respuestas en lugar de memorizarlas.</p>
@@ -39,7 +39,7 @@
                             <div class="col-xl-2 card ">
                                 <div class="col-xl-12 d-flex justify-content-center">
                                     <svg width="60" height="60" xmlns="http://www.w3.org/2000/svg">
-                                        <image xlink:href="/images/test/dos.svg" width="60" height="60" />
+                                        <image xlink:href="/images/test/dos.svg" width="60" height="60" alt="Numero 2 de Surgerencia"/>
                                     </svg>
                                 </div>
                                 <p class="mt-3 text-justify">La respuesta puede no ser única, ¿tal vez haya múltiples?</p>
@@ -47,7 +47,7 @@
                             <div class="col-xl-2 card ">
                                 <div class="col-xl-12 d-flex justify-content-center">
                                     <svg width="60" height="60" xmlns="http://www.w3.org/2000/svg">
-                                        <image xlink:href="/images/test/tres.svg" width="60" height="60" />
+                                        <image xlink:href="/images/test/tres.svg" width="60" height="60" alt="Numero 3 de Surgerencia" />
                                     </svg>
                                 </div>
                                 <p class="mt-3 text-justify">Presta más atención a las imágenes, te ayudará mucho.</p>
@@ -55,7 +55,7 @@
                             <div class="col-xl-2 card">
                                 <div class="col-xl-12 d-flex justify-content-center">
                                     <svg width="60" height="60" xmlns="http://www.w3.org/2000/svg">
-                                        <image xlink:href="/images/test/cuatro.svg" width="60" height="60" />
+                                        <image xlink:href="/images/test/cuatro.svg" width="60" height="60" alt="Numero 4 de Surgerencia" />
                                     </svg>
                                 </div>
                                 <p class="mt-3 text-justify">Finalmente, cree en ti mismo y no cambies tu elección.</p>
@@ -74,7 +74,7 @@
                                     <div class="col-xl-12 d-flex">
                                         <router-link class=" col-xl-4 col-xs-12 text-center d-flex align-items-center" :to="{ name: 'facilTests', params: { id: route.params.user_id } }">
                                             <svg width="60" height="60" xmlns="http://www.w3.org/2000/svg">
-                                                <image xlink:href="/images/test/easy.svg" width="60" height="60" />
+                                                <image xlink:href="/images/test/easy.svg" width="60" height="60" alt="Nivel facil de Test"/>
                                             </svg>
                                         </router-link>
                                         <h3 class="col-xl-7 ms-2 fw-bold">PREGUNTAS TESTS SIMPLES</h3>
@@ -92,7 +92,7 @@
                                     <div class="col-xl-12 d-flex">
                                         <router-link class="col-xl-4 col-xs-12 text-center d-flex align-items-center" :to="{ name: 'facilTests', params: { id: route.params.user_id } }">
                                             <svg width="60" height="60" xmlns="http://www.w3.org/2000/svg">
-                                                <image xlink:href="/images/test/medium.svg" width="60" height="60" />
+                                                <image xlink:href="/images/test/medium.svg" width="60" height="60" alt="Nivel facil de Test"/>
                                             </svg>
                                         </router-link>
                                         <h3 class="col-xl-7 ms-2 fw-bold">PREGUNTAS TESTS NORMALES</h3>
@@ -110,7 +110,7 @@
                                     <div class="col-xl-12 d-flex">
                                         <router-link class=" col-xl-4 col-xs-12 text-center d-flex align-items-center" :to="{ name: 'facilTests', params: { id: route.params.user_id } }">
                                             <svg width="60" height="60" xmlns="http://www.w3.org/2000/svg">
-                                                <image xlink:href="/images/test/hard.svg" width="60" height="60" />
+                                                <image xlink:href="/images/test/hard.svg" width="60" height="60" alt="Nivel facil de Test"/>
                                             </svg>
                                         </router-link>
                                         <h3 class="col-xl-7 ms-2 fw-bold">PREGUNTAS TESTS DIFICIL</h3>

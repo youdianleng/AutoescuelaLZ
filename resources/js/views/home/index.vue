@@ -7,7 +7,7 @@
             <div class="carousel-inner">
                 <div class="carousel-item active">
                     <div class="col-12 d-flex">
-                        <img src="/images/imagesCarrouselHome/comienzaAConducir.jpg" class="d-block col-12" alt="...">
+                        <img src="/images/imagesCarrouselHome/comienzaAConducir.jpg" class="d-block col-12" alt="Comienza tu camino de conducir en nuestro autoescuela">
                         <div class="shadowPortada row align-items-center col-12">
                             
                         </div>
@@ -64,7 +64,7 @@
             <div class="informacionCarnet d-xl-flex justify-content-xl-between justify-content-sm-center ">
                 <div class="col-xl-5 col-sm-8 tipoCarnetPeque">
                     <div class="col-12 absoluteImgGalardonada">
-                        <Image src="/images/imagesCarrouselHome/winner.png" alt="Image" width="100%" class="imgInfo"/>
+                        <Image src="/images/imagesCarrouselHome/winner.png" alt="Image" width="100%" class="Escuela de manejo galardonada en la ciudad"/>
                         <div class="backgroundContent d-flex align-items-end col-12">
                             <span class="ps-5 col-9 mb-4 d-flex">
                                 <h2 class="galadonadaTexto fw-bold text-white">Escuela de manejo galardonada en la ciudad</h2>
@@ -94,7 +94,7 @@
                         <div class="boxIcon">
                             <div class="d-flex col-12 justify-content-between">
                                 <div class="IconTiposCarnets d-flex justify-content-center align-items-center col-3">
-                                    <Image src="/images/assets/coche.png" alt="Image" width="100%"/>
+                                    <Image src="/images/assets/coche.png" alt="Imagen de Motocicle que tenemos en nuestro autoescuela" width="100%"/>
                                 </div>
                                 <div class="row align-items-end col-md-10 col-xs-12">
                                     <div class="row align-items-end ms-3">
@@ -105,7 +105,7 @@
                             </div>
                             <div class="d-flex col-12 justify-content-between mb-5">
                                 <div class="IconTiposCarnets d-flex justify-content-center align-items-center col-3">
-                                    <Image src="/images/assets/motocicleta.png" alt="Image" width="100%"/>
+                                    <Image src="/images/assets/motocicleta.png" alt="Imagen de Motocicle que tenemos en nuestro autoescuela" width="100%"/>
                                 </div>
                                 <div class="row align-items-end col-md-10 col-xs-12">
                                     <div class="row align-items-end ms-3">
@@ -124,7 +124,7 @@
         </section>
         <div>
             <div class="col-12 imgTopVia">
-                <Image src="/images/imagesCarrouselHome/Conduccion_segura.jpg" alt="Image" width="100%" height="100%" />
+                <Image src="/images/imagesCarrouselHome/Conduccion_segura.jpg" alt="Nuestro Record de Autoescuela" width="100%" height="100%" />
                 
             </div>
             <div class="shadow">
@@ -167,7 +167,7 @@
                 <div class="col-12 d-flex justify-content-center">
                     <div>
                         <div class="d-flex justify-content-center align-items-center">
-                            <img src="/images/assets/LZ.png" >
+                            <img src="/images/assets/LZ.png" alt="Autoescuela Perfecta">
                             <h3 class="d-flex justify-content-center ms-2">Autoescuela Perfecta</h3>
                         </div>
                         <h1 class="d-flex justify-content-center">NUESTRO ESTUDIANTES DESTACADAS</h1>
@@ -181,7 +181,7 @@
                             <div class="border-1 surface-border border-round m-2  p-3" style="height: 100%;">
                                 <div class="mb-3">
                                     <div class="mx-auto">
-                                        <img :src="`${slotProps.data.media[0].original_url}`" class="w-full border-round" height="350">
+                                        <img :src="`${slotProps.data.media[0].original_url}`" class="w-full border-round" height="350" alt="Estudiantes Destacadas">
                                     </div>
                                 </div>
                                 <div class="mb-3 fs-1">{{ slotProps.data.name }}</div>

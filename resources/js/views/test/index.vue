@@ -6,7 +6,7 @@
                 <div class="d-flex mt-5">
                     <div class="col-xl-4">
                         <div v-if="questionId['media'] && questionId['media'].length > 0" class="col-11 border d-flex justify-content-center ms-3">
-                            <img :src="`${questionId['media'][0]['original_url'] }`" alt="" height="350px" width="300px">
+                            <img :src="`${questionId['media'][0]['original_url'] }`" alt="Foto de question que deberia realizar ahora" height="350px" width="300px">
                         </div>
                         <div v-if="questionId['media'] && questionId['media'].length <= 0" class="col-11 border d-flex justify-content-center ms-3">
                             <div width="100px" height="400px" class="CajaImagen d-flex justify-content-center">{{ contador+1 }}</div>

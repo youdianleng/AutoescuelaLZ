@@ -1,7 +1,7 @@
 <template>
     <div class="lg-container">
          <div class="col-12 imgTopVia">
-            <Image src="/images/infoAutoescuela/via.png" alt="Image" width="100%" />
+            <Image src="/images/infoAutoescuela/via.png" alt="Informacion de Autoescuela" width="100%" />
             
          </div>
          <div class="shadow">
@@ -11,7 +11,7 @@
 
          <div class="col-lg-12 imgVia d-lg-flex justify-content-lg-around"> 
             <div class="col-lg-6 col-md-12 d d-flex align-items-center imgCoche">
-                <Image src="/images/infoAutoescuela/coche.jpg" alt="Image" width="100%" />
+                <Image src="/images/infoAutoescuela/coche.jpg" alt="Coche conduciendo por via urbana" width="100%" />
 
             </div>
             <div class="col-lg-6 col-md-12 mdTextoPadding30">
@@ -32,7 +32,7 @@
                 <div class="col-12 d-flex justify-content-center">
                     <div>
                         <div class="d-flex justify-content-center align-items-center">
-                            <img src="/images/assets/LZ.png" style="height: 30px;">
+                            <img src="/images/assets/LZ.png" style="height: 30px;" alt="Imagen de Autoescuela Perfecta">
                             <h3 class="d-flex justify-content-center ms-2">Autoescuela Perfecta</h3>
                         </div>
                         <h1 class="fw-bold d-flex justify-content-center">LICENCIA DE CONDUCIR PROPORCIONADA</h1>
@@ -45,7 +45,7 @@
             <div class="d-lg-flex col-12 justify-content-around bg-white pb-5 ">
                 <div class="row col-lg-5 col-md-12 informacionCarnet ">
                     <div class="col-12 card bg-body-tertiary rounded">
-                        <Image src="/images/infoAutoescuela/practicaCoche.png" class="imgCarnet" alt="Image" width="100%" id="mueveImagen" />
+                        <Image src="/images/infoAutoescuela/practicaCoche.png" class="imgCarnet" alt="Tipo de coche que usa en autoescuela" width="100%" id="mueveImagen" />
                         <div class="texto col-12">
                             <h2 class="fw-bold h2texto">Licencia Coche</h2>
                             <p class="ptexto">Una licencia de conducir de automóvil es una licencia que requiere mucho tiempo para practicar, generalmente toma entre 2 y 4 meses, 
@@ -56,7 +56,7 @@
                 </div>
                 <div class="row col-lg-5 col-md-12 topMoto informacionCarnet rounded">
                     <div class="col-12 card bg-body-tertiary rounded">
-                        <Image src="/images/infoAutoescuela/practicaMoto.png" class="imgCarnet d-flex justify-content-end" alt="Image" width="100%" id="mueveImagen"/>
+                        <Image src="/images/infoAutoescuela/practicaMoto.png" class="imgCarnet d-flex justify-content-end" alt="Tipo de Motocicleta que usa en autoescuela" width="100%" id="mueveImagen"/>
                         <div class="texto col-12">
                             <h2 class="fw-bold h2texto">Licencia Moto</h2>
                             <p class="ptexto">Si desea obtener una licencia de conducir de vehículos motorizados, 
@@ -77,7 +77,7 @@
                     <div class="col-xl-12 d-xl-flex">
                         <div class="col-xl-3">
                             <svg width="80" height="80" xmlns="http://www.w3.org/2000/svg" >
-                                <image xlink:href="/images/infoAutoescuela/planBasico.svg" width="80" height="80" />
+                                <image xlink:href="/images/infoAutoescuela/planBasico.svg" width="80" height="80" alt="Imagen de Plan Basico Numero 1" />
                             </svg>
                         </div>
                         <div class="row">
@@ -111,7 +111,7 @@
                     <div class="col-xl-12 d-xl-flex">
                         <div class="col-xl-3">
                             <svg width="80" height="80" xmlns="http://www.w3.org/2000/svg" >
-                                <image xlink:href="/images/infoAutoescuela/planAvanzado.svg" width="80" height="80" />
+                                <image xlink:href="/images/infoAutoescuela/planAvanzado.svg" width="80" height="80" alt="Imagen de Plan Avanzado Numero 2" />
                             </svg>
                         </div>
                         <div class="row">
@@ -145,7 +145,7 @@
                     <div class="col-xl-12 d-xl-flex">
                         <div class="col-xl-3">
                             <svg width="80" height="80" xmlns="http://www.w3.org/2000/svg" >
-                                <image xlink:href="/images/infoAutoescuela/planPremium.svg" width="80" height="80" />
+                                <image xlink:href="/images/infoAutoescuela/planPremium.svg" width="80" height="80" alt="Imagen de Plan Premium Numero 3" />
                             </svg>
                         </div>
                         <div class="row">
