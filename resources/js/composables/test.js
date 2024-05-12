@@ -93,7 +93,7 @@ export default function useTest() {
     // Guardar los datos para los funciones
     let user_id;
     let route_id;
-    let respuesta;
+    let respuesta = "";
 
     // Recibir el parametro de un ref de test y guardar como un variable
     const recibirRespuesta = async(Respuesta) =>{
