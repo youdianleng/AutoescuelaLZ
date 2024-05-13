@@ -1,0 +1,7 @@
+Admin:
+Nombre: teacher@gmail.com
+contraseña: 12345678
+
+Usuario:
+Nombre:zhu249968412@gmail.com
+contraseña: 12345678
